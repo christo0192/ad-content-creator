@@ -52,3 +52,7 @@ market-research-bq.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# logs
+*.log
+server.out.log
