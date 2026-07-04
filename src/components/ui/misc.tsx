@@ -84,16 +84,20 @@ export function KpiCard({
   label: string;
   value: React.ReactNode;
   hint?: string;
-  accent?: "default" | "emerald" | "indigo";
+  accent?: "default" | "emerald" | "indigo" | "warning" | "danger";
 }) {
   const valueColor =
     accent === "emerald"
-      ? "text-emerald-600"
+      ? "text-success"
       : accent === "indigo"
         ? "text-accent"
-        : "text-foreground";
+        : accent === "warning"
+          ? "text-warning"
+          : accent === "danger"
+            ? "text-danger"
+            : "text-foreground";
   return (
-    <div className="rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md">
+    <div className="rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:border-white/20">
       <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
         {label}
       </p>
@@ -121,14 +125,14 @@ export function ChipList({
   className?: string;
 }) {
   if (!items || items.length === 0) {
-    return <span className="text-sm text-slate-400">{emptyText}</span>;
+    return <span className="text-sm text-muted/70">{emptyText}</span>;
   }
   return (
     <div className={cn("flex flex-wrap gap-1.5", className)}>
       {items.map((item, i) => (
         <span
           key={`${item}-${i}`}
-          className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600"
+          className="inline-flex items-center rounded-md bg-white/5 px-2 py-0.5 text-xs font-medium text-foreground/70"
         >
           {item}
         </span>

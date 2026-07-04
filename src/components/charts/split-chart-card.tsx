@@ -68,10 +68,10 @@ function SplitTooltip({
   const d = payload[0].payload;
   const pct = total > 0 ? ((d.value / total) * 100).toFixed(0) : "0";
   return (
-    <div className="rounded-lg border border-border bg-white px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-slate-800">{d.label}</p>
-      <p className="text-slate-600">
-        <span className="font-medium text-slate-900">{d.value}</span> ({pct}%)
+    <div className="rounded-lg border border-border bg-surface px-3 py-2 text-xs shadow-lg shadow-black/40">
+      <p className="font-semibold text-foreground">{d.label}</p>
+      <p className="text-muted">
+        <span className="font-medium text-foreground">{d.value}</span> ({pct}%)
       </p>
     </div>
   );
@@ -108,7 +108,7 @@ export function SplitChartCard({
                   innerRadius="55%"
                   outerRadius="85%"
                   paddingAngle={2}
-                  stroke="#ffffff"
+                  stroke="var(--surface)"
                   strokeWidth={2}
                 >
                   {data.map((d, i) => (
@@ -133,13 +133,13 @@ export function SplitChartCard({
                           backgroundColor: colorFor(d.label, i, colorByLabel),
                         }}
                       />
-                      <span className="truncate text-slate-600" title={d.label}>
+                      <span className="truncate text-muted" title={d.label}>
                         {d.label}
                       </span>
                     </span>
-                    <span className="shrink-0 font-medium text-slate-900">
+                    <span className="shrink-0 font-medium text-foreground">
                       {d.value}{" "}
-                      <span className="font-normal text-slate-400">({pct}%)</span>
+                      <span className="font-normal text-muted/70">({pct}%)</span>
                     </span>
                   </li>
                 );

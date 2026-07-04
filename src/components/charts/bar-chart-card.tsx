@@ -68,15 +68,15 @@ function ChartTooltip({
   if (!active || !payload || payload.length === 0) return null;
   const d = payload[0].payload;
   return (
-    <div className="rounded-lg border border-border bg-white px-3 py-2 text-xs shadow-md">
-      <p className="mb-1 font-semibold text-slate-800">{d.label}</p>
-      <p className="text-slate-600">
-        {valueName}: <span className="font-medium text-slate-900">{d.value}</span>
+    <div className="rounded-lg border border-border bg-surface px-3 py-2 text-xs shadow-lg shadow-black/40">
+      <p className="mb-1 font-semibold text-foreground">{d.label}</p>
+      <p className="text-muted">
+        {valueName}: <span className="font-medium text-foreground">{d.value}</span>
       </p>
       {secondaryName !== undefined && d.secondary !== undefined ? (
-        <p className="text-slate-600">
+        <p className="text-muted">
           {secondaryName}:{" "}
-          <span className="font-medium text-indigo-600">{d.secondary}</span>
+          <span className="font-medium text-accent">{d.secondary}</span>
         </p>
       ) : null}
     </div>
@@ -117,12 +117,12 @@ export function BarChartCard({
               >
                 <CartesianGrid
                   horizontal={false}
-                  stroke="#e2e8f0"
+                  stroke="rgba(255,255,255,0.08)"
                   strokeDasharray="3 3"
                 />
                 <XAxis
                   type="number"
-                  tick={{ fontSize: 11, fill: "#64748b" }}
+                  tick={{ fontSize: 11, fill: "#8b93a8" }}
                   axisLine={false}
                   tickLine={false}
                 />
@@ -130,7 +130,7 @@ export function BarChartCard({
                   type="category"
                   dataKey="label"
                   width={140}
-                  tick={{ fontSize: 11, fill: "#475569" }}
+                  tick={{ fontSize: 11, fill: "#c3c9d6" }}
                   axisLine={false}
                   tickLine={false}
                 />
@@ -147,7 +147,7 @@ export function BarChartCard({
                   <LabelList
                     dataKey="value"
                     position="right"
-                    className="fill-slate-500"
+                    className="fill-[#8b93a8]"
                     style={{ fontSize: 11 }}
                   />
                   {highlightSecondary
@@ -169,12 +169,12 @@ export function BarChartCard({
               >
                 <CartesianGrid
                   vertical={false}
-                  stroke="#e2e8f0"
+                  stroke="rgba(255,255,255,0.08)"
                   strokeDasharray="3 3"
                 />
                 <XAxis
                   dataKey="label"
-                  tick={{ fontSize: 11, fill: "#475569" }}
+                  tick={{ fontSize: 11, fill: "#c3c9d6" }}
                   axisLine={false}
                   tickLine={false}
                   interval={0}
@@ -183,7 +183,7 @@ export function BarChartCard({
                   height={data.length > 6 ? 60 : 30}
                 />
                 <YAxis
-                  tick={{ fontSize: 11, fill: "#64748b" }}
+                  tick={{ fontSize: 11, fill: "#8b93a8" }}
                   axisLine={false}
                   tickLine={false}
                   allowDecimals={false}
@@ -201,7 +201,7 @@ export function BarChartCard({
                   <LabelList
                     dataKey="value"
                     position="top"
-                    className="fill-slate-500"
+                    className="fill-[#8b93a8]"
                     style={{ fontSize: 11 }}
                   />
                 </Bar>
