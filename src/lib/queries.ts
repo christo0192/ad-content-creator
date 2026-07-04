@@ -1,6 +1,6 @@
 import "server-only";
 
-import { DATASET, PROJECT_ID, TABLES, query } from "@/lib/bq";
+import { DATASET, PROJECT_ID, TABLES, query, safeQuery } from "@/lib/bq";
 
 /**
  * SERVER-ONLY query layer.
@@ -475,4 +475,24 @@ export async function getLatestRunDate(): Promise<string | null> {
     `SELECT MAX(run_date) AS latest FROM \`${TABLES.jobs}\``,
   );
   return rows.length ? dateStr(rows[0].latest) : null;
+}
+
+/**
+ * MAX(run_date) for the two Market_Research tables the system graph's
+ * Intelligence-department nodes need (social_trends, job_market_demand).
+ * Goes through `safeQuery` (unlike the rest of this file) so a missing table
+ * degrades to "unknown" health on the graph rather than crashing the Home
+ * page render.
+ */
+export async function getMarketResearchFreshness(): Promise<
+  Array<{ table: "social_trends" | "job_market_demand"; latest_date: string | null }>
+> {
+  const [social, jobs] = await Promise.all([
+    safeQuery<{ latest: unknown }>(`SELECT MAX(run_date) AS latest FROM \`${TABLES.social}\``),
+    safeQuery<{ latest: unknown }>(`SELECT MAX(run_date) AS latest FROM \`${TABLES.jobs}\``),
+  ]);
+  return [
+    { table: "social_trends", latest_date: social.error ? null : dateStr(social.rows[0]?.latest) },
+    { table: "job_market_demand", latest_date: jobs.error ? null : dateStr(jobs.rows[0]?.latest) },
+  ];
 }
