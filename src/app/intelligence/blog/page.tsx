@@ -20,10 +20,10 @@ import { formatDate } from "@/lib/format";
 export const dynamic = "force-dynamic";
 
 const URGENCY_COLORS: Record<string, string> = {
-  CRITICAL: "#e11d48", // rose-600
-  HIGH: "#f59e0b", // amber-500
-  MEDIUM: "#64748b", // slate-500
-  LOW: "#94a3b8", // slate-400
+  CRITICAL: "#fb7185", // danger
+  HIGH: "#fbbf24", // warning
+  MEDIUM: "#818cf8", // accent
+  LOW: "#8b93a8", // muted
 };
 
 /** Curriculum match -> badge variant. */
@@ -89,7 +89,7 @@ export default async function BlogPage() {
               <TableBody>
                 {blog.map((b, i) => (
                   <TableRow key={`${b.title}-${i}`}>
-                    <TableCell className="whitespace-nowrap font-medium text-slate-900">
+                    <TableCell className="whitespace-nowrap font-medium text-foreground">
                       {b.publication ?? "—"}
                     </TableCell>
                     <TableCell className="max-w-72">

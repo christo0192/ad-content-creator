@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 
 /** Render ad-intensity (1–5) as filled/empty dots. */
 function AdIntensity({ value }: { value: number | null }) {
-  if (value === null) return <span className="text-sm text-slate-400">—</span>;
+  if (value === null) return <span className="text-sm text-muted/70">—</span>;
   return (
     <span className="inline-flex items-center gap-1" aria-label={`Ad intensity ${value} of 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
@@ -21,11 +21,11 @@ function AdIntensity({ value }: { value: number | null }) {
           className={
             n <= value
               ? "h-2 w-4 rounded-full bg-accent"
-              : "h-2 w-4 rounded-full bg-slate-200"
+              : "h-2 w-4 rounded-full bg-white/10"
           }
         />
       ))}
-      <span className="ml-1 text-xs font-medium text-slate-500">{value}/5</span>
+      <span className="ml-1 text-xs font-medium text-muted">{value}/5</span>
     </span>
   );
 }
@@ -36,7 +36,7 @@ function MetaItem({ label, value }: { label: string; value: React.ReactNode }) {
       <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
         {label}
       </p>
-      <div className="mt-0.5 text-sm text-slate-800">{value}</div>
+      <div className="mt-0.5 text-sm text-foreground">{value}</div>
     </div>
   );
 }
@@ -98,7 +98,7 @@ export default async function CompetitorPage() {
                     <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
                       Curriculum Overview
                     </p>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-700">
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">
                       {c.curriculum_overview}
                     </p>
                   </div>
@@ -113,20 +113,20 @@ export default async function CompetitorPage() {
 
                 {/* IK advantages vs gaps — two columns */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-3">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+                  <div className="rounded-lg border border-success/30 bg-success/10 p-3">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-success">
                       ✓ IK Advantages
                     </p>
                     {c.ik_advantages.length === 0 ? (
-                      <p className="text-xs text-slate-400">—</p>
+                      <p className="text-xs text-muted/70">—</p>
                     ) : (
                       <ul className="space-y-1.5">
                         {c.ik_advantages.map((adv, j) => (
                           <li
                             key={j}
-                            className="flex gap-2 text-sm leading-snug text-slate-700"
+                            className="flex gap-2 text-sm leading-snug text-foreground/80"
                           >
-                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-success/100" />
                             {adv}
                           </li>
                         ))}
@@ -134,20 +134,20 @@ export default async function CompetitorPage() {
                     )}
                   </div>
 
-                  <div className="rounded-lg border border-rose-200 bg-rose-50/40 p-3">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-rose-700">
+                  <div className="rounded-lg border border-danger/30 bg-danger/10 p-3">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-danger">
                       ✕ IK Gaps
                     </p>
                     {c.ik_gaps.length === 0 ? (
-                      <p className="text-xs text-slate-400">—</p>
+                      <p className="text-xs text-muted/70">—</p>
                     ) : (
                       <ul className="space-y-1.5">
                         {c.ik_gaps.map((gap, j) => (
                           <li
                             key={j}
-                            className="flex gap-2 text-sm leading-snug text-slate-700"
+                            className="flex gap-2 text-sm leading-snug text-foreground/80"
                           >
-                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-danger" />
                             {gap}
                           </li>
                         ))}

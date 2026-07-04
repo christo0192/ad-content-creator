@@ -87,7 +87,7 @@ export default async function SocialPage() {
               <TableBody>
                 {social.map((s, i) => (
                   <TableRow key={`${s.topic}-${i}`}>
-                    <TableCell className="whitespace-nowrap font-medium text-slate-900">
+                    <TableCell className="whitespace-nowrap font-medium text-foreground">
                       {s.source ?? "—"}
                     </TableCell>
                     <TableCell className="max-w-80">{s.topic ?? "—"}</TableCell>

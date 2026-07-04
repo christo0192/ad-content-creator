@@ -123,7 +123,7 @@ export default async function JobsPage() {
                 {jobs.map((j, i) => (
                   <TableRow key={`${j.title}-${j.company}-${i}`}>
                     <TableCell className="max-w-72">
-                      <span className="font-medium text-slate-900">
+                      <span className="font-medium text-foreground">
                         {j.title ?? "—"}
                       </span>
                       {j.is_emerging ? (

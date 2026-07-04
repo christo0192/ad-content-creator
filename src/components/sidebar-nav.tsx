@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import {
-  LayoutDashboard,
-  Briefcase,
-  MessageSquare,
-  Newspaper,
-  Swords,
+  Activity,
+  BookMarked,
+  Gauge,
+  Home,
+  Radar,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 
@@ -18,21 +19,23 @@ interface NavItem {
   href: string;
   label: string;
   icon: LucideIcon;
+  soon?: boolean;
 }
 
 const NAV: NavItem[] = [
-  { href: "/", label: "Overview", icon: LayoutDashboard },
-  { href: "/jobs", label: "Jobs", icon: Briefcase },
-  { href: "/social", label: "Social", icon: MessageSquare },
-  { href: "/blog", label: "Blog", icon: Newspaper },
-  { href: "/competitor", label: "Competitor", icon: Swords },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/intelligence", label: "Intelligence", icon: Radar },
+  { href: "/generation", label: "Generation", icon: Sparkles },
+  { href: "/registry", label: "Registry", icon: BookMarked },
+  { href: "/runs", label: "Runs", icon: Activity },
+  { href: "/performance", label: "Performance", icon: Gauge, soon: true },
 ];
 
 export function SidebarNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col gap-1 px-3 py-2" aria-label="Primary">
+    <nav className="flex flex-col gap-1 px-3 py-3" aria-label="Primary">
       {NAV.map((item) => {
         const active =
           item.href === "/"
@@ -47,8 +50,8 @@ export function SidebarNav() {
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               active
-                ? "bg-indigo-50 text-accent"
-                : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                ? "bg-accent/15 text-accent"
+                : "text-muted hover:bg-white/5 hover:text-foreground",
             )}
           >
             <ItemIcon
@@ -56,10 +59,15 @@ export function SidebarNav() {
               strokeWidth={active ? 2.2 : 1.8}
               className={cn(
                 "h-[18px] w-[18px] shrink-0",
-                active ? "text-accent" : "text-slate-400",
+                active ? "text-accent" : "text-muted/70",
               )}
             />
             {item.label}
+            {item.soon ? (
+              <span className="ml-auto rounded-full border border-border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-muted/70">
+                Soon
+              </span>
+            ) : null}
           </Link>
         );
       })}
