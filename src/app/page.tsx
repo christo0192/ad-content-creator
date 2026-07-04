@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/ui/misc";
+import { SystemGraph } from "@/components/system-graph";
 import { cn, formatDate, formatINR } from "@/lib/format";
+import { HEALTH_STYLE, healthOf, type Health } from "@/lib/health";
 import {
   getCeFreshness,
   getLatestGenerationRunStatus,
@@ -10,28 +12,9 @@ import {
   getUnregisteredCampaigns,
   getValueLedgerHeadline,
 } from "@/lib/ce-queries";
+import { buildSystemGraph } from "@/lib/graph";
 
 export const dynamic = "force-dynamic";
-
-/** Weekly pipeline cadence: fresh within 8 days, stale beyond, unknown when never seen. */
-const STALE_AFTER_DAYS = 8;
-
-type Health = "healthy" | "stale" | "failed" | "unknown";
-
-function healthOf(latestDate: string | null): Health {
-  if (!latestDate) return "unknown";
-  const then = new Date(latestDate).getTime();
-  if (Number.isNaN(then)) return "unknown";
-  const days = (Date.now() - then) / (1000 * 60 * 60 * 24);
-  return days <= STALE_AFTER_DAYS ? "healthy" : "stale";
-}
-
-const HEALTH_STYLE: Record<Health, { dot: string; text: string; label: string }> = {
-  healthy: { dot: "bg-success", text: "text-success", label: "fresh" },
-  stale: { dot: "bg-warning", text: "text-warning", label: "stale" },
-  failed: { dot: "bg-danger", text: "text-danger", label: "failed" },
-  unknown: { dot: "bg-muted/40", text: "text-muted", label: "no data yet" },
-};
 
 function VitalTile({
   label,
@@ -74,7 +57,7 @@ function VitalTile({
 }
 
 export default async function HomePage() {
-  const [freshness, lastRunStatus, pressure, ledger, leadQuality, unregistered] =
+  const [freshness, lastRunStatus, pressure, ledger, leadQuality, unregistered, graph] =
     await Promise.all([
       getCeFreshness(),
       getLatestGenerationRunStatus(),
@@ -82,6 +65,7 @@ export default async function HomePage() {
       getValueLedgerHeadline(),
       getLeadQualityHeadline(),
       getUnregisteredCampaigns(),
+      buildSystemGraph(),
     ]);
 
   const healths = freshness.map((f) => ({
@@ -222,43 +206,13 @@ export default async function HomePage() {
         ) : null}
       </section>
 
-      {/* Graph placeholder zone (vision §2 — built next dispatch) */}
+      {/* Live system graph (vision §2, §2b) — nodes/edges/bots computed server-side in lib/graph.ts */}
       <section>
         <SectionHeading
           title="System Map"
-          description="Force-directed live view of the MIS closed loop — Intelligence → Generation → Review → Export → Performance → back."
+          description="Force-directed live view of the MIS closed loop — Intelligence + Performance → Generation → Review → Export → Performance → Lead Quality → back. Click any node or caretaker bot to open its page."
         />
-        <div className="relative flex min-h-72 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-border bg-surface/60 p-8">
-          {/* Static skeleton of the future graph so the zone reads as reserved, not broken */}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 640 200"
-            className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.14]"
-          >
-            <g stroke="currentColor" strokeWidth="1" className="text-accent">
-              <line x1="110" y1="100" x2="270" y2="60" />
-              <line x1="270" y1="60" x2="410" y2="110" />
-              <line x1="410" y1="110" x2="540" y2="70" />
-              <line x1="540" y1="70" x2="410" y2="160" />
-              <line x1="410" y1="160" x2="270" y2="60" />
-            </g>
-            <g fill="currentColor" className="text-accent">
-              <circle cx="110" cy="100" r="10" />
-              <circle cx="270" cy="60" r="14" />
-              <circle cx="410" cy="110" r="10" />
-              <circle cx="540" cy="70" r="8" />
-              <circle cx="410" cy="160" r="8" />
-            </g>
-          </svg>
-          <span className="relative rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-            Graph coming in the next dispatch
-          </span>
-          <p className="relative mt-2 max-w-md text-center text-sm text-muted">
-            This zone is reserved for the animated system graph (nodes = pipelines and
-            tables, edges = data flow, color = live health). The health data feeding it is
-            already live below.
-          </p>
-        </div>
+        <SystemGraph nodes={graph.nodes} edges={graph.edges} bots={graph.bots} />
       </section>
 
       {/* Per-table freshness strip — the honest data behind "pipeline health" */}

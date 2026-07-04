@@ -80,3 +80,38 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Caretaker bot keyframes (docs/dashboard-vision.md §2b, homepage only).
+ * Gated with `motion-safe:` at the call site in caretaker-bot.tsx; the
+ * blanket prefers-reduced-motion override above is a second, belt-and-
+ * suspenders guard in case any animation utility slips through ungated.
+ */
+@keyframes bot-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-2deg); }
+}
+@keyframes bot-wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+@keyframes bot-sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+@keyframes bot-blip {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes bot-alert {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.35); opacity: 0.05; }
+}
+@keyframes bot-wrench {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+}
+@keyframes bot-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
