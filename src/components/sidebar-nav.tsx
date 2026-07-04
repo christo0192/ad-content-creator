@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
   { href: "/generation", label: "Generation", icon: Sparkles },
   { href: "/registry", label: "Registry", icon: BookMarked },
   { href: "/runs", label: "Runs", icon: Activity },
-  { href: "/performance", label: "Performance", icon: Gauge, soon: true },
+  { href: "/performance", label: "Performance", icon: Gauge },
 ];
 
 export function SidebarNav() {
