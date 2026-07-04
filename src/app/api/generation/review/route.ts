@@ -25,6 +25,63 @@ import { getBq, CE_TABLES } from "@/lib/bq";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+/**
+ * Auth gate (defense-in-depth, not the primary perimeter — see DEPLOY.md).
+ *
+ * Fails CLOSED: if `MIS_REVIEW_TOKEN` is unset and same-origin writes are not
+ * explicitly opted into, every write is rejected with 503. This is
+ * deliberate — an unconfigured deployment must not silently accept writes.
+ *
+ *   - `MIS_REVIEW_TOKEN` set: caller must send a matching `x-mis-token`
+ *     header (server-to-server / internal automation use — a browser client
+ *     cannot hold this secret without exposing it, so this path is not what
+ *     the dashboard's own Approve/Reject buttons use).
+ *   - `MIS_REVIEW_TOKEN` unset AND `MIS_ALLOW_SAME_ORIGIN_WRITES=true`:
+ *     same-origin requests (verified via the `Origin` header, which modern
+ *     browsers attach to same-origin POSTs too) are allowed without a token.
+ *     Documented for local/internal use only.
+ *   - Neither configured: 503, writes disabled.
+ */
+function isSameOrigin(req: Request): boolean {
+  const origin = req.headers.get("origin");
+  if (!origin) return false;
+  try {
+    const originUrl = new URL(origin);
+    const selfUrl = new URL(req.url);
+    return (
+      originUrl.protocol === selfUrl.protocol && originUrl.host === selfUrl.host
+    );
+  } catch {
+    return false;
+  }
+}
+
+function checkAuth(req: Request): { ok: true } | { ok: false; status: number; error: string } {
+  const expected = process.env.MIS_REVIEW_TOKEN;
+  const allowSameOrigin = process.env.MIS_ALLOW_SAME_ORIGIN_WRITES === "true";
+
+  if (expected) {
+    const token = req.headers.get("x-mis-token");
+    if (token !== expected) {
+      return { ok: false, status: 401, error: "unauthorized" };
+    }
+    return { ok: true };
+  }
+
+  if (allowSameOrigin) {
+    if (!isSameOrigin(req)) {
+      return { ok: false, status: 401, error: "unauthorized (cross-origin write blocked)" };
+    }
+    return { ok: true };
+  }
+
+  return {
+    ok: false,
+    status: 503,
+    error: "review writes disabled (MIS_REVIEW_TOKEN not configured)",
+  };
+}
+
 const ALLOWED_TABLES = {
   keyword_candidates: CE_TABLES.keywordCandidates,
   ad_copy_drafts: CE_TABLES.adCopyDrafts,
@@ -54,6 +111,11 @@ function badRequest(message: string) {
 }
 
 export async function POST(req: Request) {
+  const auth = checkAuth(req);
+  if (!auth.ok) {
+    return NextResponse.json({ ok: false, error: auth.error }, { status: auth.status });
+  }
+
   let body: ReviewRequestBody;
   try {
     body = await req.json();
@@ -63,7 +125,14 @@ export async function POST(req: Request) {
 
   const { table, status, where } = body;
 
-  if (typeof table !== "string" || !(table in ALLOWED_TABLES)) {
+  // `in` / bracket-access on a plain object walks the prototype chain, so a
+  // caller-supplied `table: "toString"` (or "__proto__", "constructor", ...)
+  // would otherwise resolve to an inherited Object.prototype function instead
+  // of undefined — own-property checks close that off.
+  if (
+    typeof table !== "string" ||
+    !Object.prototype.hasOwnProperty.call(ALLOWED_TABLES, table)
+  ) {
     return badRequest(
       `"table" must be one of: ${Object.keys(ALLOWED_TABLES).join(", ")}.`,
     );
@@ -81,10 +150,15 @@ export async function POST(req: Request) {
   }
   const whereObj = where as Record<string, unknown>;
 
+  if (!Object.prototype.hasOwnProperty.call(WHERE_KEYS, tableKey)) {
+    return badRequest(`No WHERE-key mapping for table "${tableKey}".`);
+  }
   const requiredKeys = WHERE_KEYS[tableKey];
   const params: Record<string, unknown> = {};
   for (const key of requiredKeys) {
-    const value = whereObj[key];
+    const value = Object.prototype.hasOwnProperty.call(whereObj, key)
+      ? whereObj[key]
+      : undefined;
     if (typeof value !== "string" || value.length === 0) {
       return badRequest(
         `"where.${key}" is required (string) for table "${tableKey}".`,

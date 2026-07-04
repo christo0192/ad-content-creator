@@ -49,6 +49,15 @@ export async function GET(
     return NextResponse.json({ ok: false, error: "File not found." }, { status: 404 });
   }
 
+  const MAX_EXPORT_BYTES = 50 * 1024 * 1024; // 50MB cap — these are negative-keyword CSVs, never expected to be huge.
+  const stat = statSync(fullPath);
+  if (stat.size > MAX_EXPORT_BYTES) {
+    return NextResponse.json(
+      { ok: false, error: "Export file exceeds the 50MB download cap." },
+      { status: 413 },
+    );
+  }
+
   const stream = createReadStream(fullPath);
   const webStream = new ReadableStream({
     start(controller) {
@@ -65,6 +74,7 @@ export async function GET(
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": `attachment; filename="${safeName}"`,
+      "Content-Length": String(stat.size),
     },
   });
 }

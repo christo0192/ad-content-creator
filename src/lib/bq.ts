@@ -175,9 +175,14 @@ export async function safeQuery<T = Record<string, unknown>>(
     const rows = await query<T>(sql, params);
     return { rows, error: null };
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
+    const rawMessage = err instanceof Error ? err.message : String(err);
     // Keep the surfaced message short and non-sensitive; BQ error text can be
-    // verbose but does not include credentials.
+    // verbose but does not include credentials. Also strip the GCP project
+    // id — this message renders directly in <UnavailableBanner>, and the
+    // project id is otherwise-unnecessary infrastructure detail to expose.
+    // BigQuery uses both `project.dataset.table` (query text) and
+    // `project:dataset.table` (e.g. "Not found: Table ...") separators.
+    const message = rawMessage.split(`${PROJECT_ID}.`).join("").split(`${PROJECT_ID}:`).join("");
     return { rows: [], error: message.slice(0, 300) };
   }
 }

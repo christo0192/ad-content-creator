@@ -46,6 +46,13 @@ function bool(v: unknown): boolean {
   return v === true || v === "true" || v === 1;
 }
 
+/** Clamp a caller-supplied LIMIT to a sane, bound integer range before binding as a query param. */
+function clampLimit(value: number, max = 1000): number {
+  const n = Math.trunc(value);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.min(n, max);
+}
+
 // ---------------------------------------------------------------------------
 // Row types (post-normalization)
 // ---------------------------------------------------------------------------
@@ -538,7 +545,8 @@ export async function getGenerationRuns(
             borderline, rejected, llm_calls, duration_seconds, status, notes
        FROM \`${CE_TABLES.generationRuns}\`
       ORDER BY run_date DESC, run_id DESC, path
-      LIMIT ${Number(limit)}`,
+      LIMIT @limit`,
+    { limit: clampLimit(limit) },
   );
   return { rows: result.rows.map(mapGenerationRun), error: result.error };
 }
@@ -813,7 +821,8 @@ export async function getRecentValueLedgerEntries(
             segment, expected_impact_inr, realized_impact_inr, realized_at, status
        FROM \`${CE_TABLES.valueLedger}\`
       ORDER BY run_date DESC, entry_id DESC
-      LIMIT ${Number(limit)}`,
+      LIMIT @limit`,
+    { limit: clampLimit(limit) },
   );
   return { rows: result.rows.map(mapValueLedger), error: result.error };
 }
@@ -828,7 +837,8 @@ export async function getLeadQualityScores(
        FROM \`${CE_TABLES.leadQualityScores}\`
       WHERE period_end = (SELECT MAX(period_end) FROM \`${CE_TABLES.leadQualityScores}\`)
       ORDER BY spend_inr DESC NULLS LAST
-      LIMIT ${Number(limit)}`,
+      LIMIT @limit`,
+    { limit: clampLimit(limit) },
   );
   return { rows: result.rows.map(mapLeadQualityScore), error: result.error };
 }
@@ -882,6 +892,7 @@ const FRESHNESS_SOURCES: Array<[label: string, table: string, col: string]> = [
   ["audience_angles", CE_TABLES.audienceAngles, "run_date"],
   ["creative_briefs", CE_TABLES.creativeBriefs, "run_date"],
   ["generation_runs", CE_TABLES.generationRuns, "run_date"],
+  ["kw_search_term_perf", CE_TABLES.kwSearchTermPerf, "date"],
   ["lead_quality_scores", CE_TABLES.leadQualityScores, "run_date"],
   ["value_ledger", CE_TABLES.valueLedger, "run_date"],
 ];
