@@ -33,6 +33,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 .env.local
+# ...except the documentation template — no secrets, just variable names.
+!.env.local.example
+
+# local screenshots taken during manual/dev verification — never committed.
+/screenshots/
 
 # Google Cloud service-account keys — NEVER commit any SA key JSON.
 # Note: a blanket `*.json` would wrongly ignore package.json/tsconfig.json, so we

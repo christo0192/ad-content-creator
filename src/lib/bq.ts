@@ -92,6 +92,14 @@ function buildClientOptions(): ConstructorParameters<typeof BigQuery>[0] {
     return { ...base, credentials };
   }
 
+  // Explicit local key-file override (e.g. `.env.local`, gitignored) — lets a
+  // developer point at any SA key file (e.g. one with different dataset
+  // grants) without touching LOCAL_KEY_FILES. Never logged.
+  const overridePath = process.env.MARKET_RESEARCH_BQ_KEY_FILE;
+  if (overridePath && overridePath.trim().length > 0 && existsSync(overridePath)) {
+    return { ...base, keyFilename: overridePath };
+  }
+
   const keyFile = LOCAL_KEY_FILES.find((p) => existsSync(p));
   if (keyFile) {
     return { ...base, keyFilename: keyFile };
@@ -99,7 +107,8 @@ function buildClientOptions(): ConstructorParameters<typeof BigQuery>[0] {
 
   throw new Error(
     "No BigQuery credentials found. Set MARKET_RESEARCH_BQ_SA_B64 (base64 of the " +
-      "service-account JSON) or provide the local key file.",
+      "service-account JSON), MARKET_RESEARCH_BQ_KEY_FILE (a local key-file path), " +
+      "or provide the local key file.",
   );
 }
 
