@@ -1,0 +1,19 @@
+# Fly.io app for the monthly LinkedIn job-market agent (batch / scheduled).
+# This is NOT a server — there is no [http_service]. The work is done by a
+# scheduled Machine (see DEPLOY_FLY.md): it boots monthly, runs run_monthly.py,
+# and stops.
+app = "ik-market-research-jobs"      # rename to taste; must be globally unique
+primary_region = "sin"               # Singapore — close to India; match your other apps
+
+[build]
+  dockerfile = "Dockerfile"
+
+# Non-secret runtime config. Secrets (APIFY_TOKEN, MARKET_RESEARCH_BQ_SA_B64)
+# are set with `fly secrets set`, never here.
+[env]
+  JOBMKT_BQ_PROJECT  = "ik-marketing-data"
+  JOBMKT_BQ_DATASET  = "Market_Research"
+  JOBMKT_BQ_LOCATION = "US"
+
+# No [[services]] / [http_service]: nothing listens on a port.
+# No [[vm]] auto-start machines — the scheduled Machine is created explicitly.

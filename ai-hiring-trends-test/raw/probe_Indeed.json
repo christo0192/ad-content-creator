@@ -1,0 +1,14 @@
+{
+  "input": {
+    "query": "Machine Learning Engineer",
+    "country": "in",
+    "location": "India",
+    "maxRows": 10,
+    "fromDays": "62",
+    "sort": "date"
+  },
+  "meta": {
+    "error": "launch HTTP 400: {\n  \"error\": {\n    \"type\": \"invalid-input\",\n    \"message\": \"Input is not valid: Field input.fromDays must be equal to one of the allowed values: \\\"1\\\", \\\"3\\\", \\\"7\\\", \\\"14\\\"\"\n  }\n}"
+  },
+  "items": []
+}

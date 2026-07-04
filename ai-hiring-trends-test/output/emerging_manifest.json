@@ -1,0 +1,159 @@
+{
+  "manifest": [
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Generative AI",
+      "raw": 50,
+      "kept_ai": 38,
+      "cost_usd": 0.03
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Agentic AI",
+      "raw": 50,
+      "kept_ai": 41,
+      "cost_usd": 0.05904
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "AI Agent",
+      "raw": 50,
+      "kept_ai": 33,
+      "cost_usd": 0.04304
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "LLM Engineer",
+      "raw": 50,
+      "kept_ai": 1,
+      "cost_usd": 0.04005
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Machine Learning Engineer",
+      "raw": 50,
+      "kept_ai": 46,
+      "cost_usd": 0.05404
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Data Scientist",
+      "raw": 50,
+      "kept_ai": 37,
+      "cost_usd": 0.05405
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "AI Engineer",
+      "raw": 51,
+      "kept_ai": 44,
+      "cost_usd": 0.04804
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "MLOps Engineer",
+      "raw": 50,
+      "kept_ai": 50,
+      "cost_usd": 0.05804
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Prompt Engineer",
+      "raw": 50,
+      "kept_ai": 27,
+      "cost_usd": 0.05004
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "RAG Engineer",
+      "raw": 50,
+      "kept_ai": 3,
+      "cost_usd": 0.04505
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Applied AI",
+      "raw": 51,
+      "kept_ai": 43,
+      "cost_usd": 0.05405
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "AI Architect",
+      "raw": 50,
+      "kept_ai": 36,
+      "cost_usd": 0.05304
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "Computer Vision Engineer",
+      "raw": 51,
+      "kept_ai": 39,
+      "cost_usd": 0.04904
+    },
+    {
+      "source": "LinkedIn Jobs",
+      "query": "NLP Engineer",
+      "raw": 50,
+      "kept_ai": 33,
+      "cost_usd": 0.04405
+    },
+    {
+      "source": "Naukri",
+      "query": "Generative AI",
+      "raw": 50,
+      "kept_ai": 50,
+      "cost_usd": 0.02202
+    },
+    {
+      "source": "Naukri",
+      "query": "Agentic AI",
+      "raw": 50,
+      "kept_ai": 43,
+      "cost_usd": 0.20002
+    },
+    {
+      "source": "Naukri",
+      "query": "AI Engineer",
+      "raw": 50,
+      "kept_ai": 44,
+      "cost_usd": 0.52007
+    },
+    {
+      "source": "Naukri",
+      "query": "Machine Learning Engineer",
+      "raw": 50,
+      "kept_ai": 50,
+      "cost_usd": 0.30003
+    },
+    {
+      "source": "Naukri",
+      "query": "LLM",
+      "skipped": "budget"
+    },
+    {
+      "source": "Naukri",
+      "query": "Data Scientist",
+      "skipped": "budget"
+    },
+    {
+      "source": "Naukri",
+      "query": "MLOps",
+      "skipped": "budget"
+    },
+    {
+      "source": "Naukri",
+      "query": "Prompt Engineer",
+      "skipped": "budget"
+    }
+  ],
+  "governor": {
+    "baseline": 0.535061666518569,
+    "session_spent": 2.2337193931135064,
+    "final_usage": 2.7687810596320754
+  },
+  "window": {
+    "start": "2026-04-16",
+    "report_date": "2026-06-17"
+  }
+}

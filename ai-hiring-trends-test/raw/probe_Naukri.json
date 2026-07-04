@@ -1,0 +1,13 @@
+{
+  "input": {
+    "keyword": "Machine Learning Engineer",
+    "maxJobs": 10,
+    "fetchDetails": true,
+    "freshness": "60",
+    "sortBy": "date"
+  },
+  "meta": {
+    "error": "launch HTTP 400: {\n  \"error\": {\n    \"type\": \"invalid-input\",\n    \"message\": \"Input is not valid: Field input.maxJobs must be >= 50\"\n  }\n}"
+  },
+  "items": []
+}

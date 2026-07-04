@@ -1,0 +1,127 @@
+{
+  "input": {
+    "mode": "hiring",
+    "query": "AI",
+    "maxItems": 10
+  },
+  "meta": {
+    "run_id": "ILnqs696hpxvYD22Y",
+    "status": "SUCCEEDED",
+    "elapsed_s": 8.4,
+    "n_items": 10,
+    "cost_usd": 0.00302,
+    "session_spent": 0.50451
+  },
+  "items": [
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48539064",
+      "author": "bfackelman",
+      "company": "just emailed, thank you!",
+      "text": "just emailed, thank you!",
+      "remote": false,
+      "createdAt": "2026-06-15T10:04:47Z",
+      "url": "https://news.ycombinator.com/item?id=48539064"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48538544",
+      "author": "icfly2",
+      "company": "Banking Circle ",
+      "text": "Banking Circle | Data Scientist | London or Copenhagen | Full time Banking Circle provides account and payment infrastructure to other regulated financial firms. You have probably never heard of us but we have probably moved money on your behalf at some point this month. As part of this we need to screen payments for sanctions compliance and anti money laundering and fraud concerns. The team hiring builds the ML models that decide if the payment needs to go for manual review. We’re a diverse mix of people (50% have PhDs) and we work a wide ranging set of problems. Specifically we are looking for candidates to strengthen our GIS (geolocation) / graph (network) and NLP (genAI) capabilities. A good candidate will have experience in two of the three areas, a track record of delivering business relevant results and some research experience. https://candidate.hr-manager.net/ApplicationInit.aspx?cid=28...",
+      "remote": false,
+      "createdAt": "2026-06-15T09:03:06Z",
+      "url": "https://news.ycombinator.com/item?id=48538544"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48536207",
+      "author": "bfackelman",
+      "company": "Keeping a crew's lessons from retiring with the veterans is worth building",
+      "text": "Keeping a crew's lessons from retiring with the veterans is worth building. Just applied via email, would love to connect and own the rebuild with you",
+      "remote": false,
+      "createdAt": "2026-06-15T03:21:05Z",
+      "url": "https://news.ycombinator.com/item?id=48536207"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48533484",
+      "author": "ysandans",
+      "company": "Harmony AI ",
+      "text": "Harmony AI | Chattanooga, TN + deployed at customer sites | Full-time | ONSITE/Deployed The AI operating system for American manufacturing — an AI layer that runs your plant on real-time data, connecting machines, software, paperwork, and tribal knowledge. We embed on factory floors. Many roles are deployed: you relocate to a plant and ship inside the environment it runs in. High ownership, high equity, founder-led. Stack: Python, TS, React, Postgres, Docker/K8s, Terraform. Hiring: Full-Stack Engineers (US & Mexico), Backend Engineer, Founding Designer, AI Researcher, SDR, Head of Sales & Partnerships, and Head of Robotics. All roles: https://www.tryharmony.ai/careers",
+      "remote": false,
+      "createdAt": "2026-06-14T22:20:52Z",
+      "url": "https://news.ycombinator.com/item?id=48533484"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48533197",
+      "author": "nf093025",
+      "company": "Hi Rusty, I took a look at Seeq's job openings and applied for the AI Applications engineer position ((my email address ",
+      "text": "Hi Rusty, I took a look at Seeq's job openings and applied for the AI Applications engineer position ((my email address is the same as my HN username). I have 4 YOE working in QA (using agentic AI tools) and 2 YOE in Customer Success. I'd be excited to be considered for this role at Seeq. Thank you!",
+      "remote": false,
+      "createdAt": "2026-06-14T21:52:36Z",
+      "url": "https://news.ycombinator.com/item?id=48533197"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48533102",
+      "author": "nf093025",
+      "company": "Hi Travis, sent you an email (my email address is the same as my HN username)",
+      "text": "Hi Travis, sent you an email (my email address is the same as my HN username). I have 4+ years of experience as a QA engineer and I'd be excited to be considered for this role at Neurotone. Thank you!",
+      "remote": false,
+      "createdAt": "2026-06-14T21:42:13Z",
+      "url": "https://news.ycombinator.com/item?id=48533102"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48531236",
+      "author": "WHITEHATWOLF",
+      "company": "Location: Dakshina Kannada, Karnataka, India Remote: Yes (IST overlap) Willing to relocate: Within India for strong oppo",
+      "text": "Location: Dakshina Kannada, Karnataka, India Remote: Yes (IST overlap) Willing to relocate: Within India for strong opportunities Technologies: SIEM monitoring, Splunk ES/SOAR, log analysis, threat hunting, incident response basics, vulnerability assessment, penetration testing, digital forensics, AWS security, IAM, Secrets Manager, Linux, Python, Docker, Git, network security Résumé/CV: https://drive.google.com/drive/folders/1KGUmGsSffOLFiFCdzrKj... Email: www.giridharpai@gmail.com Cybersecurity graduate seeking Information Security Analyst, Cyber Security Analyst, Penetration Tester, or SOC Analyst roles. I have hands-on experience in information security, penetration testing, and SOC operations. I’ve worked with Splunk SIEM monitoring, threat hunting, vulnerability assessment, digital forensics, and incident response fundamentals. I’m ranked in the top 1% on TryHackMe with 13 certifications and placed 2nd in IBM ICE DAY 2025 CTF. Impact: – Built real-time threat detection systems. – Built DDoS mitigation solutions. – Developed secure cloud applications with authentication, encryption, and access control. – IBM academic internship: Tejas Raksha, a zero-day web scanner for OWASP Top 10 vulnerabilities. – Freelance cloud security work: AES-256-GCM and Argon2id file encryption, MFA/SSO/RBAC, WebAuthn/TOTP, and secure healthcare workflows. Links: – LinkedIn: https://linkedin.com/in/giridharpai227/ – GitHub: https://github.com/Giri227 – Portfolio: https://giri227.github.io/Giridharpai/",
+      "remote": true,
+      "createdAt": "2026-06-14T19:00:38Z",
+      "url": "https://news.ycombinator.com/item?id=48531236"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48522585",
+      "author": "sazmyrid",
+      "company": "Hi Steve, I have 19+ years of software engineering experience, including leading development and long-term ownership of ",
+      "text": "Hi Steve, I have 19+ years of software engineering experience, including leading development and long-term ownership of production SaaS, e-commerce, CMS, and automation platforms. My background spans Next.js, React, TypeScript, Node.js, PHP, PostgreSQL, AWS, Docker, AI-powered automation, and Magento-based e-commerce systems. I've worked extensively with distributed teams and can provide significant overlap with US business hours. Thanks, Saravana https://linkedin.com/in/saravana-bhava",
+      "remote": false,
+      "createdAt": "2026-06-13T23:40:13Z",
+      "url": "https://news.ycombinator.com/item?id=48522585"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48518968",
+      "author": "dmkostenko",
+      "company": "SEEKING WORK ",
+      "text": "SEEKING WORK | Poland / EU | Remote CET | Senior Full Stack Developer Senior Full Stack Developer / Team Lead with 10+ years of experience. Stack: React, TypeScript, Python, Django, Node.js, PostgreSQL, Docker/Kubernetes, Azure. Strong in SaaS platforms, APIs, dashboards, admin panels, production debugging, integrations and delivery ownership. Available for: short-term contract, part-time, full-time B2B, project rescue, production support. Can start immediately. LinkedIn: https://www.linkedin.com/in/dmitriy-kostenko/ CV: https://drive.google.com/file/d/1l8AIB9WLnBy4R1RnBTnGLax1diP... Email: dmitriy.finswim@gmail.com",
+      "remote": true,
+      "createdAt": "2026-06-13T16:45:03Z",
+      "url": "https://news.ycombinator.com/item?id=48518968"
+    },
+    {
+      "threadId": "48357725",
+      "threadTitle": "Ask HN: Who is hiring? (June 2026)",
+      "commentId": "48513648",
+      "author": "vk8629",
+      "company": "Hey Ohr, sent an email please check when you get a chance, TY",
+      "text": "Hey Ohr, sent an email please check when you get a chance, TY",
+      "remote": false,
+      "createdAt": "2026-06-13T05:33:20Z",
+      "url": "https://news.ycombinator.com/item?id=48513648"
+    }
+  ]
+}

@@ -1,0 +1,845 @@
+{
+  "n_rows": 658,
+  "n_in_window": 637,
+  "by_source": {
+    "LinkedIn Jobs": 471,
+    "Naukri": 187
+  },
+  "lens_counts": {
+    "L1_genai_emerging": 271,
+    "L4_seniority_hybrid": 60,
+    "novel_unmapped": 75
+  },
+  "emerging_buckets": [
+    {
+      "bucket": "GenAI / LLM Engineer",
+      "count": 124,
+      "in_window": 118,
+      "coverage_guess": "covered",
+      "companies": [
+        "Infosys (16)",
+        "Tata Consultancy Services (9)",
+        "Capgemini (6)",
+        "Anlage Infotech (4)",
+        "Zensar (4)",
+        "Vrinda International (4)"
+      ],
+      "samples": [
+        "Python/Gen AI Lead Developer",
+        "Generative AI Engineer",
+        "Generative AI Lead"
+      ]
+    },
+    {
+      "bucket": "AI Agent / Agentic AI Engineer",
+      "count": 66,
+      "in_window": 64,
+      "coverage_guess": "covered",
+      "companies": [
+        "Capgemini (5)",
+        "Infosys (4)",
+        "Tech Mahindra (4)",
+        "Contactx Resource Management (3)",
+        "Gartner (2)",
+        "DigitalXNode (2)"
+      ],
+      "samples": [
+        "Data Scientist (Classical ML, NLP & LLM/GenAI/Agentic AI)",
+        "GenAI / Agentic AI Engineer",
+        "Data Scientist(Agentic AI)"
+      ]
+    },
+    {
+      "bucket": "MLOps Engineer",
+      "count": 46,
+      "in_window": 46,
+      "coverage_guess": "gap",
+      "companies": [
+        "Grid Dynamics (4)",
+        "Radiansys Inc. (3)",
+        "UPS (2)",
+        "Iris Software Inc. (2)",
+        "Byteridge (2)",
+        "Luxoft (2)"
+      ],
+      "samples": [
+        "AI/ML Engineer- MLOps -  UPS Digital MARTEC",
+        "Senior MLOps Engineer – Azure, Databricks & Kubernetes",
+        "Data & AI - MLOPS - Senior Engineer"
+      ]
+    },
+    {
+      "bucket": "Prompt Engineer",
+      "count": 19,
+      "in_window": 19,
+      "coverage_guess": "covered",
+      "companies": [
+        "Zensar Technologies (3)",
+        "Programmers.io (1)",
+        "NetConnectGlobal (1)",
+        "Schmieder Translations (1)",
+        "eProSoft (1)",
+        "The Yoga Institute Official (1)"
+      ],
+      "samples": [
+        "Data Prompt Engineer",
+        "Prompt engineer",
+        "Prompt Engineer (m/w/d) Translation Management"
+      ]
+    },
+    {
+      "bucket": "AI Platform / Infra Engineer",
+      "count": 4,
+      "in_window": 4,
+      "coverage_guess": "gap",
+      "companies": [
+        "Weekday AI (YC W21) (2)",
+        "Google (1)",
+        "Byteridge (1)"
+      ],
+      "samples": [
+        "AI/ML Infrastructure Software Engineer",
+        "Byteridge - MLOps Engineer/AI Infrastructure Engineer",
+        "Lead - Data & Ml Platform Engineering"
+      ]
+    },
+    {
+      "bucket": "RAG / Retrieval Engineer",
+      "count": 4,
+      "in_window": 4,
+      "coverage_guess": "covered",
+      "companies": [
+        "Experis (3)",
+        "Aspyra Hr Services (1)"
+      ],
+      "samples": [
+        "Senior Data Scientist - Generative AI (LLM/RAG)",
+        "Machine Learning Engineer ( RAG & Generative AI)"
+      ]
+    },
+    {
+      "bucket": "AI Safety / Governance",
+      "count": 4,
+      "in_window": 4,
+      "coverage_guess": "covered",
+      "companies": [
+        "Accenture (4)"
+      ],
+      "samples": [
+        "Responsible AI Engineer"
+      ]
+    },
+    {
+      "bucket": "Applied AI / Scientist",
+      "count": 3,
+      "in_window": 3,
+      "coverage_guess": "gap",
+      "companies": [
+        "Hitachi Vantara (1)",
+        "Google (1)",
+        "Amgen (1)"
+      ],
+      "samples": [
+        "Applied AI/ML Engineer",
+        "Applied AI - Machine Learning Engineer"
+      ]
+    },
+    {
+      "bucket": "Forward-Deployed AI Engineer",
+      "count": 1,
+      "in_window": 1,
+      "coverage_guess": "gap",
+      "companies": [
+        "Aivar Innovations (1)"
+      ],
+      "samples": [
+        "Forward Deployed Engineer-AI/ML"
+      ]
+    }
+  ],
+  "seniority_buckets": [
+    {
+      "bucket": "AI / ML Architect",
+      "count": 50,
+      "companies": [
+        "EPAM Systems (3)",
+        "Deloitte (3)",
+        "Persistent Systems (3)",
+        "UST (2)",
+        "EY (2)",
+        "Weekday AI (YC W21) (2)"
+      ],
+      "samples": [
+        "Specialist II - Gen AI Architect",
+        "Agentic AI Architect & Builder (PSS07995)",
+        "AI Architect"
+      ]
+    },
+    {
+      "bucket": "AI/ML Lead / Manager",
+      "count": 6,
+      "companies": [
+        "HashedIn by Deloitte (1)",
+        "Birlasoft (1)",
+        "Capgemini (1)",
+        "techjays (1)",
+        "Elevation Capital (1)",
+        "Black And White Business Solutions (1)"
+      ],
+      "samples": [
+        "Python/Gen AI Lead Developer",
+        "Generative AI Lead",
+        "Python GenAI Lead"
+      ]
+    },
+    {
+      "bucket": "Principal / Staff AI",
+      "count": 4,
+      "companies": [
+        "symplr (1)",
+        "Teradata (1)",
+        "Aveva (1)",
+        "Xoom (1)"
+      ],
+      "samples": [
+        "Staff MLOps Engineer",
+        "Staff AI Engineer",
+        "Principal AI Engineer"
+      ]
+    }
+  ],
+  "novel_titles": [
+    {
+      "canonical": "ai developer",
+      "count": 10,
+      "sample": "AI Developer",
+      "companies": [
+        "Coforge (3)",
+        "Cognizant (1)",
+        "RChilli Inc. (1)",
+        "RealPage, Inc. (1)"
+      ]
+    },
+    {
+      "canonical": "aiml engineer",
+      "count": 10,
+      "sample": "AIML Engineer",
+      "companies": [
+        "LTM (2)",
+        "Capgemini (1)",
+        "nCircle Tech Careers (1)",
+        "AIONOS (1)"
+      ]
+    },
+    {
+      "canonical": "manager ai/ml",
+      "count": 4,
+      "sample": "Manager - AI/ML",
+      "companies": [
+        "KPMG India (4)"
+      ]
+    },
+    {
+      "canonical": "ai/ml developer",
+      "count": 3,
+      "sample": "Junior AI/ML Developer",
+      "companies": [
+        "Drishti IAS (2)",
+        "Persistent Systems (1)"
+      ]
+    },
+    {
+      "canonical": "llm engineer",
+      "count": 3,
+      "sample": "LLM - Engineer - Associate",
+      "companies": [
+        "PwC Acceleration Center India (3)"
+      ]
+    },
+    {
+      "canonical": "architect ai/ml",
+      "count": 3,
+      "sample": "Lead Architect- AI/ML",
+      "companies": [
+        "Birlasoft (3)"
+      ]
+    },
+    {
+      "canonical": "ai/ml python",
+      "count": 2,
+      "sample": "AI/ML, Python",
+      "companies": [
+        "LTIMindtree (2)"
+      ]
+    },
+    {
+      "canonical": "applied research scientist ai models agents",
+      "count": 2,
+      "sample": "Applied Research Scientist - AI Models & Agents",
+      "companies": [
+        "AMD (2)"
+      ]
+    },
+    {
+      "canonical": "machine learning engineer mid level",
+      "count": 2,
+      "sample": "Machine Learning  Engineer Mid Level",
+      "companies": [
+        "CapeStart (2)",
+        "Cleartrip Private Limited (1)"
+      ]
+    },
+    {
+      "canonical": "machine learning",
+      "count": 2,
+      "sample": "Machine Learning",
+      "companies": [
+        "Umicore (2)"
+      ]
+    },
+    {
+      "canonical": "ml developer",
+      "count": 2,
+      "sample": "ML Developer (Machine Learning Developer)",
+      "companies": [
+        "AI CERTs® - India (2)"
+      ]
+    },
+    {
+      "canonical": "software engineer ml systems",
+      "count": 2,
+      "sample": "Software Engineer, ML Systems",
+      "companies": [
+        "eBay (2)"
+      ]
+    },
+    {
+      "canonical": "engineer ai/ml with python",
+      "count": 2,
+      "sample": "Associate Engineer - AI/ML with Python",
+      "companies": [
+        "HARMAN India (2)"
+      ]
+    },
+    {
+      "canonical": "ai/ml software engineer",
+      "count": 1,
+      "sample": "AI/ML Software Engineer",
+      "companies": [
+        "Jumbo Consulting (1)"
+      ]
+    },
+    {
+      "canonical": "artificial intelligence specialist",
+      "count": 1,
+      "sample": "Artificial Intelligence Specialist",
+      "companies": [
+        "Ascendion (1)"
+      ]
+    },
+    {
+      "canonical": "software engineer ai/ml",
+      "count": 1,
+      "sample": "Software Engineer - AI/ML",
+      "companies": [
+        "Jobgether (1)"
+      ]
+    },
+    {
+      "canonical": "ai developer agent specialist",
+      "count": 1,
+      "sample": "AI Developer - Agent Specialist",
+      "companies": [
+        "EisnerAmper India (1)"
+      ]
+    },
+    {
+      "canonical": "ai consultant",
+      "count": 1,
+      "sample": "AI Consultant",
+      "companies": [
+        "Azilen Technologies (1)"
+      ]
+    },
+    {
+      "canonical": "software engineer aiml",
+      "count": 1,
+      "sample": "Software Engineer - AIML",
+      "companies": [
+        "Kaleris (1)"
+      ]
+    },
+    {
+      "canonical": "engineer ai/ml pune",
+      "count": 1,
+      "sample": "Senior Engineer, AI/ML - Pune",
+      "companies": [
+        "Edwards Lifesciences (1)"
+      ]
+    },
+    {
+      "canonical": "engineer ai/machine learning",
+      "count": 1,
+      "sample": "Senior Engineer, AI/Machine Learning",
+      "companies": [
+        "Edwards Lifesciences (1)"
+      ]
+    },
+    {
+      "canonical": "software engineer classic ai/ml",
+      "count": 1,
+      "sample": "Software Engineer - Classic AI/ML",
+      "companies": [
+        "HARMAN India (1)"
+      ]
+    },
+    {
+      "canonical": "engineer machine learning engineering 2",
+      "count": 1,
+      "sample": "Senior Engineer, Machine Learning Engineering-2",
+      "companies": [
+        "Mastercard (1)"
+      ]
+    },
+    {
+      "canonical": "research scientist",
+      "count": 1,
+      "sample": "Research Scientist",
+      "companies": [
+        "Syngenta (1)"
+      ]
+    },
+    {
+      "canonical": "software engineer ai/ml with python",
+      "count": 1,
+      "sample": "Software Engineer - AI/ML with Python",
+      "companies": [
+        "HARMAN India (1)"
+      ]
+    },
+    {
+      "canonical": "python engineer ai/ml",
+      "count": 1,
+      "sample": "Python Engineer - AI/ML",
+      "companies": [
+        "Citi (1)"
+      ]
+    },
+    {
+      "canonical": "search engineer ai/ml",
+      "count": 1,
+      "sample": "Search Engineer - AI/ML",
+      "companies": [
+        "Apple (1)"
+      ]
+    },
+    {
+      "canonical": "python ai specialist programmer",
+      "count": 1,
+      "sample": "Python AI specialist programmer",
+      "companies": [
+        "Infosys (1)"
+      ]
+    },
+    {
+      "canonical": "ml ops engineer r d it",
+      "count": 1,
+      "sample": "ML OPS Engineer - R&D IT",
+      "companies": [
+        "NXP Semiconductors (1)"
+      ]
+    },
+    {
+      "canonical": "ml ops platform engineer",
+      "count": 1,
+      "sample": "ML Ops Platform Engineer",
+      "companies": [
+        "Capgemini (1)"
+      ]
+    },
+    {
+      "canonical": "software engineer ml ops devops",
+      "count": 1,
+      "sample": "Software Engineer - ML Ops DevOps",
+      "companies": [
+        "HARMAN India (1)"
+      ]
+    },
+    {
+      "canonical": "technical expert ai/ml",
+      "count": 1,
+      "sample": "Technical Expert - AI/ML",
+      "companies": [
+        "ZF Group (1)"
+      ]
+    },
+    {
+      "canonical": "ml ops",
+      "count": 1,
+      "sample": "ML-Ops",
+      "companies": [
+        "Sia (1)"
+      ]
+    },
+    {
+      "canonical": "ai developer technology engineer",
+      "count": 1,
+      "sample": "AI Developer Technology Engineer",
+      "companies": [
+        "NVIDIA (1)"
+      ]
+    },
+    {
+      "canonical": "technical support engineer aiml irc297521",
+      "count": 1,
+      "sample": "Technical Support Engineer – AIML IRC297521",
+      "companies": [
+        "GlobalLogic (1)"
+      ]
+    },
+    {
+      "canonical": "cloud specialist machine learning",
+      "count": 1,
+      "sample": "Cloud Specialist - Machine Learning",
+      "companies": [
+        "Niveus Solutions (1)"
+      ]
+    },
+    {
+      "canonical": "ai research scientist algorithm",
+      "count": 1,
+      "sample": "AI Research Scientist - Algorithm",
+      "companies": [
+        "Applied Materials India (1)"
+      ]
+    },
+    {
+      "canonical": "ai/ml solutions architect",
+      "count": 1,
+      "sample": "AI/ML Solutions Architect",
+      "companies": [
+        "Searce Inc (1)"
+      ]
+    },
+    {
+      "canonical": "python developer",
+      "count": 1,
+      "sample": "Python Developer(Machine Learning)",
+      "companies": [
+        "Citi (1)"
+      ]
+    },
+    {
+      "canonical": "python developer ai/ml engineering",
+      "count": 1,
+      "sample": "Senior Python Developer - AI/ML Engineering",
+      "companies": [
+        "Virtusa (1)"
+      ]
+    }
+  ],
+  "top_canonical": [
+    {
+      "title": "ai engineer",
+      "count": 63
+    },
+    {
+      "title": "machine learning engineer",
+      "count": 52
+    },
+    {
+      "title": "data scientist",
+      "count": 43
+    },
+    {
+      "title": "ai/ml engineer",
+      "count": 30
+    },
+    {
+      "title": "mlops engineer",
+      "count": 29
+    },
+    {
+      "title": "generative ai engineer",
+      "count": 25
+    },
+    {
+      "title": "ai architect",
+      "count": 17
+    },
+    {
+      "title": "agentic ai engineer",
+      "count": 14
+    },
+    {
+      "title": "artificial intelligence engineer",
+      "count": 13
+    },
+    {
+      "title": "agentic ai developer",
+      "count": 11
+    },
+    {
+      "title": "ai developer",
+      "count": 10
+    },
+    {
+      "title": "aiml engineer",
+      "count": 10
+    },
+    {
+      "title": "gen ai engineer",
+      "count": 9
+    },
+    {
+      "title": "prompt engineer",
+      "count": 6
+    },
+    {
+      "title": "agentic ai architect",
+      "count": 6
+    },
+    {
+      "title": "ai/ml engineer generative ai",
+      "count": 6
+    },
+    {
+      "title": "generative ai developer",
+      "count": 4
+    },
+    {
+      "title": "manager ai/ml",
+      "count": 4
+    },
+    {
+      "title": "ai ml engineer",
+      "count": 4
+    },
+    {
+      "title": "ml engineer",
+      "count": 4
+    },
+    {
+      "title": "ai ml gen ai engineer",
+      "count": 4
+    },
+    {
+      "title": "aes de generative ai prompt engineers",
+      "count": 4
+    },
+    {
+      "title": "ai prompt engineer",
+      "count": 4
+    },
+    {
+      "title": "gen ai architect",
+      "count": 4
+    },
+    {
+      "title": "computer vision engineer",
+      "count": 4
+    },
+    {
+      "title": "generative ai architect",
+      "count": 4
+    },
+    {
+      "title": "responsible ai engineer",
+      "count": 4
+    },
+    {
+      "title": "python/gen ai developer",
+      "count": 3
+    },
+    {
+      "title": "gen ai",
+      "count": 3
+    },
+    {
+      "title": "ai/ml developer",
+      "count": 3
+    }
+  ],
+  "skills_demand": [
+    {
+      "skill": "Agents",
+      "count": 272,
+      "pct": 41.3,
+      "in_curriculum": true
+    },
+    {
+      "skill": "RAG",
+      "count": 202,
+      "pct": 30.7,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Azure",
+      "count": 151,
+      "pct": 22.9,
+      "in_curriculum": false
+    },
+    {
+      "skill": "AWS",
+      "count": 134,
+      "pct": 20.4,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Fine-tuning",
+      "count": 134,
+      "pct": 20.4,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Prompt Eng",
+      "count": 132,
+      "pct": 20.1,
+      "in_curriculum": true
+    },
+    {
+      "skill": "LLM Eval",
+      "count": 132,
+      "pct": 20.1,
+      "in_curriculum": false
+    },
+    {
+      "skill": "LangChain",
+      "count": 130,
+      "pct": 19.8,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Vector DB",
+      "count": 106,
+      "pct": 16.1,
+      "in_curriculum": false
+    },
+    {
+      "skill": "TensorFlow",
+      "count": 101,
+      "pct": 15.3,
+      "in_curriculum": true
+    },
+    {
+      "skill": "PyTorch",
+      "count": 96,
+      "pct": 14.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "GCP",
+      "count": 94,
+      "pct": 14.3,
+      "in_curriculum": false
+    },
+    {
+      "skill": "OpenAI API",
+      "count": 83,
+      "pct": 12.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Embeddings",
+      "count": 76,
+      "pct": 11.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "LangGraph",
+      "count": 69,
+      "pct": 10.5,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Anthropic/Claude",
+      "count": 66,
+      "pct": 10.0,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Hugging Face",
+      "count": 63,
+      "pct": 9.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Kubernetes",
+      "count": 50,
+      "pct": 7.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "LlamaIndex",
+      "count": 48,
+      "pct": 7.3,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Gemini",
+      "count": 43,
+      "pct": 6.5,
+      "in_curriculum": false
+    },
+    {
+      "skill": "Vertex AI",
+      "count": 35,
+      "pct": 5.3,
+      "in_curriculum": false
+    },
+    {
+      "skill": "Guardrails",
+      "count": 32,
+      "pct": 4.9,
+      "in_curriculum": true
+    },
+    {
+      "skill": "SageMaker",
+      "count": 31,
+      "pct": 4.7,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Llama",
+      "count": 30,
+      "pct": 4.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "AutoGen",
+      "count": 29,
+      "pct": 4.4,
+      "in_curriculum": false
+    },
+    {
+      "skill": "MLflow",
+      "count": 29,
+      "pct": 4.4,
+      "in_curriculum": false
+    },
+    {
+      "skill": "MCP",
+      "count": 26,
+      "pct": 4.0,
+      "in_curriculum": true
+    },
+    {
+      "skill": "CrewAI",
+      "count": 24,
+      "pct": 3.6,
+      "in_curriculum": true
+    },
+    {
+      "skill": "Mistral",
+      "count": 14,
+      "pct": 2.1,
+      "in_curriculum": false
+    },
+    {
+      "skill": "Semantic Kernel",
+      "count": 12,
+      "pct": 1.8,
+      "in_curriculum": false
+    }
+  ]
+}

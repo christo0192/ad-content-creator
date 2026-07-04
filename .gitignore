@@ -1,0 +1,23 @@
+# Nested legacy repo (dashboard now lives in ik-mis/dashboard; history on legacy-dashboard branch)
+market_research_dashboard/
+
+# Secrets / local env
+.env
+.env.*
+*.local
+*key*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Pipeline outputs / staging (regenerable)
+market_research/staging/
+job_market_agent/staging/
+*.log
+
+# Tooling state
+.playwright-mcp/
+.gsd/runtime/
+node_modules/

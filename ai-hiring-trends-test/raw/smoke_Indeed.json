@@ -1,0 +1,525 @@
+{
+  "input": {
+    "query": "Machine Learning Engineer",
+    "country": "in",
+    "location": "India",
+    "maxRows": 5
+  },
+  "meta": {
+    "run_id": "tyGYfZ6eUIZaEdJt7",
+    "status": "SUCCEEDED",
+    "elapsed_s": 25.4,
+    "n_items": 5,
+    "cost_usd": 0.30002,
+    "session_spent": 0.51002
+  },
+  "items": [
+    {
+      "jobKey": "045dd67e25cbb4db",
+      "scrapingInfo": {
+        "page": 1,
+        "index": 4
+      },
+      "title": "Machine Learning Engineer",
+      "jobType": [
+        "Permanent"
+      ],
+      "descriptionHtml": "<div><div><p>Date live: 06/05/2026</p>\n <p>Business Area: Private Bank Processing</p>\n <p>Area of Expertise: Technology</p>\n <p>Contract: Permanent</p>\n <p>Reference Code: JR-0000096476</p></div></div>\n<br><div><p>Barclays is looking for a Machine Learning Engineer to own and lead the design, build and operation of scalable, reliable and governed machine learning systems in production. You will work closely with Data Scientists to bridge experimentation and production, enabling faster, safer and reproducible delivery of ML models in governed environments.\n<br>\nYou will own the ML lifecycle including infrastructure, deployment, monitoring, retraining and governance, while shaping technical strategy and organisational MLOps maturity.</p>\n<p></p><p><b>To be a successful </b><b>Machine Learning Engineer</b><b>, you should have experience with:</b></p>\n<ul><li><p>Proven track record of deploying and operating machine learning models in production within governed or regulated environments. Strong software engineering background with experience delivering large scale systems.</p>\n</li><li><p>Experience using cloud ML platforms such as Databricks, AWS SageMaker or equivalent. Strong practical understanding of machine learning algorithms and statistical methods with the ability to evaluate model behaviour, performance and risk in production.</p>\n</li><li><p>Experience building and operating production grade ML platforms or large scale data platforms. Proficiency with Docker and CI/CD tooling.</p>\n</li><li><p>Strong understanding of distributed systems, scalable architectures and API based services. Ability to balance experimentation velocity with operational reliability, risk management and governance expectations.</p>\n</li></ul><p></p><p><b>Additional relevant skills given below are highly valued:</b></p>\n<ul><li><p>Experience with MLflow, feature stores and model registry implementations. Hands on experience with data validation, drift detection and ML observability tooling.</p>\n</li><li><p>Infrastructure as Code using Terraform or CloudFormation. Experience working in financial services or other highly regulated industries.</p>\n</li><li><p>Experience with responsible deployment of Generative AI systems in production environments. Prior ownership of enterprise ML platforms or MLOps standards.</p>\n</li></ul><p></p><p>You may be assessed on key critical skills relevant for success in role, such as risk and controls, change and transformation, business acumen, strategic thinking and digital and technology, as well as job-specific technical skills.</p>\n<p></p><p>This role is based in Pune.</p>\n<p><b>Purpose of the role</b></p>\n<p>To build and maintain the systems that collect, store, process, and analyse data, such as data pipelines, data warehouses and data lakes to ensure that all data is accurate, accessible, and secure.</p>\n<p></p><p><b>Accountabilities</b></p>\n<ul><li>Build and maintenance of data architectures pipelines that enable the transfer and processing of durable, complete and consistent data.</li>\n<li>Design and implementation of data warehoused and data lakes that manage the appropriate data volumes and velocity and adhere to the required security measures.</li>\n<li>Development of processing and analysis algorithms fit for the intended data complexity and volumes.</li>\n<li>Collaboration with data scientist to build and deploy machine learning models.</li>\n</ul><p></p><p><b>Vice President Expectations</b></p>\n<ul><li>To contribute or set strategy, drive requirements and make recommendations for change. Plan resources, budgets, and policies; manage and maintain policies/ processes; deliver continuous improvements and escalate breaches of policies/procedures..</li>\n<li>If managing a team, they define jobs and responsibilities, planning for the department&rsquo;s future needs and operations, counselling employees on performance and contributing to employee pay decisions/changes. They may also lead a number of specialists to influence the operations of a department, in alignment with strategic as well as tactical priorities, while balancing short and long term goals and ensuring that budgets and schedules meet corporate requirements..</li>\n<li>If the position has leadership responsibilities, People Leaders are expected to demonstrate a clear set of leadership behaviours to create an environment for colleagues to thrive and deliver to a consistently excellent standard. The four LEAD behaviours are: L &ndash; Listen and be authentic, E &ndash; Energise and inspire, A &ndash; Align across the enterprise, D &ndash; Develop others..</li>\n<li>OR for an individual contributor, they will be a subject matter expert within own discipline and will guide technical direction. They will lead collaborative, multi-year assignments and guide team members through structured assignments, identify the need for the inclusion of other areas of specialisation to complete assignments. They will train, guide and coach less experienced specialists and provide information affecting long term profits, organisational risks and strategic decisions..</li>\n<li>Advise key stakeholders, including functional leadership teams and senior management on functional and cross functional areas of impact and alignment.</li>\n<li>Manage and mitigate risks through assessment, in support of the control and governance agenda.</li>\n<li>Demonstrate leadership and accountability for managing risk and strengthening controls in relation to the work your team does.</li>\n<li>Demonstrate comprehensive understanding of the organisation functions to contribute to achieving the goals of the business.</li>\n<li>Collaborate with other areas of work, for business aligned support areas to keep up to speed with business activity and the business strategies.</li>\n<li>Create solutions based on sophisticated analytical thought comparing and selecting complex alternatives. In-depth analysis with interpretative thinking will be required to define problems and develop innovative solutions.</li>\n<li>Adopt and include the outcomes of extensive research in problem solving processes.</li>\n<li>Seek out, build and maintain trusting relationships and partnerships with internal and external stakeholders in order to accomplish key business objectives, using influencing and negotiating skills to achieve outcomes.</li>\n</ul><p></p><p>All colleagues will be expected to demonstrate the Barclays Values of Respect, Integrity, Service, Excellence and Stewardship &ndash; our moral compass, helping us do what we believe is right. They will also be expected to demonstrate the Barclays Mindset &ndash; to Empower, Challenge and Drive &ndash; the operating manual for how we behave.</p></div>",
+      "companyLogoUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/76b365e481c96410a45876ea3fcf78d9",
+      "descriptionText": "Date live: 06/05/2026\n\n Business Area: Private Bank Processing\n\n Area of Expertise: Technology\n\n Contract: Permanent\n\n Reference Code: JR-0000096476\nBarclays is looking for a Machine Learning Engineer to own and lead the design, build and operation of scalable, reliable and governed machine learning systems in production. You will work closely with Data Scientists to bridge experimentation and production, enabling faster, safer and reproducible delivery of ML models in governed environments.\nYou will own the ML lifecycle including infrastructure, deployment, monitoring, retraining and governance, while shaping technical strategy and organisational MLOps maturity.\n\nTo be a successful Machine Learning Engineer, you should have experience with:\n\nProven track record of deploying and operating machine learning models in production within governed or regulated environments. Strong software engineering background with experience delivering large scale systems.\n\nExperience using cloud ML platforms such as Databricks, AWS SageMaker or equivalent. Strong practical understanding of machine learning algorithms and statistical methods with the ability to evaluate model behaviour, performance and risk in production.\n\nExperience building and operating production grade ML platforms or large scale data platforms. Proficiency with Docker and CI/CD tooling.\n\nStrong understanding of distributed systems, scalable architectures and API based services. Ability to balance experimentation velocity with operational reliability, risk management and governance expectations.\n\nAdditional relevant skills given below are highly valued:\n\nExperience with MLflow, feature stores and model registry implementations. Hands on experience with data validation, drift detection and ML observability tooling.\n\nInfrastructure as Code using Terraform or CloudFormation. Experience working in financial services or other highly regulated industries.\n\nExperience with responsible deployment of Generative AI systems in production environments. Prior ownership of enterprise ML platforms or MLOps standards.\n\nYou may be assessed on key critical skills relevant for success in role, such as risk and controls, change and transformation, business acumen, strategic thinking and digital and technology, as well as job-specific technical skills.\n\nThis role is based in Pune.\n\nPurpose of the role\n\nTo build and maintain the systems that collect, store, process, and analyse data, such as data pipelines, data warehouses and data lakes to ensure that all data is accurate, accessible, and secure.\n\nAccountabilities\n\nBuild and maintenance of data architectures pipelines that enable the transfer and processing of durable, complete and consistent data.\nDesign and implementation of data warehoused and data lakes that manage the appropriate data volumes and velocity and adhere to the required security measures.\nDevelopment of processing and analysis algorithms fit for the intended data complexity and volumes.\nCollaboration with data scientist to build and deploy machine learning models.\n\nVice President Expectations\n\nTo contribute or set strategy, drive requirements and make recommendations for change. Plan resources, budgets, and policies; manage and maintain policies/ processes; deliver continuous improvements and escalate breaches of policies/procedures..\nIf managing a team, they define jobs and responsibilities, planning for the department’s future needs and operations, counselling employees on performance and contributing to employee pay decisions/changes. They may also lead a number of specialists to influence the operations of a department, in alignment with strategic as well as tactical priorities, while balancing short and long term goals and ensuring that budgets and schedules meet corporate requirements..\nIf the position has leadership responsibilities, People Leaders are expected to demonstrate a clear set of leadership behaviours to create an environment for colleagues to thrive and deliver to a consistently excellent standard. The four LEAD behaviours are: L – Listen and be authentic, E – Energise and inspire, A – Align across the enterprise, D – Develop others..\nOR for an individual contributor, they will be a subject matter expert within own discipline and will guide technical direction. They will lead collaborative, multi-year assignments and guide team members through structured assignments, identify the need for the inclusion of other areas of specialisation to complete assignments. They will train, guide and coach less experienced specialists and provide information affecting long term profits, organisational risks and strategic decisions..\nAdvise key stakeholders, including functional leadership teams and senior management on functional and cross functional areas of impact and alignment.\nManage and mitigate risks through assessment, in support of the control and governance agenda.\nDemonstrate leadership and accountability for managing risk and strengthening controls in relation to the work your team does.\nDemonstrate comprehensive understanding of the organisation functions to contribute to achieving the goals of the business.\nCollaborate with other areas of work, for business aligned support areas to keep up to speed with business activity and the business strategies.\nCreate solutions based on sophisticated analytical thought comparing and selecting complex alternatives. In-depth analysis with interpretative thinking will be required to define problems and develop innovative solutions.\nAdopt and include the outcomes of extensive research in problem solving processes.\nSeek out, build and maintain trusting relationships and partnerships with internal and external stakeholders in order to accomplish key business objectives, using influencing and negotiating skills to achieve outcomes.\n\nAll colleagues will be expected to demonstrate the Barclays Values of Respect, Integrity, Service, Excellence and Stewardship – our moral compass, helping us do what we believe is right. They will also be expected to demonstrate the Barclays Mindset – to Empower, Challenge and Drive – the operating manual for how we behave.",
+      "companyName": "Barclays",
+      "companyUrl": "https://in.indeed.com/cmp/Barclays",
+      "companyHeaderUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_headerimage/1960x400/478da1109a8cc84b302f952e53a794f5",
+      "location": {
+        "city": null,
+        "postalCode": null,
+        "country": "India",
+        "countryCode": "IN",
+        "formattedAddressLong": "Pune, Maharashtra",
+        "formattedAddressShort": "Pune, Maharashtra",
+        "latitude": 18.518744,
+        "longitude": 73.86022,
+        "streetAddress": null,
+        "fullAddress": "Pune, Maharashtra"
+      },
+      "salary": {},
+      "rating": {
+        "rating": 3.9,
+        "count": 6920
+      },
+      "benefits": [],
+      "occupation": [
+        "Data & Database Occupations",
+        "Technology Occupations",
+        "Data Scientists & Statisticians"
+      ],
+      "attributes": [
+        "CI/CD",
+        "Permanent",
+        "Software deployment",
+        "AWS",
+        "Docker",
+        "Machine learning",
+        "Distributed systems",
+        "Terraform",
+        "Continuous integration",
+        "Risk management",
+        "APIs",
+        "Financial services",
+        "AI",
+        "Negotiation"
+      ],
+      "contacts": [],
+      "shifts": [],
+      "socialInsurance": [],
+      "workingSystem": [],
+      "shiftAndSchedule": [],
+      "postedToday": false,
+      "hiringDemand": {
+        "isHighVolumeHiring": false,
+        "isUrgentHire": false
+      },
+      "datePublished": "2026-04-16",
+      "expired": false,
+      "source": "Barclays",
+      "age": "2 months ago",
+      "isRemote": false,
+      "locale": "in",
+      "language": "en",
+      "jobUrl": "https://in.indeed.com/viewjob?jk=045dd67e25cbb4db",
+      "applyUrl": "https://search.jobs.barclays/job/pune/machine-learning-engineer/13015/94020185888",
+      "emails": [],
+      "companyIndustry": "BANKS_AND_FINANCIAL_SERVICES",
+      "companyAddresses": [
+        "1 Churchill Place\r\nLondon E14 5HP"
+      ],
+      "companyNumEmployees": "10,000+",
+      "companyRevenue": "more than $10B (USD)",
+      "companyDescription": "Finance is the oxygen of the economy. Acting transparently and with expertise, we deploy finance responsibly to support people and businesses, acting with empathy and integrity, championing innovation and sustainability, for the common good and the long term. We have the capability and capital, the operational resilience and the commitment, to make a real and lasting difference to the economic lives of customers and communities. This is as true today as it was when our bank was founded over 330 years ago.\r\n\r\n\r\nA values-driven business\r\n\r\nWe deploy finance responsibly to support people and businesses, acting with empathy and integrity, championing innovation and sustainability, for the common good and the long term.\r\nOur Purpose is the reason our company exists; the societal need we fulfil. It encapsulates what we are fundamentally here to do. It provides a clear expression of the kind of business we want to be, and what we care about, which in turn helps guide us in the decisions we make.\r\n\r\n\r\nWorking at Barclays\r\n\r\nIn support of this great purpose, everything we do is underpinned and driven by our strong values of Respect, Integrity, Service, Excellence and Stewardship. These are fundamental to who we are, wherever we are, and in whatever role we have at Barclays – and they really matter to us.\r\n\r\nOur values guide us, but we also believe opportunities are created by those who like to challenge convention, explore new possibilities and run with bold ideas. People who think differently, who bring all kinds of backgrounds, skills, experiences and perspectives with them.\r\n\r\nWe believe that a diverse, inclusive and engaged culture is vital; that everyone’s value should be recognised and celebrated; and that every colleague has the same opportunity to fulfil their career potential. We focus on five global diversity agendas: Disability, Gender, LGBT, Multicultural and Multigenerational. And we support our colleagues in their life and work through our wellbeing initiatives, dynamic working and networking groups.",
+      "companyFounded": {
+        "year": 1690
+      },
+      "companyBriefDescription": "With 330 years of success, quality and innovation behind us, we offer careers that provide endless opportunity. Discover our world. Explore your future.",
+      "companyLinks": {
+        "facebook": "",
+        "instagram": null,
+        "twitter": "https://twitter.com/Barclays",
+        "customLinks": [
+          {
+            "name": "Instagram",
+            "url": "https://www.instagram.com/lifeatbarclays"
+          },
+          {
+            "name": "LinkedIn",
+            "url": "https://www.linkedin.com/company/barclays-bank"
+          }
+        ],
+        "corporateWebsite": "https://home.barclays/"
+      },
+      "companyCeo": {
+        "name": "C.S. Venkatakrishnan (“Venkat”)",
+        "photoUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_ceophoto/512x512/26a6444225af7e19cf34cc9131258a16",
+        "startDate": null
+      },
+      "requirements": []
+    },
+    {
+      "jobKey": "cb0d1cf3e31bfbb8",
+      "scrapingInfo": {
+        "page": 1,
+        "index": 3
+      },
+      "title": "Machine Learning Engineer",
+      "jobType": [
+        "Full-time"
+      ],
+      "descriptionHtml": "<div><div><h3 class=\"jobSectionHeader\"><b>Job Information</b></h3>\n<ul><div><p>Date Opened</p>\n<div><b>05/05/2026</b><b>\n</b></div></div><div><p>Job Type</p>\n<div><b>Full time</b><b>\n</b></div></div><div><p>Industry</p>\n<div><b>IT Services</b><b>\n</b></div></div><div><p>City</p>\n<div><b>Kolkata</b><b>\n</b></div></div><div><p>Province</p>\n<div><b>West Bengal</b><b>\n</b></div></div><div><p>Country</p>\n<div><b>India</b><b>\n</b></div></div><div><p>Postal Code</p>\n<div><b>700091</b><b>\n</b></div></div></ul></div><div><h3 class=\"jobSectionHeader\"><b>About Us</b></h3>\n<div><div>We are a fast growing technology company specializing in current and emerging internet, cloud and mobile technologies.</div><br>\n</div><p></p><h3 class=\"jobSectionHeader\"><b>Job Description</b></h3>\n<div><p>CodelogicX is a pioneering technology company, proudly certified with ISO 9001:2015 and ISO/IEC 27001:2013 standards. We are committed to advancing innovation and delivering state-of-the-art solutions that redefine industry standards. We are seeking a skilled and detail-oriented Core Machine Learning Engineer with a strong foundation in classical machine learning and deep learning techniques. The ideal candidate will have hands-on experience building, evaluating, and optimizing machine learning models, with a focus on core ML concepts rather than generative AI or LLM-based systems.</p><h2 class=\"jobSectionHeader\"><b><br>\nRoles &amp; Responsibilities</b><b>:</b></h2><ul><li><br>\n Design, develop, and deploy machine learning models using core ML techniques.</li><li><br>\n Implement supervised and unsupervised learning algorithms for structured and unstructured data.</li><li><br>\n Work on end-to-end ML pipelines including data preprocessing, feature engineering, model training, and evaluation.</li><li><br>\n Apply deep learning models for tasks such as image classification and object detection.</li><li><br>\n Analyze datasets to extract meaningful insights and improve model performance.</li><li><br>\n Perform data cleaning, transformation, and feature selection to enhance model accuracy.</li><li><br>\n Evaluate model performance using appropriate metrics and validation techniques.</li><li><br>\n Optimize models for performance, scalability, and efficiency.</li><li><br>\n Collaborate with cross-functional teams including data engineers and software developers.</li><li><br>\n Document experiments, workflows, and model performance results.</li></ul><div></div><h3 class=\"jobSectionHeader\"><b><br>\nRequirements</b></h3><ul><li> Minimum 3 years of hands on experience in core machine learning.<br>\n</li><li> Technical skills:\n</li></ul>Strong proficiency in Scikit-learn, PyTorch, NumPy, Pandas, OpenCV, Matplotlib, EAI Library (or similar ML frameworks)<ul><li> Machine Learning Algorithms:\n</li><li>Supervised Learning: Linear Regression, Logistic Regression, Decision Trees, Random Forest.</li><li>Unsupervised Learning: Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN), Recurrent Neural Networks (RNN), Transformer Architecture, Object Detection, Image Classification.</li><li> Deep Learning: Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN), Recurrent Neural Networks (RNN), Transformer Architecture, Object Detection, Image Classification</li></ul><br>\n<ul><li>\nCore ML Knowledge: Data Cleaning and Preprocessing, Feature Engineering, Model Evaluation Techniques (e.g., cross-validation, metrics analysis).</li></ul><h3 class=\"jobSectionHeader\"><b><br>\nBenefits</b></h3><p>\nHealth insurance\n<br>\nHybrid working mode\n<br>\nProvident Fund\n<br>\nParental leave\n<br>\nYearly Bonus Gratuity<br>\n<br>\n<b>Location: Kolkata</b></p></div></div></div><p></p>",
+      "companyLogoUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/cc9a0cf92772aead76e9d1a3193b81dc",
+      "descriptionText": "Job Information\nDate Opened\n05/05/2026\nJob Type\nFull time\nIndustry\nIT Services\nCity\nKolkata\nProvince\nWest Bengal\nCountry\nIndia\nPostal Code\n700091\nAbout Us\nWe are a fast growing technology company specializing in current and emerging internet, cloud and mobile technologies.\n\nJob Description\n\nCodelogicX is a pioneering technology company, proudly certified with ISO 9001:2015 and ISO/IEC 27001:2013 standards. We are committed to advancing innovation and delivering state-of-the-art solutions that redefine industry standards. We are seeking a skilled and detail-oriented Core Machine Learning Engineer with a strong foundation in classical machine learning and deep learning techniques. The ideal candidate will have hands-on experience building, evaluating, and optimizing machine learning models, with a focus on core ML concepts rather than generative AI or LLM-based systems.\n\nRoles & Responsibilities:\n\n· Design, develop, and deploy machine learning models using core ML techniques.\n\n· Implement supervised and unsupervised learning algorithms for structured and unstructured data.\n\n· Work on end-to-end ML pipelines including data preprocessing, feature engineering, model training, and evaluation.\n\n· Apply deep learning models for tasks such as image classification and object detection.\n\n· Analyze datasets to extract meaningful insights and improve model performance.\n\n· Perform data cleaning, transformation, and feature selection to enhance model accuracy.\n\n· Evaluate model performance using appropriate metrics and validation techniques.\n\n· Optimize models for performance, scalability, and efficiency.\n\n· Collaborate with cross-functional teams including data engineers and software developers.\n\n· Document experiments, workflows, and model performance results.\n\nRequirements\n\n· Minimum 3 years of hands on experience in core machine learning.\n\n· Technical skills:\nStrong proficiency in Scikit-learn, PyTorch, NumPy, Pandas, OpenCV, Matplotlib, EAI Library (or similar ML frameworks)\n\n· Machine Learning Algorithms:\n- Supervised Learning: Linear Regression, Logistic Regression, Decision Trees, Random Forest.\n- Unsupervised Learning: Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN), Recurrent Neural Networks (RNN), Transformer Architecture, Object Detection, Image Classification.\n\n· Deep Learning: Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN), Recurrent Neural Networks (RNN), Transformer Architecture, Object Detection, Image Classification\n\nCore ML Knowledge: Data Cleaning and Preprocessing, Feature Engineering, Model Evaluation Techniques (e.g., cross-validation, metrics analysis).\n\nBenefits\n\nHealth insurance\nHybrid working mode\nProvident Fund\nParental leave\nYearly Bonus Gratuity\n\nLocation: Kolkata",
+      "companyName": "Codelogicx Technologies",
+      "companyUrl": "https://in.indeed.com/cmp/Codelogicx-Technologies",
+      "location": {
+        "city": null,
+        "postalCode": null,
+        "country": "India",
+        "countryCode": "IN",
+        "formattedAddressLong": "West Bengal",
+        "formattedAddressShort": "West Bengal",
+        "latitude": 0,
+        "longitude": 0,
+        "streetAddress": null,
+        "fullAddress": "West Bengal"
+      },
+      "salary": {},
+      "rating": {
+        "rating": 3.3,
+        "count": 3
+      },
+      "benefits": [
+        "Provident Fund",
+        "Health insurance"
+      ],
+      "occupation": [
+        "Data & Database Occupations",
+        "Technology Occupations",
+        "Data Scientists & Statisticians"
+      ],
+      "attributes": [
+        "Provident Fund",
+        "Law",
+        "PyTorch",
+        "NumPy",
+        "Yearly bonus",
+        "Full-time",
+        "Master's degree",
+        "Health insurance",
+        "Pandas",
+        "Machine learning",
+        "OpenCV",
+        "ISO 27001",
+        "Data science",
+        "Python"
+      ],
+      "contacts": [],
+      "shifts": [],
+      "socialInsurance": [
+        "Health insurance"
+      ],
+      "workingSystem": [],
+      "shiftAndSchedule": [],
+      "postedToday": false,
+      "hiringDemand": {
+        "isHighVolumeHiring": false,
+        "isUrgentHire": false
+      },
+      "datePublished": "2026-05-05",
+      "expired": false,
+      "source": "codelogicx technologies",
+      "age": "a month ago",
+      "isRemote": false,
+      "locale": "in",
+      "language": "en",
+      "jobUrl": "https://in.indeed.com/viewjob?jk=cb0d1cf3e31bfbb8",
+      "applyUrl": "https://codelogicx.zohorecruit.in/jobs/Open-jobs/153287000006373035/Machine-Learning-Engineer?source=CareerSite",
+      "emails": [],
+      "companyAddresses": [],
+      "companyDescription": "Codelogicx Technologies Pvt. Ltd. is an established IT services provider focussing on critical IT applications and product development. Codelogicx started its operations on spring of 2013 with an initial focus on delivering quality and sophisticated internet solutions to both domestic and international clients at affordable price. Extremely customer oriented we take over and look into your IT issues in detail and build solutions for them, while letting you focus on your business.",
+      "companyFounded": {
+        "year": 2013
+      },
+      "companyLinks": {
+        "facebook": null,
+        "instagram": null,
+        "twitter": null,
+        "customLinks": [],
+        "corporateWebsite": "https://www.codelogicx.com/"
+      },
+      "companyCeo": {
+        "name": null,
+        "photoUrl": null,
+        "startDate": null
+      },
+      "requirements": []
+    },
+    {
+      "jobKey": "705cca1d37a4b0ee",
+      "scrapingInfo": {
+        "page": 1,
+        "index": 2
+      },
+      "title": "Machine Learning Engineer",
+      "jobType": [
+        "Remote"
+      ],
+      "descriptionHtml": "<div><div><div><div><b><i>Please apply only if you are physically present in India</i></b></div><div><div><b><i>\nMachine Learning Engineer Job Description</i></b></div><div><b><i>\nCompany: Codvo</i></b></div><div><b><i>\nJob Title: Machine Learning Engineer</i></b></div><div><b><i>\nExperience: 5+ years</i></b></div><div><b><i>\nAbout the Role</i></b></div><div><b><i>\nWe are looking for a hands-on Machine Learning Engineer to join our analytics team and collaborate closely with Data Science. The ideal candidate will have strong Python development skills, apply best practices in design and coding, and ensure performance and scalability in production environments.</i></b></div><div><b><i>\nKey Responsibilities</i></b></div><ul><li><b><i> Work closely with the Data Science team to develop and implement ML algorithms into production code.</i></b></li><li><b><i> Apply design and coding best practices, including vectorization and object-oriented programming in Python.</i></b></li><li><b><i> Ensure algorithms cover different scenarios with a focus on performance and scalability.</i></b></li><li><b><i> Rapid ramp-up to work on deliverables within Scrum teams.</i></b></li><li><b><i> Collaborate with cross-functional teams to integrate ML solutions into production systems.</i></b></li><li><b><i> Utilize CI/CD, version control (Git), and automated testing in ML projects.</i></b></li></ul><div><b><i>\nRequired Skills &amp; Qualifications</i></b></div><ul><li><b><i> Hands-on development expertise for analytics teams working with Data Science.</i></b></li><li><b><i> Experience with Python and libraries such as NumPy, Pandas, etc.</i></b></li><li><b><i> Strong understanding of object-oriented programming and its application in Python.</i></b></li><li><b><i> Ability to develop algorithms into production code with emphasis on performance and scalability.</i></b></li><li><b><i> Experience in applying design and coding best practices, including vectorization.</i></b></li><li><b><i> 4-7 years of experience in software and/or Python development.</i></b></li></ul></div></div></div></div><p></p>",
+      "descriptionText": "Please apply only if you are physically present in India\nMachine Learning Engineer Job Description\nCompany: Codvo\nJob Title: Machine Learning Engineer\nExperience: 5+ years\nAbout the Role\nWe are looking for a hands-on Machine Learning Engineer to join our analytics team and collaborate closely with Data Science. The ideal candidate will have strong Python development skills, apply best practices in design and coding, and ensure performance and scalability in production environments.\nKey Responsibilities\n• Work closely with the Data Science team to develop and implement ML algorithms into production code.\n• Apply design and coding best practices, including vectorization and object-oriented programming in Python.\n• Ensure algorithms cover different scenarios with a focus on performance and scalability.\n• Rapid ramp-up to work on deliverables within Scrum teams.\n• Collaborate with cross-functional teams to integrate ML solutions into production systems.\n• Utilize CI/CD, version control (Git), and automated testing in ML projects.\nRequired Skills & Qualifications\n• Hands-on development expertise for analytics teams working with Data Science.\n• Experience with Python and libraries such as NumPy, Pandas, etc.\n• Strong understanding of object-oriented programming and its application in Python.\n• Ability to develop algorithms into production code with emphasis on performance and scalability.\n• Experience in applying design and coding best practices, including vectorization.\n• 4-7 years of experience in software and/or Python development.",
+      "companyName": "Codvo.ai",
+      "companyUrl": "https://in.indeed.com/cmp/Codvo.ai",
+      "location": {
+        "city": "Remote",
+        "postalCode": null,
+        "country": "India",
+        "countryCode": "IN",
+        "formattedAddressLong": "Remote",
+        "formattedAddressShort": "Remote",
+        "latitude": 25,
+        "longitude": -40,
+        "streetAddress": null,
+        "fullAddress": "Remote"
+      },
+      "salary": {},
+      "rating": {
+        "rating": 0,
+        "count": 0
+      },
+      "benefits": [],
+      "occupation": [
+        "Data & Database Occupations",
+        "Technology Occupations",
+        "Data Scientists & Statisticians"
+      ],
+      "attributes": [
+        "CI/CD",
+        "NumPy",
+        "Git",
+        "Remote",
+        "Pandas",
+        "OOP",
+        "Machine learning",
+        "Continuous integration",
+        "Scalability",
+        "Agile",
+        "Data science",
+        "Python",
+        "Analytics"
+      ],
+      "contacts": [],
+      "shifts": [],
+      "socialInsurance": [],
+      "workingSystem": [],
+      "shiftAndSchedule": [],
+      "postedToday": false,
+      "hiringDemand": {
+        "isHighVolumeHiring": false,
+        "isUrgentHire": false
+      },
+      "datePublished": "2026-05-20",
+      "expired": false,
+      "source": "Codvo.ai",
+      "age": "a month ago",
+      "isRemote": true,
+      "locale": "in",
+      "language": "en",
+      "jobUrl": "https://in.indeed.com/viewjob?jk=705cca1d37a4b0ee",
+      "applyUrl": "https://codvo-team.freshteam.com/jobs/LdYTS6xyKGN8/machine-learning-engineer",
+      "emails": [],
+      "companyAddresses": [],
+      "companyLinks": {
+        "facebook": null,
+        "instagram": null,
+        "twitter": null,
+        "customLinks": [],
+        "corporateWebsite": null
+      },
+      "companyCeo": {
+        "name": null,
+        "photoUrl": null,
+        "startDate": null
+      },
+      "requirements": []
+    },
+    {
+      "jobKey": "051bd6383dd1f0df",
+      "scrapingInfo": {
+        "page": 1,
+        "index": 0
+      },
+      "title": "Machine Learning Engineer",
+      "jobType": [
+        "Permanent",
+        "Full-time",
+        "Remote",
+        "Contractual / Temporary"
+      ],
+      "descriptionHtml": "<div><div><div><div><div><div><div><div><b>About Us</b>\n</div><div>Energize your career with one of Information Technology&rsquo;s fastest growing companies.\n<p>You dream of a great career with a great company &ndash; where you can make an impact and help people. We dream of giving you the opportunity to do just this. And with the incredible growth of our business, it&rsquo;s a dream that definitely can come true. Already one of the world&rsquo;s leading IT companies, <b>MNJ SOFTWARE</b> is restlessly pursuing new ways to operate our service centers, improve our service levels and help people lead healthier lives. We live for the opportunity to make a difference and right now, we are living it up.\n</p><p><b>MNJ SOFTWARE</b> is an IT services, business solutions and outsourcing organization that delivers real results to global businesses, ensuring a level of certainty no other firm can match.\n</p><p><b>MNJ SOFTWARE</b> offers a consulting-led, integrated portfolio of IT and IT-enabled services delivered through its unique Global Network Delivery Model, recognized as the benchmark of excellence in software development.\n</p><p><b>MNJ SOFTWARE</b> service offerings span business and technology consulting, application services, systems integration, product engineering, custom software development, maintenance, re-engineering, independent testing and validation services, IT infrastructure services and business process outsourcing.\n</p><p><b>MNJ SOFTWARE</b> takes pride in building strategic long-term client relationships.\n</p><p><b>MNJ SOFTWARE</b> is only hiring those authorized to work in the India and unable to provide visa sponsorship at this time.</p>\n</div></div><p></p><div><div><b>Job Details</b>\n</div><div><b>MNJ SOFTWARE</b> is looking for talented individuals who are interested to be part of &quot;Our&quot; journey to build a best-in-class organization, driving to deliver real results to global businesses, ensuring a level of certainty no other firm can match.\n<p><b>Machine Learning Engineer</b> at <b>MNJ SOFTWARE</b>, you will participate in design, development and implementation of architectural deliverables of custom projects and products of <b>MNJ SOFTWARE</b>. The role includes working closely with lead, testers, customers, project/product managers and designers.\n</p></div></div><p></p><div><div><b>JobID</b>\n</div><div>J0110\n</div></div><p></p><div><div><b>Title</b>\n</div><div>Machine Learning Engineer\n</div></div><p></p><div><div><b>Experience</b>\n</div><div>3-6 yrs\n</div></div><p></p><div><div><b>Job Type</b>\n</div><div>Permanent / Contract [Depends on Project Needs or C2H]\n</div></div><p></p><div><div><b>Position Type</b>\n</div><div>Full time [Monday &ndash; Friday]. Employees are required to have flexibility to work any of our 9-hour shift schedules during our normal business hours of (6am - 10pm IST) or (6pm to 6am IST). It may be necessary, given the business need, to work occasional overtime [unpaid].\n</div></div><p></p><div><div><b>Qualification</b>\n</div><div>ME/M.TECH/BE/B.TECH/MCA/M.Sc(IT) etc\n</div></div><p></p><div><div><b>Technical/Functional Skills</b>\n</div><div> Understanding of data structures, data modeling and software architecture.\n<ul><li>Deep knowledge of Math, Probability, Statistics and Algorithms.\n</li><li>Experience with machine learning platforms such as Microsoft Azure, Google Cloud, IBM Watson and Amazon.\n</li><li>Big Data Environment: Hadoop, Spark.\n</li><li>Programming Languages: Python, R, PySpark.\n</li><li>Supervised &amp; Unsupervised Machine Learning: Linear Regression, Logistic Regression, K-means Clustering, Ensemble Models, Random Forest, SVM, Gradient Boosting.\n</li><li>Sampling Data: Bagging &amp; Boosting, Bootstrapping.\n</li><li>Experience of machine learning Algorithms and Libraries.\n</li></ul></div></div><p></p><div><div><b>Roles &amp; Responsibilities</b>\n</div><div> Work with Data Scientists and Business Analysts to frame problems in a business context.\n<ul><li>Assist all the processes from data Collection, Cleaning and Preprocessing to training models and deploying them to production.\n</li><li>Understand Business Objectives and Developing models that help to achieve them, along with metrics to track their progress.\n</li><li>Explore and visualize data to gain an understanding of it, then identify differences in data distribution that could affect performance when deploying the model in the real world.\n</li><li>Define validation Strategies, Preprocess or Feature engineering to be done on a given Dataset and Data augmentation pipelines.\n</li><li>Analyze the errors of the model and design strategies to overcome them.\n</li><li>Collaborate with data engineers to build data and model pipelines.\n</li><li>Manage the Infrastructure and Data pipelines needed to bring code to production and demonstrate end-to-end understanding of applications (Including, but not limited to, the machine learning algorithms) being created.\n</li></ul></div></div><p></p><div><div><b>Personal Attributes</b>\n</div><div> Must be Analytical and possess good problem-solving capabilities\n<ul><li>Independent thinker\n</li></ul></div></div><p></p><div><div><b>Process</b>\n</div><div>Aptitude Tests, Technical Tests, Interviews, Medical Health Checkup.\n</div></div><p></p><div><div><b>Reimbursement</b>\n</div><div>Best in Industry\n</div></div><p></p><div><div><b>Certification</b>\n</div><div>Optional\n</div></div><p></p><div><div><b>Location</b>\n</div><div>Remote (Work From Home)\n</div></div><p></p><div><div><b>Competencies</b>\n</div><div><b>Professionalism</b> &ndash; Knowledge of general office and administrative support including <b>MNJ SOFTWARE</b> administrative policies, processes and procedures. Demonstrates professional competence and mastery of subject matter; is conscientious and efficient in meeting commitments, observing deadlines and achieving results; remains calm in stressful situations. Commitment to implementing the goal of gender equality by ensuring equal participation and full involvement of women and men in all aspects of work.\n<br>\n<b>Teamwork</b> &ndash; Works collaboratively with colleagues to achieve organizational goals; solicits input by genuinely valuing others&rsquo; ideas and expertise; is willing to learn from others; places team agenda before personal agenda; shares credit for team accomplishments and accepts joint responsibility for team shortcomings; ability to work beyond normal hours.\n<br>\n<b>Planning and Organizing</b> &ndash; Develops clear goals that are consistent with agreed strategies; identifies priority activities and assignments; adjusts priorities as required; allocates appropriate amount of time and resources for completing work; foresees risks and allows for contingencies when planning; uses time efficiently.\n</div></div><p></p><div><div><b>Assessment</b>\n</div><div>Evaluation of qualified candidates may include an assessment exercise which may be followed by competency-based interview.\n</div></div><p></p><div><div><b>Languages</b>\n</div><div>English is the working language of this above stated post. For this post, fluency in oral and written English is required.\n</div></div><p></p><div><div><b>Note</b>\n</div><div>We're an Equal Opportunity Employer: You will receive consideration for employment without regard to race, sex, color, religion, sexual orientation, gender identity, national origin, protected veteran status, or on the basis of disability.\n</div></div><p></p><div><div><b>No Fee</b>\n</div><div>THE <b>MNJ SOFTWARE</b> DOES NOT CHARGE A FEE AT ANY STAGE OF THE RECRUITMENT PROCESS (APPLICATION, INTERVIEW MEETING, PROCESSING, OR TRAINING).\n</div></div><b>General Considerations:</b>\n<p>According to policies and processes of <b>MNJ SOFTWARE</b>, the paramount consideration in the employment of the staff is the necessity of securing the highest standards of efficiency, competence, and integrity. Candidates will not be considered for employment with the <b>MNJ SOFTWARE</b> if they have committed violations of national / international human rights law, violations of national / international humanitarian law, sexual exploitation, sexual abuse, or sexual harassment, or if there are reasonable grounds to believe that they have been involved in the commission of any of these acts. The term &ldquo;sexual exploitation&rdquo; means any actual or attempted abuse of a position of vulnerability, differential power, or trust, for sexual purposes, including, but not limited to, profiting monetarily, socially or politically from the sexual exploitation of another. The term &ldquo;sexual abuse&rdquo; means the actual or threatened physical intrusion of a sexual nature, whether by force or under unequal or coercive conditions. The term &ldquo;sexual harassment&rdquo; means any unwelcome conduct of a sexual nature that might reasonably be expected or be perceived to cause offence or humiliation, when such conduct interferes with work, is made a condition of employment or creates an intimidating, hostile or offensive work environment, and when the gravity of the conduct warrants the termination of the perpetrator&rsquo;s working relationship. Candidates who have committed crimes other than minor traffic offences may not be considered for employment.\n</p><p>Due regard will be paid to the importance of recruiting the staff on as wide a geographical basis as possible. The <b>MNJ SOFTWARE</b> places no restrictions on the eligibility of men and women to participate in any capacity and under conditions of equality in its principal and subsidiary organs. The <b>MNJ SOFTWARE</b> OFFICE is a non-smoking environment.\n</p><p>The paramount consideration in the appointment, transfer, or promotion of staff shall be the necessity of securing the highest standards of efficiency, competence, and integrity. By accepting an offer of appointment, <b>MNJ SOFTWARE</b> staff members are subject to the authority of the Managers and assignment by him or her to any activities or offices of the <b>MNJ SOFTWARE</b> in accordance with staff regulation In this context, all internationally recruited staff members shall be required to move periodically to discharge new functions within or across duty stations under conditions established by the <b>MNJ SOFTWARE</b>.\n</p><p>The evaluation of applicants will be conducted on the basis of the information submitted in the application according to the evaluation criteria of the job opening and the applicable internal legislations of the <b>MNJ SOFTWARE</b>, the Staff Regulations and Rules, administrative issuances and guidelines. Applicants must provide complete and accurate information pertaining to their personal profile and qualifications according to the instructions provided in inspira to be considered for the current job opening. No amendment, addition, deletion, revision or modification shall be made to applications that have been submitted. Candidates under serious consideration for selection will be subject to reference checks to verify the information provided in the application.</p></div></div></div></div></div></div><div></div>",
+      "descriptionText": "About Us\nEnergize your career with one of Information Technology’s fastest growing companies.\n\nYou dream of a great career with a great company – where you can make an impact and help people. We dream of giving you the opportunity to do just this. And with the incredible growth of our business, it’s a dream that definitely can come true. Already one of the world’s leading IT companies, MNJ SOFTWARE is restlessly pursuing new ways to operate our service centers, improve our service levels and help people lead healthier lives. We live for the opportunity to make a difference and right now, we are living it up.\n\nMNJ SOFTWARE is an IT services, business solutions and outsourcing organization that delivers real results to global businesses, ensuring a level of certainty no other firm can match.\n\nMNJ SOFTWARE offers a consulting-led, integrated portfolio of IT and IT-enabled services delivered through its unique Global Network Delivery Model, recognized as the benchmark of excellence in software development.\n\nMNJ SOFTWARE service offerings span business and technology consulting, application services, systems integration, product engineering, custom software development, maintenance, re-engineering, independent testing and validation services, IT infrastructure services and business process outsourcing.\n\nMNJ SOFTWARE takes pride in building strategic long-term client relationships.\n\nMNJ SOFTWARE is only hiring those authorized to work in the India and unable to provide visa sponsorship at this time.\n\nJob Details\nMNJ SOFTWARE is looking for talented individuals who are interested to be part of \"Our\" journey to build a best-in-class organization, driving to deliver real results to global businesses, ensuring a level of certainty no other firm can match.\n\nMachine Learning Engineer at MNJ SOFTWARE, you will participate in design, development and implementation of architectural deliverables of custom projects and products of MNJ SOFTWARE. The role includes working closely with lead, testers, customers, project/product managers and designers.\n\nJobID\nJ0110\nTitle\nMachine Learning Engineer\nExperience\n3-6 yrs\nJob Type\nPermanent / Contract [Depends on Project Needs or C2H]\nPosition Type\nFull time [Monday – Friday]. Employees are required to have flexibility to work any of our 9-hour shift schedules during our normal business hours of (6am - 10pm IST) or (6pm to 6am IST). It may be necessary, given the business need, to work occasional overtime [unpaid].\nQualification\nME/M.TECH/BE/B.TECH/MCA/M.Sc(IT) etc\nTechnical/Functional Skills\n Understanding of data structures, data modeling and software architecture.\n Deep knowledge of Math, Probability, Statistics and Algorithms.\n Experience with machine learning platforms such as Microsoft Azure, Google Cloud, IBM Watson and Amazon.\n Big Data Environment: Hadoop, Spark.\n Programming Languages: Python, R, PySpark.\n Supervised & Unsupervised Machine Learning: Linear Regression, Logistic Regression, K-means Clustering, Ensemble Models, Random Forest, SVM, Gradient Boosting.\n Sampling Data: Bagging & Boosting, Bootstrapping.\n Experience of machine learning Algorithms and Libraries.\nRoles & Responsibilities\n Work with Data Scientists and Business Analysts to frame problems in a business context.\n Assist all the processes from data Collection, Cleaning and Preprocessing to training models and deploying them to production.\n Understand Business Objectives and Developing models that help to achieve them, along with metrics to track their progress.\n Explore and visualize data to gain an understanding of it, then identify differences in data distribution that could affect performance when deploying the model in the real world.\n Define validation Strategies, Preprocess or Feature engineering to be done on a given Dataset and Data augmentation pipelines.\n Analyze the errors of the model and design strategies to overcome them.\n Collaborate with data engineers to build data and model pipelines.\n Manage the Infrastructure and Data pipelines needed to bring code to production and demonstrate end-to-end understanding of applications (Including, but not limited to, the machine learning algorithms) being created.\nPersonal Attributes\n Must be Analytical and possess good problem-solving capabilities\n Independent thinker\nProcess\nAptitude Tests, Technical Tests, Interviews, Medical Health Checkup.\nReimbursement\nBest in Industry\nCertification\nOptional\nLocation\nRemote (Work From Home)\nCompetencies\nProfessionalism – Knowledge of general office and administrative support including MNJ SOFTWARE administrative policies, processes and procedures. Demonstrates professional competence and mastery of subject matter; is conscientious and efficient in meeting commitments, observing deadlines and achieving results; remains calm in stressful situations. Commitment to implementing the goal of gender equality by ensuring equal participation and full involvement of women and men in all aspects of work.\nTeamwork – Works collaboratively with colleagues to achieve organizational goals; solicits input by genuinely valuing others’ ideas and expertise; is willing to learn from others; places team agenda before personal agenda; shares credit for team accomplishments and accepts joint responsibility for team shortcomings; ability to work beyond normal hours.\nPlanning and Organizing – Develops clear goals that are consistent with agreed strategies; identifies priority activities and assignments; adjusts priorities as required; allocates appropriate amount of time and resources for completing work; foresees risks and allows for contingencies when planning; uses time efficiently.\nAssessment\nEvaluation of qualified candidates may include an assessment exercise which may be followed by competency-based interview.\nLanguages\nEnglish is the working language of this above stated post. For this post, fluency in oral and written English is required.\nNote\nWe're an Equal Opportunity Employer: You will receive consideration for employment without regard to race, sex, color, religion, sexual orientation, gender identity, national origin, protected veteran status, or on the basis of disability.\nNo Fee\nTHE MNJ SOFTWARE DOES NOT CHARGE A FEE AT ANY STAGE OF THE RECRUITMENT PROCESS (APPLICATION, INTERVIEW MEETING, PROCESSING, OR TRAINING).\nGeneral Considerations:\n\nAccording to policies and processes of MNJ SOFTWARE, the paramount consideration in the employment of the staff is the necessity of securing the highest standards of efficiency, competence, and integrity. Candidates will not be considered for employment with the MNJ SOFTWARE if they have committed violations of national / international human rights law, violations of national / international humanitarian law, sexual exploitation, sexual abuse, or sexual harassment, or if there are reasonable grounds to believe that they have been involved in the commission of any of these acts. The term “sexual exploitation” means any actual or attempted abuse of a position of vulnerability, differential power, or trust, for sexual purposes, including, but not limited to, profiting monetarily, socially or politically from the sexual exploitation of another. The term “sexual abuse” means the actual or threatened physical intrusion of a sexual nature, whether by force or under unequal or coercive conditions. The term “sexual harassment” means any unwelcome conduct of a sexual nature that might reasonably be expected or be perceived to cause offence or humiliation, when such conduct interferes with work, is made a condition of employment or creates an intimidating, hostile or offensive work environment, and when the gravity of the conduct warrants the termination of the perpetrator’s working relationship. Candidates who have committed crimes other than minor traffic offences may not be considered for employment.\n\nDue regard will be paid to the importance of recruiting the staff on as wide a geographical basis as possible. The MNJ SOFTWARE places no restrictions on the eligibility of men and women to participate in any capacity and under conditions of equality in its principal and subsidiary organs. The MNJ SOFTWARE OFFICE is a non-smoking environment.\n\nThe paramount consideration in the appointment, transfer, or promotion of staff shall be the necessity of securing the highest standards of efficiency, competence, and integrity. By accepting an offer of appointment, MNJ SOFTWARE staff members are subject to the authority of the Managers and assignment by him or her to any activities or offices of the MNJ SOFTWARE in accordance with staff regulation In this context, all internationally recruited staff members shall be required to move periodically to discharge new functions within or across duty stations under conditions established by the MNJ SOFTWARE.\n\nThe evaluation of applicants will be conducted on the basis of the information submitted in the application according to the evaluation criteria of the job opening and the applicable internal legislations of the MNJ SOFTWARE, the Staff Regulations and Rules, administrative issuances and guidelines. Applicants must provide complete and accurate information pertaining to their personal profile and qualifications according to the instructions provided in inspira to be considered for the current job opening. No amendment, addition, deletion, revision or modification shall be made to applications that have been submitted. Candidates under serious consideration for selection will be subject to reference checks to verify the information provided in the application.",
+      "companyName": "MNJ Software",
+      "companyUrl": "https://in.indeed.com/cmp/Mnj-Software",
+      "location": {
+        "city": "Remote",
+        "postalCode": null,
+        "country": "India",
+        "countryCode": "IN",
+        "formattedAddressLong": "Remote",
+        "formattedAddressShort": "Remote",
+        "latitude": 25,
+        "longitude": -40,
+        "streetAddress": null,
+        "fullAddress": "Remote"
+      },
+      "salary": {},
+      "rating": {
+        "rating": 0,
+        "count": 0
+      },
+      "benefits": [
+        "Work from home"
+      ],
+      "occupation": [
+        "Data & Database Occupations",
+        "Technology Occupations",
+        "Data Scientists & Statisticians"
+      ],
+      "attributes": [
+        "Statistics",
+        "Data modelling",
+        "Permanent",
+        "Azure",
+        "Big data",
+        "Data structures",
+        "Spark",
+        "R",
+        "Full-time",
+        "English",
+        "Google Cloud Platform",
+        "Remote",
+        "Master's degree",
+        "Administrative experience",
+        "MCA",
+        "Math",
+        "Bachelor's degree",
+        "Machine learning",
+        "Work from home",
+        "Monday to Friday",
+        "Contractual / Temporary",
+        "Python",
+        "Software architecture",
+        "Hadoop"
+      ],
+      "contacts": [],
+      "shifts": [],
+      "socialInsurance": [],
+      "workingSystem": [],
+      "shiftAndSchedule": [
+        "Monday to Friday"
+      ],
+      "postedToday": false,
+      "hiringDemand": {
+        "isHighVolumeHiring": false,
+        "isUrgentHire": false
+      },
+      "datePublished": "2026-02-26",
+      "expired": false,
+      "source": "MNJ Software",
+      "age": "4 months ago",
+      "isRemote": true,
+      "locale": "in",
+      "language": "en",
+      "jobUrl": "https://in.indeed.com/viewjob?jk=051bd6383dd1f0df",
+      "applyUrl": "https://www.mnjsoftware.com/corporate/careers/job-details.aspx?JobId=J0110",
+      "emails": [],
+      "companyAddresses": [],
+      "companyLinks": {
+        "facebook": null,
+        "instagram": null,
+        "twitter": null,
+        "customLinks": [],
+        "corporateWebsite": null
+      },
+      "companyCeo": {
+        "name": null,
+        "photoUrl": null,
+        "startDate": null
+      },
+      "requirements": []
+    },
+    {
+      "jobKey": "667406a50f27864f",
+      "scrapingInfo": {
+        "page": 1,
+        "index": 1
+      },
+      "title": "Machine Learning Engineer",
+      "jobType": [
+        "Permanent",
+        "Full-time"
+      ],
+      "descriptionHtml": "You will be a key driver in our transition from reactive repairs to a proactive service model.\n<br>By leveraging high-frequency instrument telemetry and service data, you will build the predictive analytics directly impacting how we support our global customer base.\n<br><br>\nKey Responsibilities\n<br><br>\n<b>Proactive Solution Development:</b> Design and deploy ML models to predict component failures and estimate Remaining Useful Life (RUL).\n<br><b>Anomaly Detection:</b> Build robust algorithms to detect silent deviations in machine performance from high-frequency sensor and log data.\n<br><b>Data Product Integration:</b> Collaborate with the team to consume and refine data products from Snowflake and Databricks.\n<br><b>End-to-End ML Pipelines:</b> Develop, test, and scale ML pipelines on Databricks/Snowflake.\n<br><b>Scalable MLOps:</b> Own the end-to-end lifecycle of the models—from experimentation in notebooks to production deployment and monitoring using MLflow.\n<br><b>Actionable Insights:</b> Work with domain experts to ensure model outputs are not just \"scores,\" but clear, actionable steps for field engineers.\n<br><b>GenAI Collaboration:</b> Support the integration of predictive insights into our GenAI-solutions, helping provide context-aware troubleshooting steps based on model outputs.\n<br><br>\nTechnical Skills\n<br><b>The Essentials:</b> Mastery of Python and SQL. Proficiency in PyTorch/TensorFlow.\n<br><b>ML Foundations:</b> Proven experience with classical ML (XGBoost, Random Forest, Scikit-learn) applied to Time-Series or Sensor data.\n<br><b>Predictive Modeling:</b> Strong understanding of Time-Series Analysis, Survival Analysis, and Anomaly Detection (e.g., Isolation Forests, Autoencoders)\n<br><b>Big Data Ecosystem:</b> Hands-on experience with Databricks/Spark for processing large-scale machine datasets.\n<br><b>Statistical Depth:</b> Familiarity with Survival Analysis or reliability engineering concepts is a strong plus.\n<br><br>\nNice to Have\n<br>Experience with Deep Learning architectures (e.g., LSTMs or GRUs) for sequential data.\n<br>Familiarity with GenAI/LLM integration (building tools or agents).\n<br>Knowledge of dbt for data modeling within the ML pipeline.",
+      "companyLogoUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/3ecb43ed10287302ffa2fe1a8eb1fbe4",
+      "descriptionText": "You will be a key driver in our transition from reactive repairs to a proactive service model.\nBy leveraging high-frequency instrument telemetry and service data, you will build the predictive analytics directly impacting how we support our global customer base.\n\nKey Responsibilities\n\nProactive Solution Development: Design and deploy ML models to predict component failures and estimate Remaining Useful Life (RUL).\nAnomaly Detection: Build robust algorithms to detect silent deviations in machine performance from high-frequency sensor and log data.\nData Product Integration: Collaborate with the team to consume and refine data products from Snowflake and Databricks.\nEnd-to-End ML Pipelines: Develop, test, and scale ML pipelines on Databricks/Snowflake.\nScalable MLOps: Own the end-to-end lifecycle of the models—from experimentation in notebooks to production deployment and monitoring using MLflow.\nActionable Insights: Work with domain experts to ensure model outputs are not just \"scores,\" but clear, actionable steps for field engineers.\nGenAI Collaboration: Support the integration of predictive insights into our GenAI-solutions, helping provide context-aware troubleshooting steps based on model outputs.\n\nTechnical Skills\nThe Essentials: Mastery of Python and SQL. Proficiency in PyTorch/TensorFlow.\nML Foundations: Proven experience with classical ML (XGBoost, Random Forest, Scikit-learn) applied to Time-Series or Sensor data.\nPredictive Modeling: Strong understanding of Time-Series Analysis, Survival Analysis, and Anomaly Detection (e.g., Isolation Forests, Autoencoders)\nBig Data Ecosystem: Hands-on experience with Databricks/Spark for processing large-scale machine datasets.\nStatistical Depth: Familiarity with Survival Analysis or reliability engineering concepts is a strong plus.\n\nNice to Have\nExperience with Deep Learning architectures (e.g., LSTMs or GRUs) for sequential data.\nFamiliarity with GenAI/LLM integration (building tools or agents).\nKnowledge of dbt for data modeling within the ML pipeline.",
+      "companyName": "Siemens Healthineers",
+      "companyUrl": "https://in.indeed.com/cmp/Siemens-Healthineers",
+      "companyHeaderUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_headerimage/1960x400/9fbe55d2533cdb0444cd27e97c285ea5",
+      "location": {
+        "city": null,
+        "postalCode": null,
+        "country": "India",
+        "countryCode": "IN",
+        "formattedAddressLong": "Bengaluru, Karnataka",
+        "formattedAddressShort": "Bengaluru, Karnataka",
+        "latitude": 12.976711,
+        "longitude": 77.596596,
+        "streetAddress": null,
+        "fullAddress": "Bengaluru, Karnataka"
+      },
+      "salary": {},
+      "rating": {
+        "rating": 3.8,
+        "count": 523
+      },
+      "benefits": [],
+      "occupation": [
+        "Data & Database Occupations",
+        "Technology Occupations",
+        "Data Scientists & Statisticians"
+      ],
+      "attributes": [
+        "TensorFlow",
+        "Data modelling",
+        "Permanent",
+        "Law",
+        "PyTorch",
+        "Big data",
+        "Spark",
+        "Full-time",
+        "Survival analysis",
+        "SQL",
+        "Machine learning",
+        "Deep learning",
+        "Predictive analytics",
+        "Python"
+      ],
+      "contacts": [],
+      "shifts": [],
+      "socialInsurance": [],
+      "workingSystem": [],
+      "shiftAndSchedule": [],
+      "postedToday": false,
+      "hiringDemand": {
+        "isHighVolumeHiring": false,
+        "isUrgentHire": false
+      },
+      "datePublished": "2026-05-13",
+      "expired": false,
+      "source": "Siemens",
+      "age": "a month ago",
+      "isRemote": false,
+      "locale": "in",
+      "language": "en",
+      "jobUrl": "https://in.indeed.com/viewjob?jk=667406a50f27864f",
+      "applyUrl": "https://jobs.siemens-healthineers.com/searchJobs/JobDetail/504996?source=Indeed",
+      "emails": [],
+      "companyAddresses": [],
+      "companyNumEmployees": "10,000+",
+      "companyRevenue": "more than $10B (USD)",
+      "companyDescription": "At Siemens Healthineers USA, our purpose is to enable healthcare providers to increase value by empowering them on their journey towards expanding precision medicine, transforming care delivery, and improving patient experience, all enabled by digitalizing healthcare.\r\n\r\nAn estimated five million patients globally everyday benefit from our innovative technologies and services in the areas of diagnostic and therapeutic imaging, laboratory diagnostics and molecular medicine, as well as digital health and enterprise services.\r\n\r\nWe are a leading medical technology company with over 120 years of experience and 18,500 patents globally. With about 50,000 dedicated colleagues in over 70 countries, we will continue to innovate and shape the future of healthcare.",
+      "companyBriefDescription": "Leading med-tech company with over 120 years of experience and 18,500 patents globally. With 72,000 dedicated colleagues in 70 countries, we will continue to innovate and shape future of healthcare.",
+      "companyLinks": {
+        "facebook": "https://www.facebook.com/SiemensHealthineers/",
+        "instagram": "https://www.instagram.com/siemens.healthineers",
+        "twitter": "",
+        "customLinks": [
+          {
+            "name": "LinkedIn ",
+            "url": "https://www.linkedin.com/company/siemens-healthineers"
+          },
+          {
+            "name": "Careers Page",
+            "url": "https://www.siemens-healthineers.com/careers"
+          },
+          {
+            "name": "Youtube",
+            "url": "https://www.youtube.com/@SiemensHealthineers/"
+          }
+        ],
+        "corporateWebsite": "https://www.siemens-healthineers.com/"
+      },
+      "companyCeo": {
+        "name": "Bernd Montag",
+        "photoUrl": "https://d2q79iu7y748jz.cloudfront.net/s/_ceophoto/512x512/87c868f5db9c227aa36a959ff45368d1",
+        "startDate": null
+      },
+      "requirements": []
+    }
+  ]
+}

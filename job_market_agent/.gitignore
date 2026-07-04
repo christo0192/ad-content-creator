@@ -1,0 +1,9 @@
+# scraped data + run artifacts (never commit raw scrapes or outputs)
+raw/
+output/
+logs/
+__pycache__/
+*.pyc
+# secrets — never commit
+*.token
+.secrets/

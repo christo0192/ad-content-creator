@@ -1,0 +1,270 @@
+{
+  "programs": [
+    {
+      "name": "EdgeUp — Transformative GenAI & Agentic AI + Interview Lab India 2026",
+      "code": "EdgeUp",
+      "course_count": 17,
+      "description": "Domain-specialized 'Applied Agentic AI' courses, each pairing a 15-17 week agentic-AI curriculum with FAANG/Tier-1 domain interview prep (the Interview Lab). No prior AI/ML required; oriented to engineers and professionals transitioning into agentic AI while clearing top-tier interviews."
+    },
+    {
+      "name": "PwC — IK × PwC India Agentic AI Career Accelerator",
+      "code": "PwC",
+      "course_count": 1,
+      "description": "Co-branded, depth-first 12-week accelerator for experienced engineers (intermediate Python + basic AI required). Focus on enterprise multi-agent systems, GraphRAG, RBAC, audit trails and production AWS deployment on real enterprise-simulated datasets. Positioned above EdgeUp."
+    },
+    {
+      "name": "ML — Flagship ML for Leaders in Tech",
+      "code": "ML",
+      "course_count": 1,
+      "description": "10-month senior-leader pathway (6-month core ML + 5-month Engineering Management prep) to transition into or lead ML/AI initiatives. Covers classic ML, deep learning, GenAI, MLOps and FAANG+ EM interview prep. Higher-rigour switch-to-ML pathway."
+    }
+  ],
+  "courses": [
+    {
+      "name": "Applied Agentic AI for Backend Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Backend engineers designing/integrating production-grade agentic AI systems; backend devs transitioning into AI-powered/agentic development with interview-ready design skills. No prior AI/ML; needs SE fundamentals + Python.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Agentic RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "SQL", "Databases & Data Modeling", "REST/API Design", "Concurrency", "Microservices & Cloud-Native", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "CrewAI", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "FastEmbed", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Docker", "AWS", "Kubernetes", "MongoDB", "Redis", "SQL", "Streamlit"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)", "Enterprise multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for Full Stack Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Full Stack engineers integrating agentic AI into production apps; SWEs transitioning into AI; targeting FAANG/Tier-1 interviews. No prior AI/ML; needs SE fundamentals + web + backend.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Agentic RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "Behavioral & Leadership Interviews", "SQL", "Databases & Data Modeling", "JavaScript/TypeScript", "Frontend Frameworks", "REST/API Design", "Web Security", "Microservices & Cloud-Native", "AWS", "Docker & Kubernetes", "CI/CD", "UI System Design"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "Storybook.js", "React", "TypeScript", "MongoDB", "SQL", "Streamlit"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Healthcare Q&A Agent", "Enterprise multi-agent capstone", "BYOP"]
+    },
+    {
+      "name": "Applied Agentic AI for Front End Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Frontend/UI engineers and full-stack devs building production agentic AI systems and prepping for FAANG/Tier-1 front-end interviews. No prior AI/ML.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "SQL", "JavaScript/TypeScript", "Frontend Frameworks", "Front-end System Design", "Accessibility", "Internationalization", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "React", "Angular", "HTML", "CSS", "JavaScript", "Redux", "SQL", "Streamlit"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent", "Enterprise multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for TPMs 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "TPMs applying Agentic AI to program workflows; professionals moving into AI-driven program management; prepping for MAANG+ TPM interviews. No coding/AI background needed (no-code).",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning concepts", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "AI governance", "Compliance & risk management", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "No-code/Low-code AI", "Text-to-SQL", "Build-vs-Buy", "KPIs for AI agents", "Scalable System Design", "Behavioral & Leadership Interviews", "Mock Interviews & Career Coaching", "SQL", "Data Visualization", "CI/CD", "Prioritization Frameworks", "Program & Risk Management"],
+      "tools": ["Zapier (Zapier Agents)", "LangFlow", "n8n", "ElevenLabs", "Flowise", "OpenAI API", "Anthropic Claude", "Pinecone", "OpenAI Embeddings", "Cohere Rerank", "Google Drive", "Notion", "Google Sheets", "Slack", "Langfuse", "DeepEval", "OpenAI Fine-Tuning API"],
+      "capstones": ["E-Commerce Customer Support Agent", "Internal Knowledge Assistant (NovaCart RAG)", "Multi-Agent Decision Copilot", "Product Launch Command Center (voice)", "PM Digest System Blueprint", "Evaluate & Optimize a Multi-Agent Pipeline", "Personalized Product Advisor", "Executive-Ready Capstone (AI program design)"]
+    },
+    {
+      "name": "Applied Agentic AI for Product Managers 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "PMs designing/scoping/delivering agentic AI features beyond chatbots; leading AI products; transitioning into AI-first product roles. No AI/coding required (no-code).",
+      "skills": ["LLMs", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Vector DBs & Embeddings", "Fine-tuning decisions (LoRA/PEFT)", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "No-code/Low-code AI", "Recommendation Systems", "Computer Vision / Object Detection", "Statistics & Probability", "Scalable System Design", "Behavioral & Leadership Interviews", "Mock Interviews & Career Coaching", "Product Sense & Strategy", "Growth & Analytics", "Monetization & Pricing", "A/B Testing", "Program & Risk Management"],
+      "tools": ["Zapier (Zapier Agents)", "LangFlow", "n8n", "Flowise", "ElevenLabs", "OpenAI API", "OpenAI Embeddings", "OpenAI Fine-Tuning API", "Anthropic Claude", "Pinecone", "Cohere Rerank", "Google Drive", "Google Sheets", "Notion", "Slack", "Langfuse", "DeepEval"],
+      "capstones": ["E-Commerce Customer Support Agent", "Internal Knowledge Assistant (NovaCart RAG)", "Multi-Agent Decision Copilot", "Product Launch Command Center (voice)", "PM Digest System Blueprint", "Evaluate & Optimize a Multi-Agent Pipeline", "Personalized Product Advisor", "End-to-end agentic AI capstone with strategy deck"]
+    },
+    {
+      "name": "Applied Agentic AI for Engineering Managers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Engineering Managers with management experience prepping for Agentic AI + EM interviews. Needs strong SE fundamentals + Python + prior management/leadership experience. Not for ICs.",
+      "skills": ["Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking (incl. HyDE)", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Responsible AI", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "No-code/Low-code AI", "Recommendation Systems", "DSA", "Scalable System Design", "Build vs Buy / ROI", "Behavioral & Leadership Interviews", "Negotiation", "Mock Interviews & Career Coaching", "Python", "AWS", "Docker & Kubernetes", "Program & Risk Management"],
+      "tools": ["Python", "OpenAI API", "LangChain", "LangGraph", "CrewAI", "Langflow", "n8n", "Streamlit", "FastAPI", "Docker", "AWS", "Pinecone", "FAISS", "Chroma", "OpenAI Embeddings", "Cohere Rerank", "HyDE", "SerpAPI", "Tavily Search", "Whisper", "gTTS", "ElevenLabs Flash", "MCP", "A2A", "LangSmith", "DeepEval", "Guardrails AI", "Hugging Face", "PEFT", "LoRA", "Google Colab", "Telegram", "Google Sheets"],
+      "capstones": ["Enterprise multi-agent system capstone", "BYOP (financial bot, code reviewer, email generator)", "Customer Support Routing Agent", "Internal Knowledge Assistant", "Multi-Agent Travel Planner", "Voice Feedback Agent", "Negotiation Simulator", "Signup Email Agent", "Fine-Tuned Model Integration"]
+    },
+    {
+      "name": "Applied Agentic AI for Test Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Test Engineers, QA/Testers transitioning to SDET, and SWEs with test background moving into AI/agentic development. No prior AI; needs SE principles.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Agentic RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "AI for testing (autonomous test agents, defect prediction, flaky test detection)", "Quality Engineering", "Test Automation", "API Testing", "Mock Interviews & Career Coaching", "SQL", "Microservices & Cloud-Native", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "SQL", "Streamlit"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)", "Enterprise multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for Android Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Current/former Android engineers and SWEs with Android background moving into agentic AI; targeting FAANG/Tier-1 Android interviews. No prior AI/ML.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "SQL", "Concurrency", "Android Development", "Dependency Injection", "Android System Design", "AWS", "Docker & Kubernetes"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "SQL", "Kotlin", "Java", "Android", "Jetpack"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)", "Enterprise multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for iOS Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Current/former iOS engineers and SWEs with iOS background moving into agentic AI; targeting FAANG/Tier-1 iOS interviews. No prior AI/ML.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "SQL", "REST/API Design", "Concurrency", "iOS Development", "Mobile Architecture (MVVM/VIPER)", "AWS", "Docker & Kubernetes", "CI/CD", "Linux & Networking"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "SQL", "Swift"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent"]
+    },
+    {
+      "name": "Applied Agentic AI for Machine Learning Engineers 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "SWEs (incl. current/former ML engineers, AI enthusiasts with SE background) specializing in generative/agentic AI; ML engineers targeting FAANG/Tier-1 interviews. No prior AI/ML required.",
+      "skills": ["Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "Deep Learning & Neural Networks", "Supervised Learning", "Unsupervised Learning & Clustering", "Computer Vision / Object Detection", "Reinforcement Learning", "DSA", "Scalable System Design", "ML System Design", "Python", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Docker", "AWS", "Kubernetes"],
+      "capstones": ["CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)", "Enterprise multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for Cyber Security Engineers 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Security Analysts/SecOps, System/Network/Cloud Security Engineers, security-context QA, and technical cybersecurity enthusiasts building AI-powered agentic security systems. Needs cybersecurity fundamentals + Python.",
+      "skills": ["Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking (incl. HyDE)", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "No-code/Low-code AI", "DSA", "Scalable System Design", "Python", "REST/API Design", "AWS", "Linux & Networking", "Security Engineering (cryptography, auth, network/app security, OWASP, threat modeling, incident response)"],
+      "tools": ["n8n", "Langflow", "LangChain", "LangGraph", "CrewAI", "OpenAI API", "OpenAI Embeddings", "Pinecone", "Cohere Rerank", "HyDE", "SerpAPI", "Tavily Search", "Whisper", "gTTS", "ElevenLabs Flash", "Streamlit", "LangSmith", "DeepEval", "Hugging Face", "PEFT", "LoRA", "Google Colab", "MCP", "A2A", "AWS GuardDuty"],
+      "capstones": ["Enterprise multi-agent security capstone", "BYOP (financial bot, code reviewer, email generator)"]
+    },
+    {
+      "name": "Applied Agentic AI for Cloud Solutions Architects (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Cloud Engineers targeting Tier-1 roles, Cloud Solutions Architects, and DevOps/SRE/Backend engineers with distributed-systems experience. Needs Cloud Architect fundamentals + Python.",
+      "skills": ["Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking (incl. HyDE)", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "No-code/Low-code AI", "DSA", "Scalable System Design", "Mock Interviews & Career Coaching", "Python", "Microservices & Cloud-Native", "AWS", "Docker & Kubernetes", "Linux & Networking", "Monitoring & Observability (Ops)", "Serverless/Containerized Architecture", "Migration Strategies"],
+      "tools": ["n8n", "Langflow", "LangChain", "LangGraph", "CrewAI", "OpenAI API", "OpenAI Embeddings", "Pinecone", "Cohere Rerank", "HyDE", "SerpAPI", "Tavily Search", "MCP", "A2A", "Whisper", "ElevenLabs Flash", "Streamlit", "gTTS", "LangSmith", "DeepEval", "LoRA", "PEFT", "Google Colab", "Hugging Face", "AWS"],
+      "capstones": ["Customer Support Routing Agent", "Internal Knowledge Assistant", "Multi-Agent Travel Planner", "Voice Feedback Agent", "Negotiation Simulator", "Signup Email Agent", "Fine-Tuned Model Integration", "Enterprise multi-agent capstone (BYOP option)"]
+    },
+    {
+      "name": "Applied Agentic AI for Data Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Data engineers, analytics engineers, and platform/infra engineers building agentic AI-powered data systems; data engineers moving into AI/agentic roles. No prior AI/ML; needs SE fundamentals + Python.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "DSA", "Scalable System Design", "Behavioral & Leadership Interviews", "SQL", "Databases & Data Modeling", "ETL & Data Pipelines", "Data Warehousing & Governance", "Big Data (Spark/Kafka)", "Python", "AWS", "Docker & Kubernetes", "CI/CD", "Monitoring & Observability (Ops)"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "Kafka", "Airflow", "Spark", "Hive", "dbt", "Snowflake"],
+      "capstones": ["Enterprise multi-agent capstone", "BYOP", "CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)"]
+    },
+    {
+      "name": "Applied Agentic AI for Data & Business Analysts 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Current/former Business/Data/BI Analysts & BI Engineers designing/delivering agentic AI features; analysts moving into AI roles or prepping Tier-1/MAANG+ analyst interviews. No AI/coding (no-code).",
+      "skills": ["LLMs", "RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT)", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "No-code/Low-code AI", "Supervised Learning", "Unsupervised Learning & Clustering", "Time Series", "Statistics & Probability", "Ensemble Methods", "A/B Testing", "Scalable System Design", "SQL", "Databases & Data Modeling", "ETL & Data Pipelines", "Data Warehousing & Governance", "Data Visualization (Tableau)", "Python", "Product Sense & Strategy", "Program & Risk Management"],
+      "tools": ["SQL", "Python", "NumPy", "Pandas", "Streamlit", "Tableau", "Excel", "Google Sheets", "Zapier (Zapier Agents)", "LangFlow", "Flowise", "n8n", "ElevenLabs", "OpenAI API", "Anthropic Claude", "Pinecone", "Cohere Rerank", "Google Drive", "Notion", "Slack", "Langfuse", "DeepEval"],
+      "capstones": ["No-code end-to-end agentic BI capstone (+ strategy/ROI deck)", "E-Commerce Customer Support Agent", "Internal Knowledge Assistant (NovaCart RAG)", "Multi-Agent Decision Copilot", "Product Launch Command Center (voice)", "PM Digest System Blueprint", "Evaluate & Optimize a Multi-Agent Pipeline", "Personalized Product Advisor"]
+    },
+    {
+      "name": "Applied Agentic AI for Data Scientists 2.0 (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Current/former data scientists targeting Tier-1; DS, ML engineers, research engineers, statisticians specializing in agentic AI; AI enthusiasts with DS background. No prior AI/ML; needs DS principles + Python.",
+      "skills": ["LLMs", "Prompt Engineering", "RAG", "Agentic RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA/SFT)", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "Deep Learning & Neural Networks", "Supervised Learning", "Unsupervised Learning & Clustering", "Recommendation Systems", "Time Series", "Statistics & Probability", "Ensemble Methods", "DSA", "Scalable System Design", "Mock Interviews & Career Coaching", "SQL", "Python", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "FastAPI", "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "OpenAI API", "Tavily API", "SerpAPI", "FAISS", "Chroma", "Qdrant", "Hugging Face", "BGE", "SPLADE", "Pandas", "LangSmith", "DeepEval", "Guardrails AI", "Microsoft Presidio", "Whisper", "OpenAI TTS", "FastMCP", "PEFT", "QLoRA", "Pydantic", "Docker", "AWS", "Kubernetes", "TensorFlow", "FBProphet", "NeuralProphet"],
+      "capstones": ["Enterprise multi-agent capstone (BYOP option)", "CRM Lead Qualifier Agent", "SupportDesk-RAG", "Multi-Agent Travel Planner", "AxiomCart Voice Shopping Assistant", "Real Estate Negotiation Simulator", "Hybrid Product Search Agent", "Production-Ready Fintech Support Agent", "Domain-Specific Fine-Tuned Agent (Healthcare Q&A)"]
+    },
+    {
+      "name": "Applied Agentic AI for DevOps/SRE (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "SREs, DevOps engineers, infra/sysadmins (with prior SRE/DevOps experience) prepping for agentic AI system design + SRE domain interviews at FAANG+. Not for no-SRE-experience candidates.",
+      "skills": ["RAG", "Hybrid Retrieval & Reranking", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "MCP/A2A", "Agent Evaluation (offline & online)", "Observability & Tracing", "Drift detection", "Guardrails & AI Safety", "Responsible AI", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "No-code/Low-code AI", "DSA", "Scalable System Design (Non-Abstract Large System Design)", "Data Visualization", "AWS", "Docker & Kubernetes", "CI/CD", "Linux & Networking", "Monitoring & Observability (Ops)", "Infrastructure as Code", "SLIs/SLOs/SLAs & error budgets", "Incident Management", "Program & Risk Management"],
+      "tools": ["n8n", "Langflow", "LangChain", "OpenAI API", "Pinecone", "OpenAI Embeddings", "Cohere Rerank", "HyDE", "MCP", "A2A", "SerpAPI", "Tavily Search", "Whisper", "ElevenLabs Flash", "gTTS", "Streamlit", "LangSmith", "DeepEval", "Hugging Face", "PEFT", "LoRA", "Google Colab", "Zapier", "Docker", "Kubernetes", "Jenkins", "Chef", "Puppet", "Ansible", "Prometheus", "Redis", "AWS"],
+      "capstones": ["Customer Support Routing Agent", "Internal Knowledge Assistant", "Multi-Agent Travel Planner", "Voice Feedback Agent", "Negotiation Simulator", "Signup Email Agent", "Fine-Tuned Model Integration", "Final orchestrated multi-agent capstone"]
+    },
+    {
+      "name": "Applied Agentic AI for Embedded Systems Engineers (EdgeUp 2026)",
+      "program": "EdgeUp",
+      "audience": "Embedded Systems Engineers prepping for system-level interviews at hardware/semiconductor companies (automotive, networking, semiconductor); embedded SWEs integrating agentic AI. No AI/ML or coding required (no-code).",
+      "skills": ["Prompt Engineering", "RAG", "Hybrid Retrieval & Reranking", "Multi-Agent Systems & Orchestration", "Agent Memory & State", "Vector DBs & Embeddings", "Fine-tuning (LoRA/PEFT/QLoRA)", "Quantization", "MCP/A2A", "Agent Evaluation", "Observability & Tracing", "Guardrails & AI Safety", "Cost/Latency/Reliability", "Voice & Multimodal Agents", "Agent Deployment", "No-code/Low-code AI", "DSA", "Scalable System Design", "Python", "Concurrency", "Embedded Systems / Firmware (Embedded C, ARM Cortex-M, RTOS, bootloaders, functional safety ISO 26262/IEC 61508, secure boot/OTA)", "Docker & Kubernetes", "Linux & Networking"],
+      "tools": ["n8n", "Langflow", "LangChain", "LangGraph", "OpenAI API", "OpenAI Embeddings", "Pinecone", "Cohere Rerank", "HyDE", "MCP", "A2A", "SerpAPI", "Tavily Search", "Whisper", "ElevenLabs Flash", "gTTS", "Streamlit", "LangSmith", "DeepEval", "FastAPI", "Docker", "LoRA", "PEFT", "Google Colab", "Hugging Face", "Pandas", "Zapier", "ARM Cortex-M", "Embedded C", "P-threads", "U-Boot"],
+      "capstones": ["Customer Support Routing Agent", "Internal Knowledge Assistant", "Multi-Agent Travel Planner", "Voice Feedback Agent", "Negotiation Simulator", "Signup Email Agent", "Fine-Tuned Model Integration", "Learner-led enterprise multi-agent capstone (BYOP)"]
+    },
+    {
+      "name": "IK × PwC India Agentic AI Career Accelerator",
+      "program": "PwC",
+      "audience": "Tech professionals past the basics — mid-senior engineers (5-15 yr), tech leaders/TPM/EM/PM (15+ yr), data/ML engineers, and Cloud/SRE/CyberSec/Test/Mobile specialists building enterprise-grade agentic AI. Hard prereqs: intermediate Python + basic AI grasp. Not for beginners.",
+      "skills": ["Generative AI (foundations)", "LLMs", "Prompt Engineering", "RAG", "GraphRAG", "AI Agents & Tool Use", "ReAct framework", "Multi-Agent Systems & Orchestration", "Vector DBs & Embeddings", "MCP/A2A", "MCP architecture", "Observability & Tracing", "Evaluation (factual-accuracy & latency, custom evals)", "Guardrails & AI Safety", "Agent Deployment (end-to-end AWS, production readiness)", "RBAC", "Audit trails", "Python", "Frontend Frameworks", "AWS", "Docker & Kubernetes", "Portfolio narrative / positioning"],
+      "tools": ["LangChain", "LangGraph", "LangFuse", "LangSmith", "ChromaDB", "FAISS", "NetworkX", "GraphRAG", "Pydantic", "GPT-4o", "Docker", "AWS", "MCP", "ReAct", "GitHub", "Python", "Pandas", "RBAC", "Audit trails"],
+      "capstones": ["Healthcare Diagnostic Agent (39 clinical docs)", "BFSI Regulatory Compliance Agent (22 RBI/IRDAI PDFs)", "E-Commerce Dynamic Pricing & Competitor Insights Agent (60+ SKUs)", "Supply Chain Contract Intelligence Agent (36 supplier contracts)"]
+    },
+    {
+      "name": "Flagship ML for Leaders in Tech",
+      "program": "ML",
+      "audience": "Senior SWEs/devs/tech leaders (10-15+ yr) + senior tech managers (PM, EM, TPM) + senior tech professionals (security, cloud, DevOps/SRE, data/BA, DBA, embedded/IoT) transitioning into or leading ML/AI. Not for <10-15 yr non-coding or IC-only.",
+      "skills": ["Generative AI (foundations)", "LLMs", "Prompt Engineering", "RAG", "AI Agents & Tool Use", "Multi-Agent Systems & Orchestration", "Vector DBs & Embeddings", "Pre-training & Transformers (BERT, attention)", "Observability & Tracing", "Cost/Latency/Reliability", "GenAI vulnerabilities", "Deep Learning & Neural Networks (CNN, RNN, LSTM)", "Supervised Learning", "Unsupervised Learning & Clustering", "Recommendation Systems", "Computer Vision / Object Detection (YOLO, ResNet, U-Net)", "Statistics & Probability", "Feature Engineering", "Ensemble Methods (bagging, boosting, XGBoost)", "Advanced NLP (Word2Vec/GloVe, Seq2Seq)", "MLOps & ML deployment lifecycle", "Model drift detection", "DSA", "Scalable System Design", "Behavioral & Leadership Interviews", "Mock Interviews & Career Coaching", "SQL", "Big Data (Spark/Kafka)", "Data Visualization", "Python", "AWS", "Docker & Kubernetes", "CI/CD"],
+      "tools": ["Python", "NumPy", "Pandas", "Scikit-learn", "Keras", "PyTorch", "TensorFlow", "LangChain", "LangSmith", "Matplotlib", "Seaborn", "Jupyter", "Google Colab", "Gradio", "Hugging Face", "OpenAI API", "Vector stores", "Apache Spark / PySpark", "Tableau", "AWS (SageMaker, S3, EC2)", "Docker", "Kubernetes", "DVC", "Git LFS", "Airflow"],
+      "capstones": ["Browser Analytics (DA project)", "FraudShield (ML project)", "MediBot (GenAI project)", "FashionLens (CV project)"]
+    }
+  ],
+  "covered_roles": [
+    "Agentic AI Engineer (single- and multi-agent system builder)",
+    "Multi-Agent Systems / Agent Orchestration Engineer",
+    "RAG Engineer (incl. Agentic RAG, Hybrid Retrieval, GraphRAG)",
+    "GenAI-enabled Backend Engineer",
+    "GenAI-enabled Full Stack Engineer",
+    "GenAI-enabled Frontend Engineer",
+    "GenAI-enabled Mobile Engineer (Android / iOS)",
+    "GenAI-enabled / Agentic ML Engineer",
+    "AI Engineer (LLM application engineer)",
+    "AI/ML Architect / Agentic AI System Designer",
+    "Enterprise AI Solutions Architect (PwC accelerator — GraphRAG, RBAC, AWS deployment)",
+    "AI-enabled Data Engineer (agentic data pipelines)",
+    "AI-enabled Data Scientist",
+    "AI-enabled Data / Business Analyst (agentic BI)",
+    "AI-enabled Cloud Solutions Architect / AI Backend Engineer",
+    "AI-enabled Cybersecurity / SecOps Engineer (agentic security systems)",
+    "AI-enabled DevOps / SRE Engineer",
+    "AI-enabled Embedded Systems Engineer",
+    "AI-enabled SDET / Test Engineer (AI-for-testing: autonomous test agents, defect prediction)",
+    "AI Product Manager (no-code agentic product design, eval, governance)",
+    "AI Technical Program Manager (TPM)",
+    "Engineering Manager / ML Leader for AI initiatives (build-vs-buy, ROI, team leadership)",
+    "Machine Learning Engineer / Data Scientist transition (Flagship ML — classic ML + DL + CV + NLP + MLOps)"
+  ],
+  "covered_skills": [
+    "Large Language Models (LLM fundamentals, reasoning, transformers/attention, BERT, pre-training)",
+    "Prompt Engineering",
+    "RAG (Retrieval-Augmented Generation)",
+    "Agentic RAG",
+    "GraphRAG (PwC)",
+    "Hybrid Retrieval & Reranking (sparse vs dense, RRF, HyDE, BGE/SPLADE, ANN/HNSW, inverted index)",
+    "Document ingestion, chunking, indexing & embeddings",
+    "Vector Databases & Embeddings",
+    "AI Agents & Tool Use (function calling, structured tool contracts, think-act-observe / ReAct)",
+    "Single-Agent Systems",
+    "Multi-Agent Systems & Orchestration (planner-executor-critic, router, supervisor-worker, DAG/triage, message graphs, HITL)",
+    "Agent Memory & State management (FSMs, conversation memory)",
+    "MCP (Model Context Protocol) & A2A (Agent-to-Agent) Protocols",
+    "Structured outputs / schema validation (Pydantic) & hallucination control / grounding",
+    "Fine-tuning (LoRA, PEFT, QLoRA, SFT), JSONL dataset curation",
+    "Quantization & model optimization",
+    "Prompting vs RAG vs Fine-Tuning decision framework",
+    "Agent Evaluation (eval pipelines, regression tests, golden datasets, LLM-as-Judge, Precision@K/Recall@K/MRR/G-Eval, BLEU/ROUGE, faithfulness/hallucination metrics)",
+    "Observability, Tracing, Logging, drift detection",
+    "Guardrails & AI Safety (prompt injection defense, PII redaction, schema guardrails, Responsible AI)",
+    "AI governance, compliance & risk management (esp. PM/TPM tracks; RBAC + audit trails in PwC)",
+    "Cost / Latency / Reliability optimization (caching, async, model routing, retries, circuit breakers, token & cost modeling)",
+    "Voice & Multimodal Agents (STT/TTS pipelines)",
+    "Agent Deployment & Serving (FastAPI, Docker, Kubernetes, AWS, CI/CD, production readiness)",
+    "No-code / Low-code AI orchestration",
+    "Generative AI foundations & GenAI vulnerabilities",
+    "Classic ML: Supervised, Unsupervised/Clustering, Ensemble methods, Feature engineering, model evaluation",
+    "Deep Learning & Neural Networks (CNN, RNN, LSTM, autoencoders)",
+    "Computer Vision / Object Detection (YOLO, ResNet, U-Net) — ML & DS tracks only",
+    "Reinforcement Learning — ML Engineers track only",
+    "Time Series forecasting (ARIMA/SARIMA, FBProphet, NeuralProphet) — DS/DA tracks",
+    "Recommendation Systems",
+    "Advanced NLP (Word2Vec/GloVe, Seq2Seq, sentiment) — Flagship ML",
+    "MLOps & ML deployment lifecycle, model drift, DVC, distributed training — Flagship ML only",
+    "Statistics & Probability, Hypothesis testing, A/B testing",
+    "Build-vs-Buy, ROI rationale, KPI/North-Star definition for AI features",
+    "CS foundations: DSA, Scalable System Design, ML System Design",
+    "Data & DB: SQL, data modeling, ETL & pipelines, data warehousing/governance, Big Data (Spark/Kafka), Text-to-SQL",
+    "Domain interview prep: behavioral/leadership (STAR/PAR), system design, negotiation, mock interviews",
+    "Domain-specific engineering (web/frontend/mobile/embedded/cloud/security/DevOps-SRE/data) paired with each track"
+  ],
+  "covered_tools": [
+    "LangChain", "LangGraph", "LlamaIndex", "Google ADK", "CrewAI", "LangFlow", "Flowise", "n8n", "Zapier (Zapier Agents)",
+    "OpenAI API", "GPT-4o", "Anthropic Claude", "OpenAI Embeddings", "OpenAI TTS", "Whisper", "gTTS", "ElevenLabs / ElevenLabs Flash",
+    "FAISS", "Chroma / ChromaDB", "Qdrant", "Pinecone", "FastEmbed", "Vector stores (generic)",
+    "BGE", "SPLADE", "Cohere Rerank", "HyDE", "NetworkX", "GraphRAG",
+    "Hugging Face", "PEFT", "LoRA", "QLoRA", "OpenAI Fine-Tuning API",
+    "LangSmith", "LangFuse / Langfuse", "DeepEval", "Guardrails AI", "Microsoft Presidio",
+    "MCP / FastMCP", "A2A", "ReAct", "Pydantic",
+    "FastAPI", "Streamlit", "Gradio", "Pandas", "NumPy", "Tavily API / Tavily Search", "SerpAPI",
+    "Docker", "Kubernetes", "AWS (incl. SageMaker, S3, EC2, GuardDuty)", "Jenkins", "Chef", "Puppet", "Ansible", "Prometheus", "Redis", "GitHub", "Google Colab", "Telegram",
+    "Scikit-learn", "Keras", "PyTorch", "TensorFlow", "FBProphet", "NeuralProphet", "Matplotlib", "Seaborn", "Jupyter", "DVC", "Git LFS", "Airflow",
+    "SQL", "MongoDB", "Snowflake", "Spark / PySpark", "Hive", "dbt", "Kafka",
+    "React", "Angular", "TypeScript", "HTML", "CSS", "Redux", "Storybook.js",
+    "Kotlin", "Java", "Swift", "Jetpack", "ARM Cortex-M", "Embedded C", "P-threads", "U-Boot",
+    "Tableau", "Excel", "Google Sheets", "Google Drive", "Notion", "Slack"
+  ],
+  "emphasis_summary": "IK India's catalog is overwhelmingly oriented toward Agentic AI engineering for transitioning professionals, paired with FAANG/Tier-1 interview prep. Its deepest, most repeated coverage is the agentic application stack: multi-agent orchestration (planner-executor-critic, router, supervisor-worker, HITL), RAG/Agentic RAG/Hybrid Retrieval, MCP/A2A protocols, agent evaluation (LLM-as-Judge, retrieval metrics), guardrails/safety, fine-tuning (LoRA/PEFT/QLoRA), and deployment to FastAPI/Docker/Kubernetes/AWS — taught identically across 13 EdgeUp engineering tracks and reinforced in the PwC accelerator (which adds enterprise depth: GraphRAG, RBAC, audit trails, real regulated datasets). It strongly covers the role archetypes of Agentic AI Engineer, RAG Engineer, GenAI-enabled domain engineer (backend/fullstack/frontend/mobile/data/cloud/security/devops/embedded), AI/ML Architect, and the leadership/no-code lane (AI PM, TPM, EM, ML Leader). Classic ML, deep learning, computer vision, time-series and full MLOps live almost entirely in two courses (Flagship ML for Leaders, and the DS/ML EdgeUp tracks) rather than across the catalog. The clear orientation is: applied, production-leaning agentic AI + interview readiness for mid-career engineers and leaders, with India/enterprise framing.",
+  "possible_blindspots": [
+    "Production LLMOps / agent operations at scale — observability, evaluation and deployment are taught, but dedicated LLMOps (CI/CD for prompts/models, A/B rollout of agents, online eval harnesses, cost/usage governance at fleet scale) appears thin outside the Flagship ML MLOps specialization. HYPOTHESIS to test vs market demand.",
+    "Classic ML / Deep Learning breadth — supervised/unsupervised ML, CV, RL and time-series are concentrated in only ~2-3 courses (Flagship ML, DS, ML Engineers, DA); most agentic tracks teach little-to-no classical modeling. May be a gap if market demand for pure ML/DL roles is high.",
+    "Computer Vision as a standalone career track — CV appears only as a tag in ML/DS/PM courses (YOLO/ResNet/U-Net in Flagship ML); no dedicated CV engineer pathway. HYPOTHESIS.",
+    "Data Engineering depth for AI — one EdgeUp DE track covers ETL/Spark/Kafka/dbt/Snowflake, but feature stores, real-time ML data infra, and vector-data-at-scale engineering may be underweight relative to demand.",
+    "AI Safety / Governance / Responsible AI depth — present as guardrails, PII, prompt-injection and (in PM/TPM/PwC) governance/RBAC/audit, but no dedicated AI governance, red-teaming, model-risk, or AI-policy/compliance specialist track. HYPOTHESIS.",
+    "Model/research-level skills — pre-training, model architecture research, large-scale distributed training, and novel fine-tuning research are largely absent (only applied fine-tuning + transformers theory in Flagship ML). Likely intentional given applied focus; flag if 'AI Research Engineer' roles surface in market data.",
+    "Pure AI Product Management vs PM-with-agentic-skills — PM/TPM tracks are strong on agentic product design but it is unclear how deeply they cover AI-specific product strategy, model selection economics, and data/eval strategy as a standalone AI PM discipline.",
+    "Emerging roles potentially uncovered — 'AI Evaluation/Eval Engineer', 'Prompt Engineer' as a standalone role, 'AI Red Team / Security Researcher', 'AI Solutions/Forward-Deployed Engineer', and 'AI Infrastructure/Inference-serving Engineer' are touched as skills but not positioned as named role outcomes. Test these titles explicitly against scraped market roles."
+  ]
+}

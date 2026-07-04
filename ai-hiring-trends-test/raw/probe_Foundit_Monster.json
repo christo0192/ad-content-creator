@@ -1,0 +1,74 @@
+{
+  "input": {
+    "searchUrls": [
+      "https://www.foundit.in/srp/results?query=Machine-Learning-Engineer&locations=India"
+    ],
+    "maxItems": 10
+  },
+  "meta": {
+    "run_id": "ZsKxBToGnNh7KkW1K",
+    "status": "SUCCEEDED",
+    "elapsed_s": 78.0,
+    "n_items": 1,
+    "cost_usd": 0.19034,
+    "session_spent": 0.5015
+  },
+  "items": [
+    {
+      "searchUrl": "https://www.foundit.in/srp/results?query=Machine-Learning-Engineer&locations=India",
+      "jobId": 52475480,
+      "title": "Artificial Intelligence Engineer - Machine Learning Frameworks",
+      "locations": "Remote",
+      "experience": {
+        "min": 3,
+        "max": 9
+      },
+      "salary": {
+        "currency": "INR",
+        "isConfidential": true
+      },
+      "company": {
+        "name": "Xander Consulting And Advisory Private Limited",
+        "id": 928565
+      },
+      "postingDetails": {
+        "createdAt": "2026-05-11T13:03:23.000Z",
+        "updatedAt": "a month ago",
+        "closedAt": "2026-07-09T18:30:00.000Z",
+        "totalApplicants": 640
+      },
+      "jobDetails": {
+        "industries": [
+          "Software"
+        ],
+        "functions": [
+          "IT"
+        ],
+        "roles": [
+          "Software Engineer/Programmer"
+        ],
+        "employmentTypes": [
+          "Full time"
+        ],
+        "skills": "ML Frameworks, Generative AI Concepts, Agentic AI Frameworks, Cloud Platforms, Prompt Engineering, Vector Databases, Pinecone, Weaviate, Retrieval-Augmented Generation (RAG),Sql, Python, Azure, Gcp, Microservices, Tensorflow, Pytorch, AWS",
+        "designations": [
+          "Software Engineer/Programmer"
+        ]
+      },
+      "recruiter": {
+        "id": 1459356,
+        "name": "Raajesh Channiah "
+      },
+      "urls": {
+        "jobUrl": "https://www.foundit.in/job/artificial-intelligence-engineer-machine-learning-frameworks-xander-consulting-and-advisory-private-limited-remote-52475480",
+        "companyUrl": "https://www.foundit.in/search/xander-consulting-and-advisory-private-limited-928565-jobs-career"
+      },
+      "status": {
+        "isUrgentHiring": false,
+        "isHotJob": false,
+        "quickApply": true,
+        "activeJob": true
+      }
+    }
+  ]
+}

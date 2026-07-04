@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "site": "Naukri",
+      "actor": "muhammetakkurtt/naukri-job-scraper",
+      "rows": 50,
+      "kept_ai": 0,
+      "cost": 0.21,
+      "known_fixed": 0.0,
+      "per_item": 0.0042
+    },
+    {
+      "site": "Indeed",
+      "actor": "borderline/indeed-scraper",
+      "rows": 5,
+      "kept_ai": 5,
+      "cost": 0.30002,
+      "known_fixed": 0.0,
+      "per_item": 0.06
+    },
+    {
+      "site": "HackerNews",
+      "skipped": "predictive guard",
+      "cost": 0
+    },
+    {
+      "site": "Foundit",
+      "skipped": "predictive guard",
+      "cost": 0
+    },
+    {
+      "site": "Glassdoor",
+      "skipped": "predictive guard",
+      "cost": 0
+    }
+  ],
+  "spent": 0.5100219542872906,
+  "baseline": 8.392147719860077e-06,
+  "final_usage": 0.5100303464350104
+}

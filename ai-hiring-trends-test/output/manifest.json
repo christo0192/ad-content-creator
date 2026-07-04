@@ -1,0 +1,179 @@
+{
+  "manifest": [
+    {
+      "site": "LinkedIn Jobs",
+      "query": "Machine Learning Engineer",
+      "raw": 50,
+      "kept_ai": 45,
+      "cost_usd": 0.031,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "LinkedIn Jobs",
+      "query": "Data Scientist",
+      "raw": 50,
+      "kept_ai": 44,
+      "cost_usd": 0.05705,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "LinkedIn Jobs",
+      "query": "AI Engineer",
+      "raw": 52,
+      "kept_ai": 47,
+      "cost_usd": 0.04004,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "LinkedIn Jobs",
+      "query": "Generative AI",
+      "raw": 50,
+      "kept_ai": 36,
+      "cost_usd": 0.06004,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "Google Jobs",
+      "query": "Machine Learning Engineer",
+      "raw": 60,
+      "kept_ai": 57,
+      "cost_usd": 1.06409,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "Google Jobs",
+      "query": "Data Scientist",
+      "raw": 60,
+      "kept_ai": 53,
+      "cost_usd": 1.05094,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "Google Jobs",
+      "query": "AI Engineer",
+      "raw": 60,
+      "kept_ai": 43,
+      "cost_usd": 1.05057,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "Google Jobs",
+      "query": "MLOps Engineer",
+      "raw": 60,
+      "kept_ai": 60,
+      "cost_usd": 1.0506,
+      "status": "SUCCEEDED"
+    },
+    {
+      "site": "Naukri",
+      "skipped": "soft budget ceiling reached"
+    },
+    {
+      "site": "Glassdoor",
+      "skipped": "soft budget ceiling reached"
+    },
+    {
+      "site": "Foundit (Monster)",
+      "skipped": "soft budget ceiling reached"
+    },
+    {
+      "site": "Indeed",
+      "skipped": "soft budget ceiling reached"
+    },
+    {
+      "site": "HackerNews Who-is-Hiring",
+      "skipped": "soft budget ceiling reached"
+    }
+  ],
+  "governor": {
+    "baseline": 0.6200240887812946,
+    "session_spent": 4.404344306438889,
+    "final_usage": 5.024368395220184,
+    "events": [
+      [
+        "pre:LinkedIn Jobs:Machine Learning Engineer",
+        0.6200240887812946,
+        0.0
+      ],
+      [
+        "post:LinkedIn Jobs:Machine Learning Engineer",
+        0.6510273564196798,
+        0.031003267638385235
+      ],
+      [
+        "pre:LinkedIn Jobs:Data Scientist",
+        0.6510273564196798,
+        0.031003267638385235
+      ],
+      [
+        "post:LinkedIn Jobs:Data Scientist",
+        0.7080747563023541,
+        0.0880506675210595
+      ],
+      [
+        "pre:LinkedIn Jobs:AI Engineer",
+        0.7080747563023541,
+        0.0880506675210595
+      ],
+      [
+        "post:LinkedIn Jobs:AI Engineer",
+        0.7481148792029593,
+        0.1280907904216647
+      ],
+      [
+        "pre:LinkedIn Jobs:Generative AI",
+        0.7481171451107833,
+        0.12809305632948875
+      ],
+      [
+        "post:LinkedIn Jobs:Generative AI",
+        0.8081606932914489,
+        0.18813660451015435
+      ],
+      [
+        "pre:Google Jobs:Machine Learning Engineer",
+        0.8081606932914489,
+        0.18813660451015435
+      ],
+      [
+        "post:Google Jobs:Machine Learning Engineer",
+        1.8722553167152638,
+        1.2522312279339691
+      ],
+      [
+        "pre:Google Jobs:Data Scientist",
+        1.8722553167152638,
+        1.2522312279339691
+      ],
+      [
+        "post:Google Jobs:Data Scientist",
+        2.923192931923234,
+        2.3031688431419393
+      ],
+      [
+        "pre:Google Jobs:AI Engineer",
+        2.923192931923234,
+        2.3031688431419393
+      ],
+      [
+        "post:Google Jobs:AI Engineer",
+        3.9737641429336903,
+        3.3537400541523956
+      ],
+      [
+        "pre:Google Jobs:MLOps Engineer",
+        3.9737641429336903,
+        3.3537400541523956
+      ],
+      [
+        "post:Google Jobs:MLOps Engineer",
+        5.024368395220184,
+        4.404344306438889
+      ]
+    ]
+  },
+  "window": {
+    "start": "2026-04-16",
+    "report_date": "2026-06-17"
+  }
+}

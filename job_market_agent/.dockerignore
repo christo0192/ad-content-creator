@@ -1,0 +1,9 @@
+raw/
+output/
+logs/
+__pycache__/
+*.pyc
+*.ps1
+*.md
+.secrets/
+.gitignore

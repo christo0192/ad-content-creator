@@ -1,0 +1,28 @@
+Source/Platform,Trending Topic/Keyword,Sentiment Score,Engagement Volume,Reference Documents
+GitHub,LangChain,4/5,"122,000 stars",https://github.com/langchain-ai/langchain
+GitHub,AutoGen,4/5,"50,400 stars",https://github.com/microsoft/autogen
+GitHub,CrewAI,5/5,"30,000+ stars",https://github.com/joaomdmoura/crewAI
+GitHub,LangGraph,5/5,"22,000 stars",https://github.com/langchain-ai/langgraph
+GitHub,LlamaIndex,4/5,"15,000+ stars",https://github.com/run-llama/llama_index
+GitHub,OpenAI Swarm,3/5,"9,000+ stars",https://github.com/openai/swarm
+GitHub,Milvus (Vector DB),4/5,"35,000 stars",https://github.com/milvus-io/milvus
+Reddit r/MachineLearning,LangChain Complexity Frustration,2/5,High engagement,https://reddit.com/r/MachineLearning
+Reddit r/developersIndia,Job Security Anxiety - AI Impact,2/5,Viral posts,https://reddit.com/r/developersIndia
+Reddit r/developersIndia,Layoffs Discussion (TCS 12K),2/5,Very High,https://reddit.com/r/developersIndia
+Twitter/X,Claude 3.5 Sonnet for Coding,5/5,High mentions,https://twitter.com/anthropic
+Twitter/X,MCP (Model Context Protocol),5/5,Growing rapidly,https://modelcontextprotocol.io
+Twitter/X,Cursor IDE,5/5,Very High,https://twitter.com/cursor_ai
+LinkedIn India,92% Workers Using AI Tools,4/5,High shares,https://linkedin.com
+LinkedIn India,GenAI Job Postings +411%,5/5,Professional discussions,https://linkedin.com
+GitHub,Pinecone (Vector DB),4/5,Production standard,https://www.pinecone.io
+GitHub,Weaviate (Vector DB),4/5,1M+ Docker pulls/mo,https://github.com/weaviate/weaviate
+GitHub,ChromaDB (Vector DB),4/5,Developer favorite,https://github.com/chroma-core/chroma
+Quora,AI Course Quality Complaints,2/5,Frequent discussions,https://quora.com
+Reddit r/cscareerquestions,Service Co Salary Stagnation,2/5,High concern,https://reddit.com/r/cscareerquestions
+GitHub,Semantic Kernel (Microsoft),4/5,Merged with AutoGen,https://github.com/microsoft/semantic-kernel
+Twitter/X,o1 Model Discussion,4/5,High engagement,https://openai.com
+Reddit r/artificial,RAG Implementation Challenges,3/5,Common discussion,https://reddit.com/r/artificial
+LinkedIn India,Vector Database Adoption,4/5,Professional interest,https://linkedin.com
+HackerNews,LLMOps Tools Comparison,4/5,Active discussions,https://news.ycombinator.com
+Twitter/X,Claude 3.7 (hypothetical future),N/A,Anticipated,https://anthropic.com
+Reddit r/developersIndia,Service Company Vs Product,3/5,High engagement,https://reddit.com/r/developersIndia

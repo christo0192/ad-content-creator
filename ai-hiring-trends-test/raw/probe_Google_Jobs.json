@@ -1,0 +1,535 @@
+{
+  "input": {
+    "query": "Machine Learning Engineer",
+    "location": "India",
+    "country": "in",
+    "num_results": 10,
+    "max_pagination": 0
+  },
+  "meta": {
+    "run_id": "Ueo392AJ4i9oWEWf0",
+    "status": "SUCCEEDED",
+    "elapsed_s": 8.4,
+    "n_items": 10,
+    "cost_usd": 0.00601,
+    "session_spent": 0.00601
+  },
+  "items": [
+    {
+      "title": "Machine Learning Engineer, Vision",
+      "company_name": "Sarvam AI",
+      "location": "India",
+      "via": "Sarvam AI",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=_X85rEKwKqh5npmNAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWOsQrCMBRFce0nOD1XKY0ILnVSEBF1ElzLa3gkqelLyUulo__g6tf5Jcblwj3cA7f4zIr6ito6JrgQRnZs4MAmd4ol3J24wPB9vaELLUheaAuZHEMwnuZbm9IgtVIivjKSMDld6dCrwNSGSWVJ_tGIxUiDx0TNerOaqoHNcnHD-MQedidwDHtig36MYwnn_AMTPvAH1SlPCp8AAAA&shmds=v1_ATWGeeOTGvAtLEuOBKXJHFfEi_lbKpAb06ZRRDspXE-g4f48hQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=_X85rEKwKqh5npmNAAAAAA%3D%3D",
+      "extensions": [
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://www.sarvam.ai/careers/jobs/282019f4-f86b-4fe0-a643-bbac0cd8a751",
+      "job_title": "Machine Learning Engineer, Vision",
+      "description": "About Sarvam\nSarvam is building the bedrock of Sovereign AI for India. The company is developing India's full-stack sovereign AI platform, building across research, models, infrastructure and applications with a singular focus on making AI genuinely work for India. Sarvam works with leading enterprises and public institutions and is backed by Lightspeed, Peak XV, and Khosla Ventures. Sarvam partners with India's leading brands, including Tata Capital, SBI Life, CRED, IDFC, and LIC.\n\n\nAbout the Role\nYou will work across the full lifecycle of vision-language model (VLM) development — data, training, evaluation, and production. The team's scope will evolve as the field does; we want engineers who are comfortable with that.\n\n\nWhat You'll Do\n\nDesign and run training and fine-tuning pipelines for large vision-language models on GPU clusters\nBuild multimodal data pipelines — ingestion, filtering, deduplication, synthetic generation, and quality assurance\nImplement and experiment with new architectures and training techniques from research\nBuild evaluation harnesses, benchmarks, and automated regression tracking\nOptimise models for inference — quantisation, batching, and serving infrastructure\nBuild robust pipelines and integrations that put vision model capabilities in the hands of end users\nTranslate real-world problems into well-scoped ML tasks with the right data and evaluation strategy\nWork directly with clients to understand their use cases — document processing, visual search, form extraction — and own the solution end to end\nBuild production-grade systems on top of Sarvam Vision and open-source models: multimodal pipelines, retrieval-augmented workflows, and structured output extraction\nDebug and improve deployed solutions — latency, accuracy, edge cases, and integration with client infrastructure\n\nWhat We're Looking For\n\nStrong Python and PyTorch — comfortable reading and modifying model internals\nHands-on experience training or fine-tuning large models, including debugging broken runs\nExperience building data pipelines at scale\nSolid grounding in transformer architectures and modern training techniques\nComfort with ambiguity — the roadmap is not fully pre-specified\nStrong focus on secure coding practices, code quality, and system reliability\nUndergraduate degree in a technical discipline (CS, statistics, physics, or equivalent)\n\nBonus Points\n\nExperience with vision-language models or multimodal systems\nDistributed training (FSDP, DeepSpeed, Megatron-LM)\nPost-training methods — RLHF, DPO, or alignment techniques\nInference optimisation — quantisation, distillation, serving\nPrior exposure to vision-based AI systems or document processing pipelines\nContributions to open-source projects or a solid GitHub portfolio\n\nWhy Sarvam?\nSarvam is a fast-moving, high talent-density team building full-stack AI for India, working on problems that push the frontiers of AI with real population-scale impact.\n\n\n\nWork alongside researchers, engineers, builders, and business leaders who move fast and hold each other to a very high bar\nHigh ownership and high impact, from day one\nEverything we do is AI-first, from the way we build and ship to the way we think about problems\nYou can work on problems that could change how an entire country learns, works, and communicates\n\nIf you want to work on problems at the frontier of AI in India, Sarvam is the place to be.",
+      "apply_options": [
+        {
+          "title": "Sarvam AI",
+          "link": "https://www.sarvam.ai/careers/jobs/282019f4-f86b-4fe0-a643-bbac0cd8a751?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Roku Jobs",
+          "link": "https://www.weareroku.com/jobs/sr-sw-engineer-machine-learning-bengaluru-karnataka-india-a8df87b8-a023-41f7-9680-f6a0bf60cbe6?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Keysight Careers",
+          "link": "https://jobs.keysight.com/external/jobs/52559?lang=en-us&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobs",
+          "link": "https://jobs.ashbyhq.com/sarvam/282019f4-f86b-4fe0-a643-bbac0cd8a751/application?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Forces Families Jobs",
+          "link": "https://www.forcesfamiliesjobs.co.uk/jobs/machine-learning-engineer-vp-bangalore/2705675-1/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "SWE Career Center - Society Of Women Engineers",
+          "link": "https://careers.swe.org/job/machine-learning-engineer-expert/84381635/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Foundit",
+          "link": "https://www.foundit.in/job/machine-learning-engineer-genai-technology-point72-bengaluru-bangalore-52735515?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "LinkedIn",
+          "link": "https://in.linkedin.com/jobs/view/machine-learning-engineer-integrity-at-hackerrank-4398830613?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJNYWNoaW5lIExlYXJuaW5nIEVuZ2luZWVyLCBWaXNpb24iLCJjb21wYW55X25hbWUiOiJTYXJ2YW0gQUkiLCJodGlkb2NpZCI6Il9YODVyRUt3S3FoNW5wbU5BQUFBQUE9PSIsInV1bGUiOiJ3K0NBSVFJQ0lGU1c1a2FXRSIsImdsIjoiaW4iLCJmYyI6IkVzd0JDb3dCUVUxdU15MTVVM3BUYVdadmFVUXdXbFZKVWt0a1MxUlpjMGxyUlhod1RsaFplVmRhZUdnMmVFYzFZekZMY3pOTlVXZGFVSEpYWlZVM2FtTkJVVGwxWlVVdFkwdDFaalU1WlVac1ZISTJTRVZtYlRBeVNVZFpORkJ4U1ZkNlFsRTBhMU55VDJwVGN6aFpkMU5IU2pORlpIcDRTR0U1YnpoVVpGRXdXR3N6ZVY5a1gwcERVbUZJVldsRlVWOFNGelpKUVhsaGNqZFNUbUZwUjNkaWExQnJUMHRVY1ZGVkdpSkJTa3RNUm0xTGVEbHZOVWxSYW5SaE1YaDRPVE5aZGpGRVkxTkhSek5pYUhabiIsImZjdiI6IjMiLCJmY19pZCI6Il9YODVyRUt3S3FoNW5wbU5BQUFBQUE9PSJ9",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.459763",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "MLE(Machine Learning Engineer)",
+      "company_name": "Two95 International Inc.",
+      "location": "India",
+      "via": "Shine",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=EvOdFLPJHdPvc5mIAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWLsQrCMBRFce0nOD03dUhEKKLORYR2cy-v8ZGkxPdKErCj_-Dk7_klxuVeDodTfRbVoWubdYfGeSZoCSN7ttCwLUxxA9_XG0YZIBVlHAjDRcQGWp5dzlM6aZ1SUDZlzN4oIw8tTIPMukTpP31yGGkKmKnf17tZTWy3q9tTjjVcOVPkUgpjKGQUeC5_9_gDFxi9FZwAAAA&shmds=v1_ATWGeeOOxOt8SLk8uDmUOOWvCUftBQ4U5jTBfnY2fnuWZBYMfg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=EvOdFLPJHdPvc5mIAAAAAA%3D%3D",
+      "extensions": [
+        "12 hours ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "12 hours ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://www.shine.com/jobs/mlemachine-learning-engineer/two95-international-inc/19133471",
+      "job_title": "MLE(Machine Learning Engineer)",
+      "description": "As a Machine Learning Engineer, you will apply strong software engineering and machine learning expertise to industrialize predictive and prescriptive solutions across big datasets, handling both streaming and non-streaming analytics use cases. With a deep understanding of analytics and data science, you will engineer performant and robust code while applying best-in-class development frameworks.\n\n**Key Responsibilities:**\n- Refactor prototypes of predictive models into highly performant, production-ready solutions\n- Work closely with Data Engineers and Data Scientists to create analytical variables, metrics, and models\n- Solve difficult engineering and machine learning problems in collaboration with data scientists, producing high-quality code\n- Choose and utilize the appropriate analytical libraries, programming languages, and frameworks for each task\n- Contribute to building client capabilities by coaching team members on data science methodologies and approaches\n- Contribute to best coding and engineering practices across AI projects\n- Build, refactor, and develop code into reusable libraries, APIs, and tools\n\n**Qualifications Required:**\n- BSc/MSc in computer science, mathematics, or related technical discipline\n- 1-4 years of experience in software engineering with exposure to a statistical and/or data science role (5-10 years for Senior ML Engineer)\n- Deep knowledge and proven experience with optimizing machine learning models in a production context\n- Experience with Python or Scala is required; background in programming in C, C++, Java is beneficial\n- Exposure to both streaming and non-streaming analytics\n- Experience with SQL, Spark, Pandas, Numpy, SciPy, Statsmodels, Stan, pymc3, Caret, Scikit-learn, Keras, TensorFlow, Pytorch, Databricks is beneficial\n- Experience working with large datasets, simulation/optimization, and distributed computing tools (Map/Reduce, Hadoop, Hive, Spark, Gurobi, Arena, etc.)\n\nAs an ideal candidate, you should be able to build a sense of trust and rapport that creates a comfortable and effective workplace, with a collaborative attitude to thrive in a fun, fast-paced, startup-like environment. You should also be open-minded to new approaches and learning.\n\nIf interested, please send your updated resume to hidden_email free to forward this posting to anyone in your network who might be a perfect match for this job.\n\nWe look forward to hearing from you at the earliest! As a Machine Learning Engineer, you will apply strong software engineering and machine learning expertise to industrialize predictive and prescriptive solutions across big datasets, handling both streaming and non-streaming analytics use cases. With a deep understanding of analytics and data science, you will engineer performant and robust code while applying best-in-class development frameworks.\n\n**Key Responsibilities:**\n- Refactor prototypes of predictive models into highly performant, production-ready solutions\n- Work closely with Data Engineers and Data Scientists to create analytical variables, metrics, and models\n- Solve difficult engineering and machine learning problems in collaboration with data scientists, producing high-quality code\n- Choose and utilize the appropriate analytical libraries, programming languages, and frameworks for each task\n- Contribute to building client capabilities by coaching team members on data science methodologies and approaches\n- Contribute to best coding and engineering practices across AI projects\n- Build, refactor, and develop code into reusable libraries, APIs, and tools\n\n**Qualifications Required:**\n- BSc/MSc in computer science, mathematics, or related technical discipline\n- 1-4 years of experience in software engineering with exposure to a statistical and/or data science role (5-10 years for Senior ML Engineer)\n- Deep knowledge and proven experience with optimizing machine learning models in a production context\n- Experience with Python or Scala is required; background in programming in C, C++, Java is beneficial\n- Exposure to both streaming and non-streaming analytics\n- Experience with SQL, Spark, Pandas, Numpy, SciPy, Statsmodels, Stan, pymc3, Caret, Scikit-learn, Keras, TensorFlow, Pytorch, Databricks is beneficial\n- Experience working with large datasets, simulation/optimization, and distributed computing tools (Map/Reduce, Hadoop, Hive, Spark, Gurobi, Arena, etc.)\n\nAs an ideal candidate, you should be able to build a sense of trust and rapport that creates a comfortable and effective workplace, with a collaborative attitude to thrive in a fun, fast-paced, startup-like environment. You should also be open-minded to new approaches and learning.\n\nIf interested, please send your updated resume to hidden_email",
+      "apply_options": [
+        {
+          "title": "Shine",
+          "link": "https://www.shine.com/jobs/mlemachine-learning-engineer/two95-international-inc/19133471?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Adzuna",
+          "link": "https://www.adzuna.in/details/5636066384?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Trabajo.org",
+          "link": "https://in.trabajo.org/job-4111-1255f77e055e5079c9e056bac5e36e4d?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "BestKaam",
+          "link": "https://www.bestkaam.com/job/manager-machine-learning-moody%27s-corporation-bengaluru-1-any-year-341740?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobrapido.com",
+          "link": "https://in.jobrapido.com/jobpreview/7316789932654067712?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Rockerstop",
+          "link": "https://www.rockerstop.com/jobs/meachine-learning/17284?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Talents Jobs",
+          "link": "https://talentsjobs.in/learning-java-course-talent-it-solutions-0-to-8-years-158235?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJNTEUoTWFjaGluZSBMZWFybmluZyBFbmdpbmVlcikiLCJjb21wYW55X25hbWUiOiJUd285NSBJbnRlcm5hdGlvbmFsIEluYy4iLCJodGlkb2NpZCI6IkV2T2RGTFBKSGRQdmM1bUlBQUFBQUE9PSIsInV1bGUiOiJ3K0NBSVFJQ0lGU1c1a2FXRSIsImdsIjoiaW4iLCJmYyI6IkVzd0JDb3dCUVUxdU15MTVVbnBUYkVkZk9XVTNSRkJsV21sbk1rNUhXWGRQVTBGQ04yeDBNSGxZZWxCcFMwUnhVazEwUWtZeGVEWmhjbTlJWHpSZlRYbEtZa1ZrTW5GSlF6VjZTWGRCWWtSclVtRXdiVXhDVDFCZlVGTkNkVlpCVkV0Q2VGSnNZbk14ZFRod1NEUXpjV05pTURSWGRsWlhVbFpxV20xdVVuazNNVUV4VVdGelJsOHRTbVZSYnpKMWFqZ1NGelpKUVhsaGNqZFNUbUZwUjNkaWExQnJUMHRVY1ZGVkdpSkJTa3RNUm0xTVowZHpWMlYwY2xKbWRUWm9kREJ1T1dOalRtUndWMmxoZW1sMyIsImZjdiI6IjMiLCJmY19pZCI6IkV2T2RGTFBKSGRQdmM1bUlBQUFBQUE9PSJ9",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.526035",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "AI Engineer (Fresher / Entry-Level)",
+      "company_name": "Keywords Studios",
+      "location": "India",
+      "via": "Jobs By Workable",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=WuK_j4W85R_pVgZdAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWLMQrCQBBFsc0RrKYRVDQrgo3aWKiICoIHCJtk2F1Zd8LORJPOO3gDj-ZJjM3n8Xg_-fSS9eYA22BcQIww3EVk24HqnMR2esIH-hF8X2-4UQ6MOhYWKMCeyHjsr6xIxUulmH1qWLS4Ii3orihgTo3qTvyfjK2OWHktmM0XsyatghkPjtg-KZYMV6lLRwwuwKUOOIGz7nrNVqL-AWQ8R7ilAAAA&shmds=v1_ATWGeeP2ViXvXvkG1IYdqvJVB8DNLmL_8ewlZ8H6ZfXwZPo59Q&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=WuK_j4W85R_pVgZdAAAAAA%3D%3D",
+      "extensions": [
+        "3 days ago",
+        "Work from home",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "3 days ago",
+        "work_from_home": true,
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://apply.workable.com/keywords-intl1/j/C8BF016A6E/",
+      "job_title": "AI Engineer (Fresher / Entry-Level)",
+      "description": "About HelpshiftHelpshift is a leading customer service platform powered by AI and automation, helping businesses deliver exceptional customer support experiences across digital channels. We are looking for passionate AI Engineers who are eager to build intelligent systems using the latest advancements in Generative AI, NLP, and Machine Learning.\n\nRole Overview\n\nAs an Entry-Level AI Engineer, you will work with experienced engineers and data scientists to design, develop, and deploy AI-powered solutions. You will contribute to building conversational AI systems, intelligent automation workflows, Retrieval-Augmented Generation (RAG) pipelines, and machine learning applications that enhance customer support experiences.\n\nThis role is ideal for candidates with a strong foundation in Python, Natural Language Processing (NLP), Generative AI, and MLOps who are excited about solving real-world problems using AI technologies.\n\n\n\nResponsibilities\n\nDevelop and maintain AI/ML applications using Python.Build and optimize NLP pipelines for text processing, classification, information extraction, and semantic search.Develop Generative AI solutions using Large Language Models (LLMs).Implement Retrieval-Augmented Generation (RAG) systems using vector databases and embedding models.Design prompts and evaluate LLM responses for quality and performance.Collaborate with senior engineers to deploy and monitor AI applications in production.Build APIs and AI services using frameworks such as FastAPI.Assist in model training, fine-tuning, evaluation, and experimentation.Work with MLOps tools to automate model deployment, monitoring, and versioning.Participate in code reviews, testing, debugging, and documentation activities.Stay updated with emerging AI, NLP, and Generative AI technologies.Technical SkillsStrong programming skills in Python.Understanding of Data Structures and Algorithms.Knowledge of Machine Learning fundamentals.Understanding of Natural Language Processing (NLP) concepts:TokenizationEmbeddingsText ClassificationNamed Entity Recognition (NER)Semantic SearchTransformer ModelsUnderstanding of Generative AI concepts:Large Language Models (LLMs)Prompt EngineeringRAG (Retrieval-Augmented Generation)Fine-tuning conceptsAI Agent fundamentalsFamiliarity with AI/ML frameworks:PyTorch or TensorFlowHugging Face TransformersLangChain, LlamaIndex, or similar frameworksMLOps KnowledgeUnderstanding of model deployment and serving concepts.Familiarity with:DockerGit/GitHubCI/CD conceptsKubernetes (basic understanding)ML experiment tracking tools (MLflow, Weights & Biases, etc.)Database & API SkillsBasic knowledge of SQL databases.Familiarity with vector databases such as Pinecone, Weaviate, Qdrant, or ChromaDB.Understanding of REST APIs and FastAPI.\n\nPreferred Qualifications\n\nBachelor's or Master's degree in Computer Science, Artificial Intelligence, Machine Learning, Data Science, or a related field.Hands-on academic projects, internships, or personal projects in AI/ML.Experience building chatbots, AI assistants, or NLP applications.Contributions to open-source AI projects are a plus.Familiarity with cloud platforms such as AWS, GCP, or Azure.\n\nWhat We Look For\n\nStrong problem-solving and analytical skills.Passion for AI, Machine Learning, and emerging technologies.Curiosity to learn and experiment with new AI frameworks and tools.Good communication and teamwork skills.Ability to work in a fast-paced, collaborative environment.\n\nNice-to-Have Projects\n\nCandidates who have built any of the following will stand out:\n\nAI Chatbot using LLMsRAG-based Question Answering SystemAI Agent using LangChain or LlamaIndexDocument Search and Retrieval PlatformCustomer Support Automation BotNLP Classification or Information Extraction SystemEnd-to-End ML Deployment Project with Docker/Kubernetes Hybrid setup Worker's insurance Paid Time Offs Other employee benefits to be discussed by our Talent Acquisition team in India. Helpshift embraces diversity. We are proud to be an equal opportunity workplace and do not discriminate on the basis of sex, race, color, age, sexual orientation, gender identity, religion, national origin, citizenship, marital status, veteran status, or disability status\n\n\n\nPrivacy Notice\nBy providing your information in this application, you understand that we will collect and process your information in accordance with our Applicant Privacy Notice. For more information, please see our Applicant Privacy Notice at https://www.keywordsstudios.com/en/applicant-privacy-notice.",
+      "apply_options": [
+        {
+          "title": "Jobs By Workable",
+          "link": "https://apply.workable.com/keywords-intl1/j/C8BF016A6E/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Bayt.com",
+          "link": "https://www.bayt.com/en/india/jobs/ai-engineer-fresher-entry-level-74740259/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "LinkedIn",
+          "link": "https://in.linkedin.com/jobs/view/ai-engineer-fresher-entry-level-at-keywords-studios-4428813505?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Adzuna",
+          "link": "https://www.adzuna.in/details/5764343371?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Placement Baba",
+          "link": "https://placementbaba.com/job/ai-engineer-fresher-entry-level-at-keywords-studios-in-india-99482?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Recruit.net",
+          "link": "https://www.recruit.net/job/ai-engineer-jobs/F6A67986504A8EAD?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJBSSBFbmdpbmVlciAoRnJlc2hlciAvIEVudHJ5LUxldmVsKSIsImNvbXBhbnlfbmFtZSI6IktleXdvcmRzIFN0dWRpb3MiLCJodGlkb2NpZCI6Ild1S19qNFc4NVJfcFZnWmRBQUFBQUE9PSIsInV1bGUiOiJ3K0NBSVFJQ0lGU1c1a2FXRSIsImdsIjoiaW4iLCJmYyI6IkVzd0JDb3dCUVUxdU15MTVVakpvTnpObWJIUlBVMkpSYkhRMFZsSnBkV3hGVmxvNGNtUjZOMEZZZURSdU9VNDBWMXBWWnpsd2RuaDRXalpHTWtaeE1sTTVWMUJRYkhCalZrcHdTMWRMT1RKdFp5MDJXa2xST1ZSVlNHTkpObTFrVlZGM1dWZDFVMnhCUldWYVRsSlpUbEZJZVdOUFZVOVdaRzU2YUdaeFdISm9abmxuUTNoTFJ6ZE9YME53YzI5ZldYQVNGelpKUVhsaGNqZFNUbUZwUjNkaWExQnJUMHRVY1ZGVkdpSkJTa3RNUm0xTGFsZFdMVWxaVmpaS2ExUnhUV3cwU1VKTWFtUmhPR1JZVjNObiIsImZjdiI6IjMiLCJmY19pZCI6Ild1S19qNFc4NVJfcFZnWmRBQUFBQUE9PSJ9",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.582807",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Ai Software Engineer",
+      "company_name": "FreighAI",
+      "location": "India",
+      "via": "LinkedIn",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=E443dsRuckbHcpziAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWMMQrCQBAAsc0TBGFr0ZwINlqlULEQBB8QNmG9uxB3j9sVU9pb-kNfYmymmpniPSmWVYSr3OyJmWDPPjJRhu_rA500oIS5DSAMRxHf03QXzJJunVPtS6-GFtuylbsTpkYGN0b6R61hHKYejer1ZjWUif18dsgUfahOEBkuD6YFnHH0UINl_AFYPXn4jgAAAA&shmds=v1_ATWGeeOrlX1lsIgUezhQ6y5sMqQ_c_FrumyX3Uc1WUOSjBscKA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=E443dsRuckbHcpziAAAAAA%3D%3D",
+      "extensions": [
+        "17 hours ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "17 hours ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://in.linkedin.com/jobs/view/ai-software-engineer-at-freighai-4428072403",
+      "job_title": "Ai Software Engineer",
+      "description": "Build the multi-agent core of an AI-native TMS for freight & logistics.\n\n\n\n\nFreighAi is an AI-native TMS (Transport Management System) for freight forwarders and logistics businesses — automating day-to-day operations at roughly 80% agentic AI, 20% human-in-the-loop. The product is live and serving customers today. We’re hiring AI Software Engineers to extend it — build advanced versions, ship enhancements, maintain and harden what’s running, and troubleshoot production issues across our multi-agent systems and integrations.\n\n\n\n\nOUR STACK\n\nBackend: Microservices architecture — Python (primary); Kotlin / Java a plusFrontend: React.jsDatabase: MongoDBAI: A mix of LLMs and SLMs, multi-agent orchestration, RAG + vector search\n\n\nHOW WE BUILD\n\nThe majority of development happens in Claude Code, with agentic coding as the default workflow. We work across a mix of LLMs and SLMs — picking the right model for each job (large models for reasoning and orchestration, smaller / faster models for high-volume, latency- or cost-sensitive tasks). You’ll be orchestrating agents and reviewing their output as much as writing code by hand. This is a build-and-own role, not a research role — you’ll be shipping to real freight customers quickly.\n\n\n\n\nWHAT YOU’LL DO\n\nExtend and enhance our multi-agent workflows (planner, executor, reviewer, and domain-specific agents) handling real freight ops — quoting, booking, track-and-trace, document processing, exception handling.Maintain, troubleshoot, and harden production systems already serving customers — diagnose agent failures, fix regressions, improve reliability and cost.Design and own services in our microservices backend — clean APIs, sensible boundaries, resilient inter-service communication.Own integrations: FreighAi works as a TMS and integrates with other TMSes, plus carrier / rate APIs (ocean, air, road), ERPs, EDI (204/210/214/990, etc.), customs / compliance platforms, and email / document ingestion.Build and improve document AI pipelines (OCR + extraction) for BOLs, invoices, packing lists, and customs paperwork.Build and maintain clean, responsive React.js front-ends for the operators who handle the human-in-the-loop side.Tune model selection and routing across LLMs/SLMs, and refine prompts, tools, memory, and retrieval (RAG + vector search) for reliability and unit economics.Strengthen human-in-the-loop flows — escalation, approvals, confidence thresholds — so humans handle the ~20% cleanly.Improve evals, observability, and guardrails — catching hallucinations, retries / fallbacks, latency / cost monitoring, and tracking agent success rates in production.\n\n\nWHAT WE’RE LOOKING FOR\n\n2–5 years of professional software engineering experience, with real production systems under your belt.Strong backend engineering in Python within a microservices architecture — async, queues, API design, service boundaries — and the judgment to work on a live system without breaking it. Kotlin / Java experience a plus.Solid React.js front-end skills — you can build and maintain production UI, not just prototypes.Strong MongoDB skills — schema design, aggregation pipelines, indexing, and query performance on production data.Hands-on experience building LLM-powered or agentic applications: tool use, orchestration, prompt design, evals, RAG (LangGraph, CrewAI, AutoGen, MCP, or custom).Fluency with agentic coding tools (Claude Code, Codex, or similar) as a primary way of working — not just occasional autocomplete.Experience with messy third-party API integrations; bonus for EDI, TMS, or any logistics / supply-chain exposure.Strong English communication — written and verbal. You can write clear specs, explain trade-offs, and collaborate with the team and customers. This is non-negotiable: clear writing is how you delegate to agents and how you’ll work here day to day.A production-reliability mindset — you treat agents as systems to be monitored, tested, and hardened, not demos.\n\n\nTHE AI-FIRST WORKING STYLE WE WANT\n\nClear written communication and spec-writing — you can turn a fuzzy requirement into a precise brief an agent can execute. Clarity of intent is your core skill.Context engineering — you know what to feed the agent (conventions, constraints, relevant files) and what to leave out; you keep project context sharp.Task decomposition — you break work into agent-sized chunks with clear, verifiable done-criteria.Critical review at scale — you read AI-generated diffs skeptically, catch subtle bugs and bad patterns, and never rubber-stamp.Verification discipline — you think Plan → Execute → Verify: tests and specs first, validation always.Good judgment on when to drop down — you know when to let the agent run vs. when to hand-write the tricky bit yourself.\n\n\nNICE TO HAVE\n\nFreight forwarding, supply chain, or logistics domain knowledge.Vector databases, document AI / OCR, and RAG at scale.Prior work on human-in-the-loop or workflow-automation products.",
+      "apply_options": [
+        {
+          "title": "LinkedIn",
+          "link": "https://in.linkedin.com/jobs/view/ai-software-engineer-at-freighai-4428072403?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJBaSBTb2Z0d2FyZSBFbmdpbmVlciIsImNvbXBhbnlfbmFtZSI6IkZyZWlnaEFJIiwiaHRpZG9jaWQiOiJFNDQzZHNSdWNrYkhjcHppQUFBQUFBPT0iLCJ1dWxlIjoidytDQUlRSUNJRlNXNWthV0UiLCJnbCI6ImluIiwiZmMiOiJFc3dCQ293QlFVMXVNeTE1VkMwMFIwRnRURzFWVm5ZemNIVXRYMXBKVFhSZlFURkNaWFZRVXpGTGJEZEVialJIU3pSUGFsUnZhRmR2Y1VGUFNYaGpObk0xTFhKdFgwUkZVMVpzYzBGbVZXVm1PWGRDTWpaT1drMW1hRTlyWTJGRVVIQlpialJEYzB0M2NFbHhlakpNY0VreU1XUXdUMnBUTkZwMllrNDRSMDlOYUcweGQxRnFWRlpQYVhkbVMwaHdlWGNTRnpaSlFYbGhjamRTVG1GcFIzZGlhMUJyVDB0VWNWRlZHaUpCU2t0TVJtMUplVmRRY2xGRWRHZFVablZTZFY5cVFrTTVVMnBEVVRGM2QzQjMiLCJmY3YiOiIzIiwiZmNfaWQiOiJFNDQzZHNSdWNrYkhjcHppQUFBQUFBPT0ifQ==",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.622243",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Lead Software Engineer - Machine Learning",
+      "company_name": "Freshworks",
+      "location": "India",
+      "via": "Smart Recruiters Jobs",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=v3WNwfU1IJrBNJRKAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWNMQ7CMBAERZsnUB0tghgh0UAHAhqggT5yzGEbnLvIZ5SU_IEv8DJegmlWq9GOtvgMivUB9RXOfEudjghbsp4QI0zhqI3LHfIgkicL39cb7lyDZGAcMMGe2QYcrlxKrSyVEgmllaSTN6XhRjFhzb3KkvyjEpc_2qATVvPFrC9bsuPRLqK4juNDwBNsHBJpP4GLbnyAk74-fwT1K1enAAAA&shmds=v1_ATWGeeOFw0sA9EqVgmBAQz4rJ6LozEyAAty3fS3CW156eXcs2g&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=v3WNwfU1IJrBNJRKAAAAAA%3D%3D",
+      "extensions": [
+        "2 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "2 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://jobs.smartrecruiters.com/Freshworks/744000132139255-lead-software-engineer-machine-learning?utm_source=jobs.cobloom.com",
+      "job_title": "Lead Software Engineer - Machine Learning",
+      "description": "Company DescriptionOrganizations everywhere struggle under the crushing costs and complexities of “solutions” that promise to simplify their lives. To create a better experience for their customers and employees. To help them grow. Software is a choice that can make or break a business. Create better or worse experiences. Propel or throttle growth. Business software has become a blocker instead of ways to get work done. There’s another option. Freshworks. With a fresh vision for how the world works.At Freshworks, we build uncomplicated service software that delivers exceptional customer and employee experiences. Our enterprise-grade solutions are powerful, yet easy to use, and quick to deliver results. Our people-first approach to AI eliminates friction, making employees more effective and organizations more productive. Over 72,000 companies, including Bridgestone, New Balance, Nucor, S&P Global, and Sony Music, trust Freshworks’ customer experience (CX) and employee experience (EX) software to fuel customer loyalty and service efficiency. And, over 4,500 Freshworks employees make this possible, all around the world. Fresh vision. Real impact. Come build it with us.Job DescriptionImpact You Will CreateBridge Research and Production: Serve as the critical link translating theoretical data science research and sophisticated algorithms into product-ready, enterprise-scale implementations.Scale to Millions: Build and deploy robust ML APIs and data pipelines engineered to handle millions of requests with high efficiency, low latency, and reliability.Architect from Scratch: Drive organizational technical alignment by architecting high-performance ML solutions from the ground up and leading cross-functional adoption.Roles & ResponsibilitiesML Algorithm Implementation: Collaborate with Data Scientists to translate complex models and experimental algorithms into clean, high-performance, production-grade code.End-to-End Pipeline Architecture: Design, build, and manage comprehensive ML pipelines encompassing data pre-processing, model generation, automated deployment, cross-validation, and active feedback loops.High-Performance Service Delivery: Develop and deploy extensible, scalable ML API services optimized for minimal latency under high traffic loads.Operational Intelligence: Design and implement monitoring systems to track engineering efficiency and active ML model performance metrics, ensuring long-term system health.Strategic Innovation & Collaboration: Architect technical solutions from scratch and liaise with cross-product architects and engineers to ensure organizational alignment.Prototyping & POC Execution: Lead Proof of Concept (POC) initiatives across diverse tech stacks to identify and validate optimal infrastructure solutions for complex business challenges.Lifecycle Ownership: Independently own the full lifecycle of feature delivery, from initial requirement gathering with product teams to final deployment and monitoring.QualificationsSkillsProduction ML Engineering: Proven capability in translating advanced mathematical models into optimized, production-ready software.MLOps Mastery: Deep expertise in lifecycle management practices, ensuring seamless model transitions from experimental stages to live production environments.Distributed Pipeline & API Design: Strong architecture skills in building scalable data pipelines and low-latency API microservices.System Telemetry & Monitoring: Proficiency in establishing monitoring frameworks for tracking engineering efficiency, system health, and model performance metrics.Technical Project Leadership: Ability to execute rapid prototyping, evaluate technical stacks, and lead cross-functional technical alignment.QualificationsExperience: 6–9 years of professional experience in software engineering and machine learning development.Track Record: A proven history of successfully building, productionizing, and maintaining Machine Learning solutions at scale.Education: Degree in Computer Science, Artificial Intelligence, or a related quantitative field.Additional InformationAt Freshworks, we have fostered an environment that enables everyone to find their true potential, purpose, and passion, welcoming colleagues of all backgrounds, genders, sexual orientations, religions, and ethnicities. We are committed to providing equal opportunity and believe that diversity in the workplace creates a more vibrant, richer environment that boosts the goals of our employees, communities, and business. Fresh vision. Real impact. Come build it with us.",
+      "apply_options": [
+        {
+          "title": "Smart Recruiters Jobs",
+          "link": "https://jobs.smartrecruiters.com/Freshworks/744000132139255-lead-software-engineer-machine-learning?utm_source=jobs.cobloom.com&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Hirist",
+          "link": "https://www.hirist.tech/j/natwest-software-engineer-machine-learning-1630996?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Glassdoor",
+          "link": "https://www.glassdoor.co.in/job-listing/lead-software-engineer-machine-learning-freshworks-JV_IC2833209_KO0,39_KE40,50.htm?jl=1010168445077&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Apna Jobs",
+          "link": "https://apna.co/job/chennai/lead-software-engineer-machine-learning-1930863189?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "SimplyHired",
+          "link": "https://www.simplyhired.co.in/job/cDlNtCKadG4c84t-WT9q3pEfuNV8lWg0sXr9nIBvA8xPa_TbwEaDWQ?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "LinkedIn",
+          "link": "https://in.linkedin.com/jobs/view/lead-software-engineer-machine-learning-at-freshworks-4428810222?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Bayt.com",
+          "link": "https://www.bayt.com/en/india/jobs/lead-software-engineer-machine-learning-74743238/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "JobzMall",
+          "link": "https://www.jobzmall.com/freshworks/job/lead-software-engineer-machine-learning?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJMZWFkIFNvZnR3YXJlIEVuZ2luZWVyIC0gTWFjaGluZSBMZWFybmluZyIsImNvbXBhbnlfbmFtZSI6IkZyZXNod29ya3MiLCJodGlkb2NpZCI6InYzV053ZlUxSUpyQk5KUktBQUFBQUE9PSIsInV1bGUiOiJ3K0NBSVFJQ0lGU1c1a2FXRSIsImdsIjoiaW4iLCJmYyI6IkVzd0JDb3dCUVUxdU15MTVVMHhGVWtveGIyVmFWazkzTjIxS1ZWQmlTeTE2YUVoRlJHNVdNMDFNZDFsdmJXNWliVXhCZFZkNlJubzNkV3BzWTNwaFRFTndSREZ1YVVkYVkweExjbGRvZW5samFYaHlXV2xMTUd0RVkzSk9kMlZRTTBwUVEwSkpjbmRFTjBsYWExTmtWV2xOWTNGRVRUWlNZMHgyZDJzNVZFUk1MUzF5UTNJeFVXSlZlRXRhWVVGRFZXY1NGelpKUVhsaGNqZFNUbUZwUjNkaWExQnJUMHRVY1ZGVkdpSkJTa3RNUm0xSmJtZzJWbm81YUVWM2NYUnljRFZTTWw5MVRXb3dXVTVEV1ZWQiIsImZjdiI6IjMiLCJmY19pZCI6InYzV053ZlUxSUpyQk5KUktBQUFBQUE9PSJ9",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.649001",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Software Engineer - Machine Learning",
+      "company_name": "Roku",
+      "location": "India",
+      "via": "Roku Jobs",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=Y9MP1m37IK0MhQVAAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWNMQoCMRBFsd0jiMXUookINoqNIBZqowdYZsOYxI0zS5LFLb2DncfzJMbm8XnwedVnVG2vcstPjAR7tp6JIszhjMaVDSfCyJ4tfF9vuEsDqQjjQBgOIjbQeONy7tJa65SCsilj9kYZeWhhamTQ5ZT-qJMrjS5gpnq5WgyqYzudXKTtwTPsiC2GPvYzOJYiZmzxB0U-J-OdAAAA&shmds=v1_ATWGeeNJIgI3f4eUc6LWU8MP9cY5itqzrhHo_a5ys-p-SdZ9eQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=Y9MP1m37IK0MhQVAAAAAAA%3D%3D",
+      "extensions": [
+        "19 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "19 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://www.weareroku.com/jobs/software-engineer-machine-learning-bengaluru-karnataka-india",
+      "job_title": "Software Engineer - Machine Learning",
+      "description": "Teamwork makes the stream work.\n \n\n\nRoku is changing how the world watches TV\nRoku is the #1 TV streaming platform in the U.S., Canada, and Mexico, and we've set our sights on powering every television in the world. Roku pioneered streaming to the TV. Our mission is to be the TV streaming platform that connects the entire TV ecosystem. We connect consumers to the content they love, enable content publishers to build and monetize large audiences, and provide advertisers unique capabilities to engage consumers.\n\n\nFrom your first day at Roku, you'll make a valuable - and valued - contribution. We're a fast-growing public company where no one is a bystander. We offer you the opportunity to delight millions of TV streamers around the world while gaining meaningful experience across a variety of disciplines.\n\n\n \n\n\n\nAbout the team\nRoku pioneered streaming to the TV. We connect users to the streaming content they love, enable content publishers to build and monetize large audiences, and provide advertisers with unique capabilities to engage consumers. Roku streaming players and Roku TV™ models are available worldwide through direct retail sales and licensing arrangements with TV brands and pay-TV operators.\n\n\nAbout the role \nWe seek an outstanding, creative, and passionate Machine Learning engineer to join Roku's Recommendation team. You will be responsible for building and owning the next generation of content recommendations and other algorithms/systems that will make the experience for our many millions of Roku users 100% personalized and unique.\n\n\nWhat you'll be doing\n\n\nApply state of the art ML on recommendations using techniques in deep learning, bandits, transformers, LLMs, causal inference, and optimizations to make our users more delighted and engaged on the platform\nRun online AB tests and analyze them against the critical business KPIs\nCollaborate with US engineering teams as well as cross-functional teams to translate business requirements into technical specifications\nNurture our ML ecosystem to make it withstand scale, developer velocity and future business shifts\nHelp in training and mentoring new team members\n\n\nWe're excited if you have\n• 5+ years of experience applying Machine Learning to concrete problems at large scale.\n• Strong CS fundamentals. Should be able to write an algorithm with ease.\n• Solid understanding of Data Science and ML fundamentals – Regression, Classification, Tree-based approach, Neural network, and sequence-based models.\n• Understanding of NLP approaches like W2V or Bert. Should be able to identify the right KPIs and Objective functions.\n• Good understanding of system architecture.\n• Have experience in big data technologies – streaming architecture, data pipelines, etc.\n• Bachelors in Computer Science, Statistics, or related field\n\nPreferred Skills\n• Build Recommender Systems for a living\n• Experience with Java, Scala, or Python\n• Work with big data systems – Spark, EMR, S3, AirFlow\n• Hold an MS or PhD in CS or related fields\n• AI literacy and curiosity.You have either tried Gen AI in your previous work or outside of work or are curious about Gen AI and have explored it.\n \n\n\nOur Hybrid Work Approach\nRoku fosters an inclusive and collaborative environment where teams work in the office Monday through Thursday. Fridays are flexible for remote work except for employees whose roles are required to be in the office five days a week or employees who are in offices with a five day in office policy.\n\n\n \n\n\nBenefits\nRoku is committed to offering a diverse range of benefits as part of our compensation package to support our employees and their families. Our comprehensive benefits include global access to mental health and financial wellness support and resources. Local benefits include statutory and voluntary benefits which may include healthcare (medical, dental, and vision), life, accident, disability, commuter, and retirement options (401(k)/pension). Employees are supported in taking time off, in accordance with local leave policies and other personal needs to support their evolving work and life needs. It's important to note that not every benefit is available in all locations or for every role. For details specific to your location, please consult with your recruiter.\n\n\n \n\n\nAccommodations\nRoku welcomes applicants of all backgrounds and provides reasonable accommodations and adjustments in accordance with applicable law. If you require reasonable accommodation at any point in the hiring process, please direct your inquiries to EmployeeRelations@Roku.com.\n\n\n \n\n\nThe Roku Culture\nRoku is a great place for people who want to work in a fast-paced environment where everyone is focused on the company's success rather than their own. We try to surround ourselves with people who are great at their jobs, who are easy to work with, and who keep their egos in check. We appreciate a sense of humor. We believe a fewer number of very talented folks can do more for less cost than a larger number of less talented teams. We're independent thinkers with big ideas who act boldly, move fast and accomplish extraordinary things through collaboration and trust. In short, at Roku you'll be part of a company that's changing how the world watches TV. \n\n\nWe have a unique culture that we are proud of. We think of ourselves primarily as problem-solvers, which itself is a two-part idea. We come up with the solution, but the solution isn't real until it is built and delivered to the customer. That penchant for action gives us a pragmatic approach to innovation, one that has served us well since 2002. \n\n\nTo learn more about Roku, our global footprint, and how we've grown, visit https://www.weareroku.com/factsheet.\n\n\nBy providing your information, you acknowledge that you want Roku to contact you about job roles, that you have read Roku's Applicant Privacy Notice, and understand that Roku will use your information as described in that notice. If you do not wish to receive any communications from Roku regarding this role or similar roles in the future, you may unsubscribe at any time by emailing WorkforcePrivacy@Roku.com.",
+      "apply_options": [
+        {
+          "title": "Roku Jobs",
+          "link": "https://www.weareroku.com/jobs/software-engineer-machine-learning-bengaluru-karnataka-india?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Startup Jobs",
+          "link": "https://startup.jobs/software-engineer-machine-learning-roku-8003094?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Levels.fyi",
+          "link": "https://www.levels.fyi/jobs?jobId=73061448208523974&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobaaj",
+          "link": "https://www.jobaaj.com/job/splore-human-centric-ai-software-engineer-machine-learning-bengaluru-karnataka-india-0-to-2-years-404773?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Built In",
+          "link": "https://builtin.com/job/sw-engineer-machine-learning/9545491?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "ZipRecruiter India",
+          "link": "https://www.ziprecruiter.in/jobs/538276605-sw-engineer-machine-learning-at-roku?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Employbl",
+          "link": "https://www.employbl.com/jobs/software-engineer-machine-learning-roku-1556580?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Bandana.com",
+          "link": "https://bandana.com/jobs/7073cf2d-be8c-4f96-b87f-66b66993c996?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJTb2Z0d2FyZSBFbmdpbmVlciAtIE1hY2hpbmUgTGVhcm5pbmciLCJjb21wYW55X25hbWUiOiJSb2t1IiwiaHRpZG9jaWQiOiJZOU1QMW0zN0lLME1oUVZBQUFBQUFBPT0iLCJ1dWxlIjoidytDQUlRSUNJRlNXNWthV0UiLCJnbCI6ImluIiwiZmMiOiJFc3dCQ293QlFVMXVNeTE1VVV0NlNIYzRkR2t3V2xZMVNVSTNWMm95ZFY5U2JsZzBTRTAwWWtzMFNHTTJNa1pvY0hwTE0zWTVXVkpqTkU1Wk1TMU5kMTlEZURWdFRHeGlTVjlaZUZKUk16VndUMGxIY0ZOMmVIbFVkSGRCWkRjMGIxOUtUVzVtU2t0UVpXeHNRMmRUYm1JelJYQk9RMEZwWlhoemExUjZjemN0VGpaUFRsOUtURTB0VFVOZllUVktWbGtTRnpaSlFYbGhjamRTVG1GcFIzZGlhMUJyVDB0VWNWRlZHaUpCU2t0TVJtMU1MVmRpYjBSbU4zUlhhRFpOY1RFMFltZHhTVUpIY0hGTVIxbG4iLCJmY3YiOiIzIiwiZmNfaWQiOiJZOU1QMW0zN0lLME1oUVZBQUFBQUFBPT0ifQ==",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.684940",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Artificial Intelligence Engineer",
+      "company_name": "HP",
+      "location": "India",
+      "via": "Careers At HP",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=iODG7jYNvDioiveJAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXLMQrCQBAAQGzzhFRbi-REsFArBVGx8Qdhc6yX1XXvuNtASv-gL_QlajPdVO9Jtdpm4yt7RoGTGolwIPUEew2sRBk-zxfcYgeFMPseosIhxiBUb3qzVNbOlSJNKIbGvvHx4aJSF0f3S-VPW3rMlASN2sVyPjZJw7Q-XoAVdqQBZcjDDM6YFQ3v-AWAnZ6blwAAAA&shmds=v1_ATWGeePLz8CvG5yl5zp9TPT93xGzklTNXjav_4s7jv9tMPfr2Q&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=iODG7jYNvDioiveJAAAAAA%3D%3D",
+      "extensions": [
+        "21 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "21 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://apply.hp.com/careers/job/42045917",
+      "job_title": "Artificial Intelligence Engineer",
+      "description": "Artificial Intelligence Engineer\n\nDescription -\n\nJob Summary  \n• This role is responsible for proficiently designing and developing complex software components and applying extensive technical knowledge to independently create solutions of significant complexity. The role engages in development of standards, documents, and templates to ensure conformance and consistency across all deliverables. The role also contributes to complex projects while fostering collaboration and mentoring lower-level employees.  \n  \nResponsibilities  \n• Demonstrates proficiency in designing units to implement and successfully completes complex component development.  \n• Represents the team when interacting with clients, showcasing technical leadership, and extending influence beyond the immediate team.  \n• Applies extensive technical knowledge to provide maintenance solutions across one or more technology areas, such as web-site development.  \n• Applies organizational and third-party technologies to create complex software solutions, independently implementing end-user or enterprise solutions of significant complexity.  \n• Integrates technical expertise and business acumen to craft exceptional client solution, while also consulting with team members, other organizations, clients, and vendors on complex issues, thereby fostering effective collaboration and problem-solving.  \n• Designs, develops, modifies, rigorously tests, and deploys database objects, ensuring reliability and performance.  \n• Develops comprehensive standards, style documents, and templates to ensure a consistent and cohesive user experience.  \n• Defines the scope, plans, and deliverables for assigned components, ensuring clarity and alignment with project goals.  \n• Applies advanced subject matter knowledge, leads, and contributes to complex projects, and exercises independent judgment in resolving business issues and establishing policies  \n• Develops and builds productive internal/external working relationships and may provide mentoring and guidance to lower-level employees.  \n  \nEducation & Experience Recommended  \n• Four-year or Graduate Degree in Computer Science, Engineering, Business Administration, or any other related discipline or commensurate work experience or demonstrated competence.  \n• Typically has 7-10 years of work experience, preferably in computer programming languages, integrated development environment, or a related field.  \n  \nPreferred Certifications  \nNA  \n  \nKnowledge & Skills  \n• Agile Methodology  \n• Angular (Web Framework)  \n• Application Development  \n• Application Programming Interface (API)  \n• Automation  \n• Business Process  \n• Business Requirements  \n• C# (Programming Language)  \n• Cascading Style Sheets (CSS)  \n• Computer Science  \n• Debugging  \n• HyperText Markup Language (HTML)  \n• Java (Programming Language)  \n• JavaScript (Programming Language)  \n• Microsoft Azure  \n• Python (Programming Language)  \n• Scrum (Software Development)  \n• Software Development  \n• SQL (Programming Language)  \n• Web Services  \n  \nCross-Org Skills  \n• Effective Communication  \n• Results Orientation  \n• Learning Agility  \n• Digital Fluency  \n• Customer Centricity  \n  \nImpact & Scope  \n• Impacts function and leads and/or provides expertise to functional project teams and may participate in cross-functional initiatives.  \n  \nComplexity  \n• Works on complex problems where analysis of situations or data requires an in-depth evaluation of multiple factors.  \n  \nDisclaimer  \n• This job description describes the general nature and level of work performed in this role. It is not intended to be an exhaustive list of all duties, skills, responsibilities, knowledge, etc. These may be subject to change and additional functions may be assigned as needed by management.  \n\n\nJob -\n\nServices\n\nSchedule -\n\nFull time\n\nShift -\n\nNo shift premium (India)\n\nTravel -\n\nRelocation -\n\nEqual Opportunity Employer (EEO) \\- \n\nHP, Inc. provides equal employment opportunity to all employees and prospective employees, without regard to race, color, religion, sex, national origin, ancestry, citizenship, sexual orientation, age, disability, or status as a protected veteran, marital status, familial status, physical or mental disability, medical condition, pregnancy, genetic predisposition or carrier status, uniformed service status, political affiliation or any other characteristic protected by applicable national, federal, state, and local law(s).\n\nPlease be assured that you will not be subject to any adverse treatment if you choose to disclose the information requested. This information is provided voluntarily. The information obtained will be kept in strict confidence.\n\nFor more information, review HP’s EEO Policy or read about your rights as an applicant under the law here: “Know Your Rights: Workplace Discrimination is Illegal\"",
+      "apply_options": [
+        {
+          "title": "Careers At HP",
+          "link": "https://apply.hp.com/careers/job/42045917?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Bayt.com",
+          "link": "https://www.bayt.com/en/india/jobs/artificial-intelligence-engineer-74693660/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "LinkedIn",
+          "link": "https://in.linkedin.com/jobs/view/artificial-intelligence-engineer-at-alpha-variance-solutions-4416155975?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Apna Jobs",
+          "link": "https://apna.co/job/bengaluru/ai-engineering-specialist-1670841381?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "BeBee",
+          "link": "https://bebee.com/in/jobs/artificial-intelligence-engineer-hirebound-bengaluru-karnataka--theirstack-718753970?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Foundit",
+          "link": "https://www.foundit.in/job/artificial-intelligence-engineer-recro-bengaluru-bangalore-54601926?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "EWorker",
+          "link": "https://eworker.co/job/artificial-intelligence-engineer-169/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "India Jobs Expertini",
+          "link": "https://in.expertini.com/job/artificial-intelligence-engineer-karnataka-experion-technologies-2178-344477/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJBcnRpZmljaWFsIEludGVsbGlnZW5jZSBFbmdpbmVlciIsImNvbXBhbnlfbmFtZSI6IkhQIiwiaHRpZG9jaWQiOiJpT0RHN2pZTnZEaW9pdmVKQUFBQUFBPT0iLCJ1dWxlIjoidytDQUlRSUNJRlNXNWthV0UiLCJnbCI6ImluIiwiZmMiOiJFc3dCQ293QlFVMXVNeTE1VWtGNFdXaHdkWEI2ZUhZMGIwNUZhRlpxWXkxYVdXNTFkR1YyY0VWSmFqVkpielJKWlcwNFowdFBXa0ZTWVRsdFZWZEhaVWM0Vmw4Mk1teE1SMHRIVUc5a1ZXbzJZMEpuV0RkeFNqVmZRWGRVVjFOTlRHeFNTRVZDT1dsc1ZteHpRWGN3VEZCWlZWQjVWRWcxU0dSdk9UZE9iMW93VTJRMFJqWkpWMHd4Tm10M2JHb3RaeklTRnpaSlFYbGhjamRTVG1GcFIzZGlhMUJyVDB0VWNWRlZHaUpCU2t0TVJtMUpTR1pHVlZGeldtcEVXakZXZVc1S1FXOXRNSEozZEZjMmFsSlIiLCJmY3YiOiIzIiwiZmNfaWQiOiJpT0RHN2pZTnZEaW9pdmVKQUFBQUFBPT0ifQ==",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.721318",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Machine Learning Engineer – Generative Ai",
+      "company_name": "Tata Consultancy Services",
+      "location": "India",
+      "via": "BeBee",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=l6EWp_I_GeFWOwD7AAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2LPQrCQBBGsc0RrKYWSYJgo5V_xEIrBcswLsPuyjoTdtYYO-_gWbyQJzHaPPge38veg2y9R-M8E-wII3u2sGHbb4rweb6gIqaIybcEC_83FzmD9l_jQBgqERtoOHcpNTorCtWQW019YXIj10KYztIVfaQ_1OowUhMwUT2Zll3esB2VR0wIK2G9hYRsHnCg2HpDCp5hK_eIbgwn0gRLYovhCxJP2Cy4AAAA&shmds=v1_ATWGeeOIEC7qAJ99Cwa6vZbK3AUpGtFg-1IvYc76hmb3jPAnTQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=l6EWp_I_GeFWOwD7AAAAAA%3D%3D",
+      "extensions": [
+        "4 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "4 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://bebee.com/in/jobs/machine-learning-engineer-generative-ai-tata-consultancy-services-haora--jobted-935d4c5bf4c5cd656f3e2080fa54fd2a",
+      "job_title": "Machine Learning Engineer – Generative Ai",
+      "description": "Job Title: AI Engineer Experience: 5-10Years Location: Kolkata, Pune, PAN INDIA Key Skills:\n\n\nPython & AI/ML engineeringGenAI frameworks: Lang Chain, LangGraph, RAGCloud platforms (AWS/Azure)LLMs, prompt engineering, Agentic AIMLOps tools (MLflow, Docker, Kubernetes)GitHub, basic DevOps (good to have) Responsibilities:Build and deploy AI/GenAI solutions (RAG, LLM apps, pipelines)Design scalable ML/DL models and workflowsImplement AI pipelines using MLOps best practicesCollaborate with cross-functional teams and mentor juniorsEnsure code quality, optimization, and deployment Requirements:3+ years in AI/ML engineeringStrong experience in Python and LLM-based applicationsHands-on with cloud deployment and AI frameworksKnowledge of Agentic AI and modern AI tools Other:Domain: Energy & Resources (preferred)Strong communication, collaboration, and problem-solving skillsDegree in CS/AI or related",
+      "apply_options": [
+        {
+          "title": "BeBee",
+          "link": "https://bebee.com/in/jobs/machine-learning-engineer-generative-ai-tata-consultancy-services-haora--jobted-935d4c5bf4c5cd656f3e2080fa54fd2a?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobrapido.com",
+          "link": "https://in.jobrapido.com/jobpreview/9087454453140815872?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJNYWNoaW5lIExlYXJuaW5nIEVuZ2luZWVyIOKAkyBHZW5lcmF0aXZlIEFpIiwiY29tcGFueV9uYW1lIjoiVGF0YSBDb25zdWx0YW5jeSBTZXJ2aWNlcyIsImh0aWRvY2lkIjoibDZFV3BfSV9HZUZXT3dEN0FBQUFBQT09IiwidXVsZSI6IncrQ0FJUUlDSUZTVzVrYVdFIiwiZ2wiOiJpbiIsImZjIjoiRXN3QkNvd0JRVTF1TXkxNVVYcFhaVzVpUWkxRVJUZzJUbVZXVmxJdFFucE1RV2hrVlRCelkxaG9TbGxDYm1rMWFXWlpSbU01V0dNelQxZG1ZbWd5U1ZONE4wRnlOa2xJYkVFd00xTnpPRVEzYUV0QlVtbHhZMWc0WDNCM1lWVmliVk4zTFZRNWVqSnllblpDTlhCMloxVm1ValpYTUZwWVpWSnVTMWROTkhGMmNISXhlR3BxYVhsTmVFNWZkMnhET0RnU0Z6WkpRWGxoY2pkU1RtRnBSM2RpYTFCclQwdFVjVkZWR2lKQlNrdE1SbTFNWnpsc05rTlBRV3RqV2pjelZXVkpZalpXV2tvd1lVWjRSbEZSIiwiZmN2IjoiMyIsImZjX2lkIjoibDZFV3BfSV9HZUZXT3dEN0FBQUFBQT09In0=",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.759240",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Data Scientist and Machine Learning Engineer",
+      "company_name": "Hitachi India Pvt Ltd",
+      "location": "India",
+      "via": "Apna Jobs",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=Hz7uS17Fwb_byT6VAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWOQQrCMBBFcdsjuJq1aCOCG92JRcUKggco03RIo3FSkql06R08ijfyJKabD5_P47_sO8mKPQrCTVtisVEAuYEL6tYyQUkY2LKBgk3qFOD3_sDd1xDTolvwDAfvjaPpthXp4kapGF1uoqBYnWv_VJ6p9oNKUByjii0G6hwKVav1csg7NrPF0cp4CSduLML1JVBKA5ZhR2zQ9aGfwzm5JNUH_gH0hEVytgAAAA&shmds=v1_ATWGeePQIfnTW11ZcQmKa9nViEgwJgJVTZIAnOpP1R0RUjTscw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=Hz7uS17Fwb_byT6VAAAAAA%3D%3D",
+      "extensions": [
+        "5 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "5 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://apna.co/job/bengaluru/data-scientist-machine-learning-engineer-1128721557",
+      "job_title": "Data Scientist and Machine Learning Engineer",
+      "description": "Data Scientist/ Machine Learning Engineer Function Engineering Our Company We’re Hitachi Vantara, the data foundation trusted by the world’s innovators. Our resilient, high-performance data infrastructure means that customers – from banks to theme parks ­– can focus on achieving the incredible with data. If you’ve seen the Las Vegas Sphere, you’ve seen just one example of how we empower businesses to automate, optimize, innovate – and wow their customers. Right now, we’re laying the foundation for our next wave of growth. We’re looking for people who love being part of a diverse, global team – and who get excited about making a real-world impact with data. Job description Position Overview: We are looking for a highly skilled Data Scientist/ML Engineer with a strong background in statistical and machine learning methods, with a specialized focus on natural language processing (NLP). The ideal candidate will be adept at model training, retraining and optimization and will proactively collaborate in productionizing end-to-end machine learning solutions at scale. What you will do: -- Understand business and product needs and use classical ML methods or advanced AI techniques to solve them at scale -- Design, train, and fine-tune machine learning models for information extraction, and evaluate model performance using relevant metrics and iteratively improve the models. -- Communicate and collaborate with engineering/cross-functional teams to implement a feedback mechanism to optimize the models by training, tuning and evaluating them on a timely basis. What you will need: -- Bachelors/Masters Degree or equivalent, with 5-8 years of experience in solving industry problems using statistical, traditional ML and AI methods with proven experience in developing machine learning or NLP models, particularly for information extraction tasks -- Deep understanding, both theory and practice, of basic statistical methods such as regression, clustering, general ML algorithms such as SVM, tree-based methods, neural networks etc. for solving supervised and unsupervised problems. -- Experience working on advanced NLP methods like feature extraction, tagging and entity recognition and classification to identify sensitive information that comply with relevant data privacy regulations from structured and unstructured data sources -- Understanding of data privacy regulations and best practices. -- Good Understanding of evaluation metrics specific to NLP tasks -- Skills in working with LLMs through prompt engineering, fine-tuning pre-trained models on specific datasets for targeted applications, etc. -- Work closely with data engineers, software developers, and other stakeholders to integrate the solutions into existing systems with systemic feedback and continuous training and optimization. Technical Skills: -- Proficiency in programming languages such as Python -- Experience with machine learning frameworks (e.g., Sklearn, TensorFlow, PyTorch). -- Experience with NLP libraries and frameworks (e.g., spaCy, NLTK, Hugging Face Transformers). -- Familiarity with libraries and frameworks commonly used for LLMs (e.g., Hugging Face Transformers, LlamaIndex, LangChain etc). #LI-SP7 About us We’re a global team of innovators. Together, we harness engineering excellence and passion for insight to co-create meaningful solutions to complex challenges. We turn organizations into data-driven leaders that can a make positive impact on their industries and society. If you believe that innovation can inspire the future, this is the place to fulfil your purpose and achieve your potential. Fostering innovation through diverse perspectives Hitachi is a global company operating across a wide range of industries and regions. One of the things that sets Hitachi apart is the diversity of our business and people, which drives our innovation and growth. We are committed to building an inclusive culture based on mutual respect and merit-based systems. We believe that when people feel valued, heard, and safe to express themselves, they do their best work. How we look after you We help take care of your today and tomorrow with industry-leading benefits, support, and services that look after your holistic health and wellbeing. We’re also champions of life balance and offer flexible arrangements that work for you (role and location dependent). We’re always looking for new ways of working that bring out our best, which leads to unexpected ideas. So here, you’ll experience a sense of belonging, and discover autonomy, freedom, and ownership as you work alongside talented people you enjoy sharing knowledge with. We’re proud to say we’re an equal opportunity employer and welcome all applicants for employment without attention to race, colour, religion, sex, sexual orientation, gender identity, national origin, veteran, age, disability status or any other protected characteristic. Should you need reasonable accommodations during the recruitment process, please let us know so that we can do our best to set you up for success. Experience Level Senior Level",
+      "apply_options": [
+        {
+          "title": "Apna Jobs",
+          "link": "https://apna.co/job/bengaluru/data-scientist-machine-learning-engineer-1128721557?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "BeBee",
+          "link": "https://bebee.com/in/jobs/data-scientist-and-machine-learning-engineer-hitachi-india-pvt-ltd-bengaluru--techmap_in_1986666720?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobrapido.com",
+          "link": "https://in.jobrapido.com/jobpreview/3249669483475763200?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJEYXRhIFNjaWVudGlzdCBhbmQgTWFjaGluZSBMZWFybmluZyBFbmdpbmVlciIsImNvbXBhbnlfbmFtZSI6IkhpdGFjaGkgSW5kaWEgUHZ0IEx0ZCIsImh0aWRvY2lkIjoiSHo3dVMxN0Z3Yl9ieVQ2VkFBQUFBQT09IiwidXVsZSI6IncrQ0FJUUlDSUZTVzVrYVdFIiwiZ2wiOiJpbiIsImZjIjoiRXN3QkNvd0JRVTF1TXkxNVUwOURWM0kwWDI5TmJscENjRTVqUkcxQlIyNU1WRmc1ZVdoRk5GaHNNbkphUTJoQk1FaG1SM1ZsVEVSa2R6WmFjSEV4TW5aTGVGQlBNRTVHUmpGYVFrSXdSM2hXYzBsTVRGbHVWaTFJVms1U1UxaFlWbU5wZUZCWmRFcFJSVEl4WjBGdlJuVmhlR2sxV1d0aE9YRldURFF0TW1SSFEzUndXVVJYUlhaNlMxQmlVRGRDWjNVU0Z6WkpRWGxoY2pkU1RtRnBSM2RpYTFCclQwdFVjVkZWR2lKQlNrdE1SbTFMU0dSTFpqZ3RRVGhsVjFoeGVuTjRaWEp2TjFoYWRUQkhjV2gzIiwiZmN2IjoiMyIsImZjX2lkIjoiSHo3dVMxN0Z3Yl9ieVQ2VkFBQUFBQT09In0=",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:37.917651",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    },
+    {
+      "title": "Senior Machine Learning Engineer",
+      "company_name": "Wabtec Careers",
+      "location": "India",
+      "via": "Wabtec Careers",
+      "share_link": "https://www.google.com/search?ibp=htl;jobs&q=Machine+Learning+Engineer&htidocid=Gf14xxeb1PMFW9slAAAAAA%3D%3D&hl=en-IN&shem=epsdc,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWOMQoCMRBFsd0jWE1lIbIRwULtFLFQKwvLZTYMSdY4s2SysKV38AKezZMYmwefx4dXfSbV5kYcJMEVrQ9McCFMHNjBkV3ZlOD7ekMnLWgx1oMwnERcpOnO59zr1hjVWDvNmIOtrTyNMLUymnLSPxr1mKiPmKlZrZdj3bObz-7YZrJwKIqSQmDYEzuMQxoWcC4RmPGBPxGCUh2jAAAA&shmds=v1_ATWGeeMSxrqMm-SIYVKLsJWzYx-hn_TmboTZm6nyYmBGw52dPQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=Machine+Learning+Engineer&htidocid=Gf14xxeb1PMFW9slAAAAAA%3D%3D",
+      "extensions": [
+        "13 days ago",
+        "Full–time"
+      ],
+      "detected_extensions": {
+        "posted_at": "13 days ago",
+        "schedule_type": "Full–time"
+      },
+      "source_link": "https://careers.wabtec.com/job/senior-machine-learning-engineer-in-bengaluru-ka-india-jid-2242",
+      "job_title": "Senior Machine Learning Engineer",
+      "description": "Job Description\nSummary: \n\nThe Senior ML Engineer, working as part of Wabtec’s Digital Advanced Technologies (DAT) team will be responsible for architecting and deploying new advanced AI computer vision solutions throughout the freight and passenger transportation industry. DAT is a cross-disciplined entrepreneurial group that carries out applied research in AI/ML, designs and deploys cutting edge algorithms and new digital solutions throughout the Wabtec portfolio of businesses. The candidate will work closely with DAT’s ML engineers and Wabtec’s cloud architects to deploy scalable machine learning and deep learning solutions in cloud and edge video analytics, robotics and automation systems. \n\n\n\nExperience & Qualifications: \n\nMasters in engineering, Physics, Chemistry, Mathematics, Robotics or Computer Science from an accredited university or college, or relevant and significant industry experience.Experience in the fields of AI/ML product development, generative AI, MLOps, edge computingExperience and proficiency in writing production worthy code python, GO or similar languages.Proficient with deep learning frameworks – (Open CV, TensorFlow, PyTorch, HuggingFace, Langchain)A minimum of 4 years of experience as a data scientist, machine learning or computer vision engineer Hands on experience with LLM architectures, fine-tuning LLMs, RAG based applications, vector databasesExposure to AWS model oriented services deploying and orchestrating ML/LLM workloads on Bedrock or Sagemaker services.Has had experience in deploying scalable AI solutions that solve industry problemsStrong interpersonal, leadership and communication skillsA critical thinker that can quickly understand a new problem space and apply analytic techniques to identify potential valueDemonstrated thought leader with an interest in working on Digital Industrial transformationDemonstrated change agent with strong credibility and ability to influence across the organizationDemonstrated engineering thought leader with experience developing and executing engineering solutions for businesses to gain efficiencyDemonstrated commitment for process improvementExperience with product managementStrong command & working knowledge of engineering workflow processes \n\nResponsibilities:\n\nHelp set and execute the vision for scalable AI solutions at Wabtec and drive a culture of applied innovationWork closely with the DAT ML engineers to build and deploy highly scalable AI solutions that drive business value for our business units and customersSet the architecture and framework for scalable video analytic solutions (edge and cloud) that can be leveraged throughout different parts of the businessPartner with the head of DAT and business development teams to engage directly with business units and external customers to understand pain-points Be a machine learning cross-functional leader with organizations such as, Freight Engineering, Services, Transit Engineering, Digital Electronics, Freight Components, Mining and Marine operations to drive new computer vision solutions and opportunitiesLead education and awareness of deploying AI solutions throughout Wabtec to build the pipeline for advanced data scientists within the organizationBe involved in external collaboration efforts with startups, incubators and universities to grow Wabtec’s AI skill base and resource arm Act as coach for others in driving digital industrial solutions across all functional engineering areasYou may also be asked to perform other duties outside of your function or trade, for which adequate training will be provided if necessary.\n\n\nAdditional Information\nWhat could you accomplish in a place that puts People First?\n\nAt Wabtec, it’s not just about a job - it’s about the impact you make. When our people come together, we’re Expanding the Possible by continuously improving what we do and how we do it - for our clients and each other.\n\nIf you’re ready to revolutionize how the world moves for future generations, Wabtec is the place for you.\n\n \n\nWho are we?\n\nWabtec is a leading global provider of equipment, systems, digital solutions, and value-added services for the freight and transit rail sectors. Drawing on more than 150 years of experience, we are leading the way in safety, efficiency, reliability, innovation, and productivity. Whether it’s freight, transit, ports, logistics, mining, industrial, or marine, our expertise, technologies, and people together – are accelerating the future of transportation. With roots that date back to George Westinghouse, Thomas Edison, and Louis Faiveley, Wabtec has always built technologies and implemented solutions for a variety of sectors that are critical to meeting the needs of customers and governments alike.\n\nOur global team of about 30,000 employees worldwide delivers performance that moves the world forward. We’re lifelong learners, obsessed with better. Learn more at www.WabtecCorp.com.\n\nCulture powers us and the possibilities.\n\nWe believe the best ideas come from a mix of experiences and backgrounds. At Wabtec, we strive every day to create a place where everyone belongs. We’re building a culture where leadership, inclusion and your unique perspective fuel progress.\n\n\n\nWe’re proud to be an Equal Opportunity Employer. We welcome talent of all backgrounds, experiences, and identities, including race, gender, age, disability, veteran status and more.\n\nNeed accommodation? Just let us know - we’ve got you.",
+      "apply_options": [
+        {
+          "title": "Wabtec Careers",
+          "link": "https://careers.wabtec.com/job/senior-machine-learning-engineer-in-bengaluru-ka-india-jid-2242?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobs At Alstom",
+          "link": "https://jobsearch.alstom.com/job/Bangalore-Machine-Learning-Engineer-KA/1285729501/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Jobs | Continental",
+          "link": "https://jobs.continental.com/en/detail-page/job-detail/REF88143X-p-d2b4c283ef159777ea3325ddba024259/it-engineer-machine-learning/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Chevron Careers",
+          "link": "https://careers.chevron.com/job/bengaluru/senior-machine-learning-engineer/38138/87210781008?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Adobe Careers",
+          "link": "https://careers.adobe.com/us/en/job/R166657/Machine-Learning-Engineer-4?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "FOX Careers",
+          "link": "https://www.foxcareers.com/Search/JobDetail/R50031423/machine-learning-engineer-fox-corporation?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Workday",
+          "link": "https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced/job/Bangalore/Machine-Learning-Engineer-4_R168142-1/apply?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        },
+        {
+          "title": "Mr. Cooper",
+          "link": "https://careers.mrcooper.com/us/en/job/024538/Principal-Machine-Learning-Engineer?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic"
+        }
+      ],
+      "job_id": "eyJqb2JfdGl0bGUiOiJTZW5pb3IgTWFjaGluZSBMZWFybmluZyBFbmdpbmVlciIsImNvbXBhbnlfbmFtZSI6IldhYnRlYyBDYXJlZXJzIiwiaHRpZG9jaWQiOiJHZjE0eHhlYjFQTUZXOXNsQUFBQUFBPT0iLCJ1dWxlIjoidytDQUlRSUNJRlNXNWthV0UiLCJnbCI6ImluIiwiZmMiOiJFc3dCQ293QlFVMXVNeTE1VkdNdFJsRmhhbkIzUkhSUmFVdHhlak5WU0VGa1JuSmZWM2N4Y0U0MlowbzBSWEZuWlhaRlFWOU1UbmRrVjA5aGNXeHhhVzV6VkUxcFkzUnJTVzFNZDIxRFdWTklWalowYVc1NVdrWlljRTVvZUdKNWVqUnpMUzE0YUZReldUQnFXVkZDUVhWa1lsa3Rabkp1TTB3ME1VNHdOR3R5YTNNemJIVjFTVUZwU3pkRFdHeE5abE1TRnpaSlFYbGhjamRTVG1GcFIzZGlhMUJyVDB0VWNWRlZHaUpCU2t0TVJtMUtaV2hVVUdSRlVFVXhRek52TjJwdVEwRkpVRGRCVjBGaGVGTlIiLCJmY3YiOiIzIiwiZmNfaWQiOiJHZjE0eHhlYjFQTUZXOXNsQUFBQUFBPT0ifQ==",
+      "query": "Machine Learning Engineer",
+      "country": "in",
+      "language": null,
+      "google_domain": "google.com",
+      "search_timestamp": "2026-06-17T11:11:38.003167",
+      "total_jobs_found": 10,
+      "pages_processed": 0
+    }
+  ]
+}
