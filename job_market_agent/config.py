@@ -12,12 +12,17 @@ from datetime import date, timedelta
 
 # ---------------------------------------------------------------------------
 # CADENCE / DATE WINDOW
-# Monthly run -> look back ~1 month (32d buffer covers slipped run dates).
-# REPORT_DATE is dynamic (today) so the agent is self-dating each month.
+# Month-to-date: window = 1st of the current month -> today (requested 2026-08:
+# "August 1st till date"). REPORT_DATE is dynamic so the agent self-dates each
+# month; postings are date-filtered post-hoc against this window (in_window).
+# Override with JOBMKT_WINDOW_START=YYYY-MM-DD for an explicit window.
 # ---------------------------------------------------------------------------
+import os as _os
 REPORT_DATE = date.today()
-WINDOW_DAYS = 32
-WINDOW_START = REPORT_DATE - timedelta(days=WINDOW_DAYS)
+_ws = _os.getenv("JOBMKT_WINDOW_START")
+WINDOW_START = (date.fromisoformat(_ws) if _ws
+                else date(REPORT_DATE.year, REPORT_DATE.month, 1))
+WINDOW_DAYS = max(1, (REPORT_DATE - WINDOW_START).days)
 
 # ---------------------------------------------------------------------------
 # BUDGET GUARDRAILS  (sized for LinkedIn-only monthly ~ $0.70-1.00/run)
@@ -61,6 +66,51 @@ def linkedin_input(query, count=COUNT_PER_QUERY):
            + "&location=India&geoId=" + LINKEDIN_INDIA_GEOID
            + "&f_TPR=r" + str(LINKEDIN_TPR_SECONDS))
     return {"urls": [url], "count": count, "scrapeCompany": SCRAPE_COMPANY}
+
+
+# ---------------------------------------------------------------------------
+# NAUKRI SOURCE  (added 2026-08: India-native board, cheaper than LinkedIn.
+# Actor: thirdwatch/naukri-jobs-scraper — PAY_PER_EVENT $0.001/result +
+# $0.00005 start => ~$0.05 per 50-job query (~10x cheaper than the
+# muhammetakkurtt detailed actor, whose `job_item_detailed` events cost
+# ~$0.01/job). thirdwatch returns a FLAT 60-field payload with posted_date
+# already ISO, a real skills list, and broken-out salary. `freshnessDays` caps
+# recency at source; postings are still post-hoc filtered via in_window.)
+# ---------------------------------------------------------------------------
+NAUKRI_ACTOR = "thirdwatch/naukri-jobs-scraper"
+# Legacy (expensive, nested payload) — kept for reference only:
+NAUKRI_ACTOR_LEGACY = "muhammetakkurtt/naukri-job-scraper"
+NAUKRI_COUNT_PER_QUERY = 50
+# Nearest freshness enum ('0','1','3','7','15','30') at/above the MTD window.
+NAUKRI_FRESHNESS_DAYS = "30" if WINDOW_DAYS > 15 else "15"
+# Mirror the LinkedIn AI/ML query plan for month-over-month comparability.
+NAUKRI_QUERIES = list(LINKEDIN_QUERIES)
+
+
+def naukri_input(query, count=NAUKRI_COUNT_PER_QUERY):
+    """Build the thirdwatch Naukri actor input for one AI/ML query (India)."""
+    return {
+        "platform": "naukri",
+        "queries": [query],
+        "location": "India",
+        "includeNaukriDetails": True,
+        "includeDescription": True,
+        "maxResultsPerQuery": max(1, count),
+        "freshnessDays": NAUKRI_FRESHNESS_DAYS,
+        "sortBy": "date",
+    }
+
+
+# ---------------------------------------------------------------------------
+# ACTIVE JOB SOURCE  (env/CLI selectable; default LinkedIn to preserve the
+# original monthly contract). run_monthly.py --source naukri flips this.
+# ---------------------------------------------------------------------------
+SOURCES = {
+    "linkedin": {"name": "LinkedIn", "actor": LINKEDIN_ACTOR,
+                 "queries": LINKEDIN_QUERIES, "input": linkedin_input},
+    "naukri":   {"name": "Naukri", "actor": NAUKRI_ACTOR,
+                 "queries": NAUKRI_QUERIES, "input": naukri_input},
+}
 
 
 # ---------------------------------------------------------------------------
