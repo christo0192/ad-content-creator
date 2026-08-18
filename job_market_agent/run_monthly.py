@@ -30,7 +30,10 @@ DRYRUN_RAW_GLOBS = [
     os.path.join(HERE, "..", "ai-hiring-trends-test", "raw", "scaled_LinkedIn_Jobs_*.json"),
 ]
 
+# SOURCE / RUN_ID are set in main() from --source (default keeps LinkedIn).
+SOURCE = "linkedin"
 RUN_ID = f"linkedin-{C.REPORT_DATE:%Y-%m}"
+NORMALIZERS = {"linkedin": N.normalize_linkedin, "naukri": N.normalize_naukri}
 
 
 def _query_from_filename(path: str) -> str:
@@ -43,7 +46,7 @@ def _query_from_filename(path: str) -> str:
 def build_row(query: str, item: dict) -> JobDemandRow | None:
     """Normalize -> AI-filter -> score -> validate. Returns a row or None if the
     title is non-AI (dropped) — raises ValidationError if it fails the gate."""
-    base = N.normalize_linkedin(item)
+    base = NORMALIZERS[SOURCE](item)
     keep, bucket, fam_code, fam_name = K.classify_role(base["title"])
     if not keep:
         return None
@@ -56,7 +59,7 @@ def build_row(query: str, item: dict) -> JobDemandRow | None:
     return JobDemandRow(
         run_id=RUN_ID,
         run_date=C.REPORT_DATE,
-        source="LinkedIn",
+        source=C.SOURCES[SOURCE]["name"],
         query=query,
         job_id=base.get("job_id") or None,
         title=base["title"],
@@ -138,20 +141,24 @@ def fetch_dryrun() -> tuple[dict[str, list[dict]], dict]:
     return by_query, meta
 
 
-def fetch_live() -> tuple[dict[str, list[dict]], dict]:
+def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]], dict]:
     import harness as H   # imported lazily: requires APIFY_TOKEN
+    src = C.SOURCES[SOURCE]
+    actor, input_fn, sname = src["actor"], src["input"], src["name"]
+    queries = list(src["queries"])
+    if limit_queries:
+        queries = queries[:limit_queries]
     gov = H.BudgetGovernor()
     by_query: dict[str, list[dict]] = {}
     manifest = []
-    for q in C.LINKEDIN_QUERIES:
+    for q in queries:
         if gov.session_spent + C.WORST_CASE_PER_QUERY_USD > C.SESSION_HARD_ABORT_USD or not gov.soft_ok():
             print(f"[GUARD-SKIP] {q} (spent ${gov.session_spent:.3f})")
             manifest.append({"query": q, "skipped": "budget"})
             continue
         try:
             items, cost, meta = H.run_actor(
-                C.LINKEDIN_ACTOR, C.linkedin_input(q), gov, f"LinkedIn:{q}",
-                timeout_s=240)
+                actor, input_fn(q), gov, f"{sname}:{q}", timeout_s=240)
         except H.BudgetExceeded as e:
             print(f"[ABORT] {e}")
             break
@@ -164,30 +171,39 @@ def fetch_live() -> tuple[dict[str, list[dict]], dict]:
             manifest.append({"query": q, "launch_error": meta["error"][:200]})
             continue
         safe = re.sub(r"[^A-Za-z0-9]+", "_", q)
-        json.dump(items, open(os.path.join(RAW, f"live_LinkedIn_{safe}.json"), "w",
+        json.dump(items, open(os.path.join(RAW, f"live_{sname}_{safe}.json"), "w",
                   encoding="utf-8"), ensure_ascii=False)
         by_query.setdefault(q, []).extend(items)
         print(f"[OK] {q:<28} raw={meta['n_items']:<4} cost=${meta['cost_usd']:<8} "
               f"session=${meta['session_spent']}")
         manifest.append({"query": q, "raw": meta["n_items"], "cost_usd": meta["cost_usd"]})
-    metaout = {"mode": "live", "apify_cost_usd": round(gov.session_spent, 5),
+    metaout = {"mode": "live", "source": sname, "apify_cost_usd": round(gov.session_spent, 5),
                "apify_final_usage": round(gov.last, 5), "manifest": manifest}
     return by_query, metaout
 
 
 def main():
+    global SOURCE, RUN_ID
     ap = argparse.ArgumentParser()
+    ap.add_argument("--source", choices=list(C.SOURCES), default="linkedin",
+                    help="job board to scrape (default linkedin)")
+    ap.add_argument("--limit-queries", type=int, default=None,
+                    help="live only: cap number of queries (smoke test)")
     ap.add_argument("--dry-run", action="store_true",
                     help="reuse existing raw LinkedIn JSON; no Apify spend/token")
     ap.add_argument("--no-bq", action="store_true", help="skip the BigQuery write")
     args = ap.parse_args()
 
+    SOURCE = args.source
+    RUN_ID = f"{SOURCE}-{C.REPORT_DATE:%Y-%m}"
+
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(RAW, exist_ok=True)
 
-    print(f"=== Job Market Demand agent | run_id={RUN_ID} | "
-          f"window {C.WINDOW_START} -> {C.REPORT_DATE} ===")
-    by_query, fetch_meta = (fetch_dryrun() if args.dry_run else fetch_live())
+    print(f"=== Job Market Demand agent | source={C.SOURCES[SOURCE]['name']} | "
+          f"run_id={RUN_ID} | window {C.WINDOW_START} -> {C.REPORT_DATE} ===")
+    by_query, fetch_meta = (fetch_dryrun() if args.dry_run
+                            else fetch_live(args.limit_queries))
     rows, stats = process(by_query)
 
     print(f"\n[PROCESS] raw={stats['raw']} kept={stats['kept']} "

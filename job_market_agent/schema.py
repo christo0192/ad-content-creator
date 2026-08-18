@@ -54,7 +54,7 @@ class JobDemandRow(BaseModel):
     run_id: str
     run_date: date
     scraped_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    source: Literal["LinkedIn"] = "LinkedIn"
+    source: Literal["LinkedIn", "Naukri"] = "LinkedIn"
     query: Optional[str] = None
     job_id: Optional[str] = None
 
