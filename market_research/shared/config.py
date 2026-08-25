@@ -34,11 +34,14 @@ def fqtn(key: str) -> str:
 # ---- LLM (claude -p, Max plan) -------------------------------------------
 CLAUDE_BIN = (os.getenv("CLAUDE_BIN") or shutil.which("claude")
               or r"C:\Users\Admin\.local\bin\claude.exe")
-# All `claude -p` calls run on Sonnet 5 at medium reasoning effort (requested
-# 2026-08). Invoked headless as: claude -p --model <M> --effort <E> --output-format text
-EXTRACT_MODEL  = os.getenv("MR_EXTRACT_MODEL", "claude-sonnet-5")  # Tab2/Tab4 page->JSON
+# Hybrid model split (2026-08): the bulk blog/competitor calls are mechanical
+# page->JSON extraction, so they run on fast/cheap Haiku at low effort. Only the
+# single exec-summary call is cross-dataset reasoning, so it runs on Sonnet 5 at
+# medium effort. Invoked headless: claude -p --model <M> --effort <E> --output-format text
+EXTRACT_MODEL  = os.getenv("MR_EXTRACT_MODEL", "haiku")            # Tab2/Tab4 page->JSON
 SYNTH_MODEL    = os.getenv("MR_SYNTH_MODEL", "claude-sonnet-5")    # Exec Summary
-LLM_EFFORT     = os.getenv("MR_LLM_EFFORT", "medium")     # claude --effort level
+EXTRACT_EFFORT = os.getenv("MR_EXTRACT_EFFORT", "low")    # mechanical extraction
+SYNTH_EFFORT   = os.getenv("MR_SYNTH_EFFORT", "medium")   # reasoning / synthesis
 LLM_TIMEOUT_S  = int(os.getenv("MR_LLM_TIMEOUT_S", "300"))
 # `claude -p` spawns a full Node+agent process per call; even 2 concurrent heavy
 # calls thrash a laptop CPU so both stall past their timeout. Sequential (1) is

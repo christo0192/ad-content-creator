@@ -13,9 +13,11 @@ primary_region = "sin"                # Singapore — close to India; match your
   MR_BQ_PROJECT  = "ik-marketing-data"
   MR_BQ_DATASET  = "Market_Research"   # flip from cai_dev_sandbox once provisioned
   MR_BQ_LOCATION = "US"
-  MR_EXTRACT_MODEL = "claude-sonnet-5"
+  # Hybrid: Haiku (low effort) for bulk extraction, Sonnet 5 (medium) for synthesis.
+  MR_EXTRACT_MODEL = "haiku"
   MR_SYNTH_MODEL   = "claude-sonnet-5"
-  MR_LLM_EFFORT    = "medium"
+  MR_EXTRACT_EFFORT = "low"
+  MR_SYNTH_EFFORT   = "medium"
   # Monthly cadence (was weekly): widen the blog/competitor recency window to
   # ~32 days so a monthly run captures a full month of publications.
   MR_WEEKLY_WINDOW_DAYS = "32"
