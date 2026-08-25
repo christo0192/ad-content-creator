@@ -12,17 +12,22 @@ from datetime import date, timedelta
 
 # ---------------------------------------------------------------------------
 # CADENCE / DATE WINDOW
-# Month-to-date: window = 1st of the current month -> today (requested 2026-08:
-# "August 1st till date"). REPORT_DATE is dynamic so the agent self-dates each
-# month; postings are date-filtered post-hoc against this window (in_window).
-# Override with JOBMKT_WINDOW_START=YYYY-MM-DD for an explicit window.
+# Default = rolling ~32-day lookback so an automated monthly cron (Fly fires on
+# the 1st) always captures a full month of postings regardless of the run day.
+# REPORT_DATE is dynamic so the agent self-dates each month; postings are
+# date-filtered post-hoc against this window (in_window).
+# Overrides: JOBMKT_WINDOW_DAYS=N (lookback length) or JOBMKT_WINDOW_START=
+# YYYY-MM-DD (explicit start, e.g. an ad-hoc month-to-date run).
 # ---------------------------------------------------------------------------
 import os as _os
 REPORT_DATE = date.today()
+WINDOW_DAYS = int(_os.getenv("JOBMKT_WINDOW_DAYS", "32"))
 _ws = _os.getenv("JOBMKT_WINDOW_START")
-WINDOW_START = (date.fromisoformat(_ws) if _ws
-                else date(REPORT_DATE.year, REPORT_DATE.month, 1))
-WINDOW_DAYS = max(1, (REPORT_DATE - WINDOW_START).days)
+if _ws:
+    WINDOW_START = date.fromisoformat(_ws)
+    WINDOW_DAYS = max(1, (REPORT_DATE - WINDOW_START).days)
+else:
+    WINDOW_START = REPORT_DATE - timedelta(days=WINDOW_DAYS)
 
 # ---------------------------------------------------------------------------
 # BUDGET GUARDRAILS  (sized for LinkedIn-only monthly ~ $0.70-1.00/run)

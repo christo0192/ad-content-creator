@@ -1,16 +1,20 @@
-# Fly.io app — weekly Market Research pipeline (batch / scheduled Machine).
-# No [http_service]; a scheduled Machine boots weekly, runs run_weekly.py, stops.
+# Fly.io app — Market Research pipeline (batch / scheduled Machine).
+# No [http_service]; a scheduled Machine boots monthly, runs run_weekly.py, stops.
+# (Cadence set to monthly to match the jobs agent — see DEPLOY_FLY.md.)
 app = "ik-market-research-weekly"     # rename to taste; globally unique
 primary_region = "sin"                # Singapore — close to India; match your other apps
 
 [build]
   dockerfile = "Dockerfile"
 
-# Non-secret config. Secrets (CLAUDE_CODE_OAUTH_TOKEN, APIFY_TOKEN,
-# MARKET_RESEARCH_BQ_SA_B64) via `fly secrets set` — see DEPLOY_FLY.md.
+# Non-secret config. Secrets (CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY,
+# APIFY_TOKEN, MARKET_RESEARCH_BQ_SA_B64) via `fly secrets set` — see DEPLOY_FLY.md.
 [env]
   MR_BQ_PROJECT  = "ik-marketing-data"
   MR_BQ_DATASET  = "Market_Research"   # flip from cai_dev_sandbox once provisioned
   MR_BQ_LOCATION = "US"
   MR_EXTRACT_MODEL = "haiku"
   MR_SYNTH_MODEL   = "sonnet"
+  # Monthly cadence (was weekly): widen the blog/competitor recency window to
+  # ~32 days so a monthly run captures a full month of publications.
+  MR_WEEKLY_WINDOW_DAYS = "32"
