@@ -34,8 +34,11 @@ def fqtn(key: str) -> str:
 # ---- LLM (claude -p, Max plan) -------------------------------------------
 CLAUDE_BIN = (os.getenv("CLAUDE_BIN") or shutil.which("claude")
               or r"C:\Users\Admin\.local\bin\claude.exe")
-EXTRACT_MODEL  = os.getenv("MR_EXTRACT_MODEL", "haiku")    # Tab2/Tab4 page->JSON
-SYNTH_MODEL    = os.getenv("MR_SYNTH_MODEL", "sonnet")     # Exec Summary
+# All `claude -p` calls run on Sonnet 5 at medium reasoning effort (requested
+# 2026-08). Invoked headless as: claude -p --model <M> --effort <E> --output-format text
+EXTRACT_MODEL  = os.getenv("MR_EXTRACT_MODEL", "claude-sonnet-5")  # Tab2/Tab4 page->JSON
+SYNTH_MODEL    = os.getenv("MR_SYNTH_MODEL", "claude-sonnet-5")    # Exec Summary
+LLM_EFFORT     = os.getenv("MR_LLM_EFFORT", "medium")     # claude --effort level
 LLM_TIMEOUT_S  = int(os.getenv("MR_LLM_TIMEOUT_S", "300"))
 # `claude -p` spawns a full Node+agent process per call; even 2 concurrent heavy
 # calls thrash a laptop CPU so both stall past their timeout. Sequential (1) is
