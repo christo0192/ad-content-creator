@@ -20,13 +20,15 @@ def _strip_fences(text: str) -> str:
     return m.group(1).strip() if m else t
 
 
-def claude(prompt: str, model: str | None = None, timeout: int | None = None) -> str:
+def claude(prompt: str, model: str | None = None, timeout: int | None = None,
+           effort: str | None = None) -> str:
     """One headless call. Prompt is sent on STDIN (handles large content)."""
     model = model or C.EXTRACT_MODEL
     timeout = timeout or C.LLM_TIMEOUT_S
+    effort = effort or C.EXTRACT_EFFORT
     proc = subprocess.run(
         [C.CLAUDE_BIN, "-p", "--model", model,
-         "--effort", C.LLM_EFFORT, "--output-format", "text"],
+         "--effort", effort, "--output-format", "text"],
         input=prompt, capture_output=True, text=True, encoding="utf-8",
         timeout=timeout,
     )
@@ -37,13 +39,14 @@ def claude(prompt: str, model: str | None = None, timeout: int | None = None) ->
 
 
 def extract_json(prompt: str, model: str | None = None, retries: int = 2,
-                 timeout: int | None = None):
+                 timeout: int | None = None, effort: str | None = None):
     """Call claude and parse a JSON object/array from the reply. Retries on
-    unparseable output (appending a stricter nudge)."""
+    unparseable output (appending a stricter nudge). Defaults to the extraction
+    tier (Haiku, low effort)."""
     last = None
     p = prompt
     for attempt in range(retries + 1):
-        out = claude(p, model=model, timeout=timeout)
+        out = claude(p, model=model, timeout=timeout, effort=effort or C.EXTRACT_EFFORT)
         try:
             return json.loads(_strip_fences(out))
         except Exception as e:
@@ -52,8 +55,11 @@ def extract_json(prompt: str, model: str | None = None, retries: int = 2,
     raise ValueError(f"unparseable JSON after {retries + 1} tries: {last}")
 
 
-def synthesize(prompt: str, model: str | None = None, timeout: int | None = None) -> str:
-    return claude(prompt, model=model or C.SYNTH_MODEL, timeout=timeout)
+def synthesize(prompt: str, model: str | None = None, timeout: int | None = None,
+               effort: str | None = None) -> str:
+    """Cross-dataset synthesis tier (Sonnet 5, medium effort by default)."""
+    return claude(prompt, model=model or C.SYNTH_MODEL, timeout=timeout,
+                  effort=effort or C.SYNTH_EFFORT)
 
 
 def map_extract(prompts: list[str], model: str | None = None,
