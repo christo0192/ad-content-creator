@@ -25,7 +25,8 @@ def claude(prompt: str, model: str | None = None, timeout: int | None = None) ->
     model = model or C.EXTRACT_MODEL
     timeout = timeout or C.LLM_TIMEOUT_S
     proc = subprocess.run(
-        [C.CLAUDE_BIN, "-p", "--model", model, "--output-format", "text"],
+        [C.CLAUDE_BIN, "-p", "--model", model,
+         "--effort", C.LLM_EFFORT, "--output-format", "text"],
         input=prompt, capture_output=True, text=True, encoding="utf-8",
         timeout=timeout,
     )
