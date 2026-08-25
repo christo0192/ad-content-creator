@@ -7,6 +7,14 @@ primary_region = "sin"                # Singapore — close to India; match your
 [build]
   dockerfile = "Dockerfile"
 
+# The weekly pipeline shells out to the Node-based `claude` CLI (one full Node
+# process per LLM call), which starves on the 256MB default and crawls. Give the
+# batch Machine real headroom — it's stopped between monthly runs, so the size
+# only costs during the ~10-min run.
+[[vm]]
+  size   = "shared-cpu-2x"
+  memory = "4gb"
+
 # Non-secret config. Secrets (CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY,
 # APIFY_TOKEN, MARKET_RESEARCH_BQ_SA_B64) via `fly secrets set` — see DEPLOY_FLY.md.
 [env]
