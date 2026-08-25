@@ -185,8 +185,9 @@ def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]],
 def main():
     global SOURCE, RUN_ID
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", choices=list(C.SOURCES), default="linkedin",
-                    help="job board to scrape (default linkedin)")
+    ap.add_argument("--source", choices=list(C.SOURCES),
+                    default=os.getenv("JOBMKT_SOURCE", "linkedin"),
+                    help="job board to scrape (default: $JOBMKT_SOURCE or linkedin)")
     ap.add_argument("--limit-queries", type=int, default=None,
                     help="live only: cap number of queries (smoke test)")
     ap.add_argument("--dry-run", action="store_true",
