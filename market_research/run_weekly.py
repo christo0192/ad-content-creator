@@ -11,7 +11,8 @@ monthly BQ snapshot) and writes that too.
   python run_weekly.py --only social   # run one agent
   python run_weekly.py --no-exec       # skip Executive Summary
   python run_weekly.py --preflight     # secrets + BQ SELECT 1 + one tiny claude -p
-                                       #   call, then exit; no collection, no writes
+                                       #   call per LLM tier (extract + synth), then
+                                       #   exit; no collection, no writes
 
 LLM calls use `claude -p` (Max plan). Jobs (Tab 3) runs on its own monthly
 cadence in ../job_market_agent. On Fly this runs MONTHLY (MR_CADENCE=monthly,
@@ -157,7 +158,9 @@ def run_ok(summary: dict, only=None, no_exec=False) -> bool:
 
 def run_preflight_only(no_bq: bool, only: str | None = None) -> int:
     """`--preflight`: prove the booted machine has its secrets, that BigQuery
-    auth works (SELECT 1) and that `claude -p` answers (one tiny call), then
+    auth works (SELECT 1) and that `claude -p` answers on BOTH LLM tiers (one
+    tiny call each, with the model AND effort the run uses, so a bad
+    MR_*_MODEL / MR_*_EFFORT fails here instead of in the monthly run), then
     exit — no collection, no BQ write. Post-deploy smoke on Fly (DEPLOY_FLY.md)."""
     missing = preflight(no_bq, only)
     if missing:
@@ -172,13 +175,16 @@ def run_preflight_only(no_bq: bool, only: str | None = None) -> int:
             return 2
         print(f"[preflight] BigQuery OK (project {C.BQ_PROJECT})")
     if only != "social":
-        try:
-            import llm as L
-            out = L.claude("Reply with OK", timeout=120)
-        except Exception as e:
-            print(f"FATAL preflight: claude -p failed: {type(e).__name__}: {str(e)[:200]}")
-            return 2
-        print(f"[preflight] claude -p OK ({C.EXTRACT_MODEL}): {out[:40]!r}")
+        import llm as L
+        for tier, model, effort in (("extract", C.EXTRACT_MODEL, C.EXTRACT_EFFORT),
+                                    ("synth", C.SYNTH_MODEL, C.SYNTH_EFFORT)):
+            try:
+                out = L.claude("Reply with OK", model=model, timeout=120, effort=effort)
+            except Exception as e:
+                print(f"FATAL preflight: claude -p failed ({tier} {model}/{effort}): "
+                      f"{type(e).__name__}: {str(e)[:200]}")
+                return 2
+            print(f"[preflight] claude -p OK ({tier} {model}/{effort}): {out[:40]!r}")
     print("preflight OK")
     return 0
 
@@ -189,8 +195,8 @@ def main(argv=None) -> int:
     ap.add_argument("--no-bq", action="store_true")
     ap.add_argument("--no-exec", action="store_true")
     ap.add_argument("--preflight", action="store_true",
-                    help="check secrets, BigQuery (SELECT 1) and one claude -p call, "
-                         "print 'preflight OK', exit; collects and writes nothing")
+                    help="check secrets, BigQuery (SELECT 1) and one claude -p call per "
+                         "LLM tier, print 'preflight OK', exit; collects and writes nothing")
     a = ap.parse_args(argv)
     if a.preflight:
         return run_preflight_only(a.no_bq, a.only)

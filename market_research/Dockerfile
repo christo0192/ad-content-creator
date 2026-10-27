@@ -28,5 +28,7 @@ COPY exec_summary.py run_weekly.py ./
 
 # Runs once and exits -> a stopped Fly Machine that the Cloudflare Worker
 # ik-intelligence-trigger starts monthly (no Fly --schedule). Exit 0 OK /
-# 1 degraded run / 2 preflight failed. Smoke: --command "python run_weekly.py --preflight".
+# 1 degraded run / 2 preflight failed. Smoke (DEPLOY_FLY.md §4): pass the command
+# after `--`: `fly machine run <image> … -- python run_weekly.py --preflight`. Never
+# `--command "…"` — flyctl ignores it without --shell and runs this full CMD.
 CMD ["python", "run_weekly.py"]

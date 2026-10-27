@@ -57,15 +57,64 @@ export function startUrl(t: Target): string {
   return `https://api.machines.dev/v1/apps/${encodeURIComponent(t.app)}/machines/${encodeURIComponent(t.machineId)}/start`;
 }
 
-export async function startMachine(
-  t: Target,
-  fetchImpl: typeof fetch = fetch,
-): Promise<{ ok: boolean; status: number; body: string }> {
+export interface StartResult {
+  ok: boolean;
+  status: number;
+  body: string;
+}
+
+/** Per-attempt cap, so a hung Fly API call cannot eat the whole retry budget. */
+export const ATTEMPT_TIMEOUT_MS = 15_000;
+
+export async function startMachine(t: Target, fetchImpl: typeof fetch = fetch): Promise<StartResult> {
   const res = await fetchImpl(startUrl(t), {
     method: "POST",
     headers: { Authorization: authHeader(t.token), "Content-Type": "application/json" },
+    signal: AbortSignal.timeout(ATTEMPT_TIMEOUT_MS),
   });
   return { ok: res.ok, status: res.status, body: (await res.text()).slice(0, 500) };
+}
+
+// Retry (added 2026-10-27): the cron fires on days 1 and 2 only, so ONE
+// transient Fly API error (5xx / 429 / network / timeout) used to skip that
+// pipeline for the whole month. A retry cannot double-run a job: it targets the
+// same single Machine seconds later (a job runs for minutes), and a Machine that
+// is still running cannot be started a second time. Any other 4xx (bad token,
+// wrong id, non-startable state) is final and never retried.
+export const START_ATTEMPTS = 3;
+/** Pause before retry n (ms): attempt 2 after 2 s, attempt 3 after 5 s more. */
+export const RETRY_DELAYS_MS: readonly number[] = [2_000, 5_000];
+
+export function isRetryableStatus(status: number): boolean {
+  return status === 429 || status >= 500;
+}
+
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+export interface RetryOptions {
+  fetchImpl?: typeof fetch;
+  wait?: (ms: number) => Promise<void>;
+  warn?: (msg: string) => void;
+}
+
+/** startMachine with bounded retries. Returns the last response (plus how many
+ *  attempts it took); rethrows the last error only if every attempt threw. */
+export async function startMachineWithRetry(
+  t: Target,
+  { fetchImpl = fetch, wait = sleep, warn = (m: string) => console.warn(m) }: RetryOptions = {},
+): Promise<StartResult & { attempts: number }> {
+  for (let attempt = 1; ; attempt++) {
+    const last = attempt >= START_ATTEMPTS;
+    try {
+      const r = await startMachine(t, fetchImpl);
+      if (r.ok || !isRetryableStatus(r.status) || last) return { ...r, attempts: attempt };
+      warn(`${t.label} start attempt ${attempt}/${START_ATTEMPTS} got ${r.status} — retrying`);
+    } catch (err) {
+      if (last) throw err;
+      warn(`${t.label} start attempt ${attempt}/${START_ATTEMPTS} error: ${String(err)} — retrying`);
+    }
+    await wait(RETRY_DELAYS_MS[Math.min(attempt, RETRY_DELAYS_MS.length) - 1]);
+  }
 }
 
 function iso(ms: number): string {
@@ -93,11 +142,14 @@ export default {
         console.error(`[${when}] ${t.label}: missing app/machine/token config — not started`);
         return;
       }
-      const r = await startMachine(t);
+      const r = await startMachineWithRetry(t, { warn: (m) => console.warn(`[${when}] ${m}`) });
+      const tries = r.attempts > 1 ? ` after ${r.attempts} attempts` : "";
       if (r.ok) {
-        console.log(`[${when}] ${t.label} start OK (${r.status}) ${t.app}/${t.machineId}`);
+        console.log(`[${when}] ${t.label} start OK (${r.status}) ${t.app}/${t.machineId}${tries}`);
       } else {
-        console.error(`[${when}] ${t.label} start FAILED (${r.status}) ${t.app}/${t.machineId}: ${r.body}`);
+        // After a lost/5xx first response the machine may in fact be running
+        // (the retry is then refused) — `fly machine status` tells which.
+        console.error(`[${when}] ${t.label} start FAILED (${r.status}) ${t.app}/${t.machineId}${tries}: ${r.body}`);
       }
     } catch (err) {
       console.error(`[${when}] ${label} fetch error:`, err);

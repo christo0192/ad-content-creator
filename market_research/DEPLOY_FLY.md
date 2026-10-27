@@ -85,19 +85,37 @@ it deliberately and re-run §4 after the rebuild.
 ## 4. Preflight smoke (no collection, no writes)
 
 `run_weekly.py --preflight` checks the BigQuery SA and (on Fly) the LLM token,
-runs one BigQuery `SELECT 1` and one tiny `claude -p` call, prints `preflight OK`
-and exits 0. Run it in a throwaway Machine on the new image:
+runs one BigQuery `SELECT 1` and one tiny `claude -p` call per LLM tier
+(extraction `MR_EXTRACT_MODEL`/`MR_EXTRACT_EFFORT`, synthesis
+`MR_SYNTH_MODEL`/`MR_SYNTH_EFFORT` — exactly as the run calls them), prints
+`preflight OK` and exits 0. Run it in a throwaway Machine on the new image:
 
 ```bash
 fly image show -a ik-market-research-weekly           # note the deployment tag
 fly machine run "registry.fly.io/ik-market-research-weekly:<deployment tag>" --rm --restart no \
   --region sin --vm-cpus 2 --vm-memory 4096 -a ik-market-research-weekly \
-  --command "python run_weekly.py --preflight"
-# expect: [preflight] BigQuery OK ... / [preflight] claude -p OK ... / preflight OK
+  --env MR_CADENCE=monthly --env MR_WEEKLY_WINDOW_DAYS=32 \
+  -- python run_weekly.py --preflight
+fly logs -a ik-market-research-weekly
+# expect: [preflight] BigQuery OK ... / [preflight] claude -p OK (extract ...) /
+#         [preflight] claude -p OK (synth ...) / preflight OK
 
 # The real Machine must show no schedule, restart no, state stopped:
 fly machines list -a ik-market-research-weekly --json
 ```
+
+- The command goes **positionally, after `--`**. Never use `--command "…"`:
+  `fly machine run` reads `--command` only together with `--shell` and otherwise
+  silently boots the image CMD — the whole pipeline: every `claude -p` call, the
+  Reddit Apify scrape and a DELETE + append on all four tables (flyctl v0.4.110,
+  `internal/command/machine/run.go`). If the logs show `=== Market Research` at
+  any point (the live-run banner; `--preflight` never prints it), the override
+  did not apply: kill that Machine at once with
+  `fly machine destroy --force <id printed by machine run> -a ik-market-research-weekly`.
+- `fly machine run` does **not** apply `fly.toml [env]` (only `--env`). The two
+  `--env` flags are the `[env]` values that differ from the `config.py` defaults,
+  so the throwaway Machine sees the same config as the real one (a test guards
+  that every other `[env]` value equals its default).
 
 Exit codes of `run_weekly.py` (what the Machine's exit shows after a run):
 
@@ -105,7 +123,7 @@ Exit codes of `run_weekly.py` (what the Machine's exit shows after a run):
 |---|---|
 | 0 | every tab that ran produced rows, plus the Executive Summary on a full run |
 | 1 | degraded — a tab errored or produced 0 rows (e.g. the Claude token expired, so blog/competitor/exec are empty), or an uncaught error |
-| 2 | preflight failed — missing BQ creds / LLM token, or the `--preflight` probe failed. Nothing was collected or written |
+| 2 | preflight failed — missing BQ creds / LLM token, or the `--preflight` probe (BQ or either LLM tier) failed. Nothing was collected or written |
 
 ## 5. The scheduler: Cloudflare Worker `ik-intelligence-trigger`
 
@@ -113,6 +131,8 @@ Lives in `../cloudflare-trigger/`. One cron, `30 3 1,2 * *` (03:30 UTC = 09:00
 IST); the handler dispatches on the UTC day: day 1 starts the jobs Machine, **day
 2 starts this Machine**, any other day does nothing. It only POSTs the Fly
 Machines API `start`; it never throws (a Cloudflare retry would double-start).
+A transient failure (5xx / 429 / network / 15 s timeout) is retried in-handler up
+to 3 attempts within ~1 min; any other 4xx (e.g. a 401 expired token) is final.
 
 The Worker authenticates with an **app-scoped Fly deploy token** (least
 privilege). Create it and pipe it straight into the Worker secret so it is never

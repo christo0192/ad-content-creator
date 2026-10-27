@@ -9,6 +9,8 @@ import base64
 import glob
 import importlib
 import json
+import os
+import re
 import sys
 from datetime import timedelta
 
@@ -48,16 +50,22 @@ class _Job:
 class FakeBQClient:
     """Records every call in order; never touches the network."""
 
-    def __init__(self, query_exc=None):
+    def __init__(self, query_exc=None, create_exc=None, events=None):
         self.calls = []
         self.query_exc = query_exc
+        self.create_exc = create_exc
+        self.events = events if events is not None else []
 
     def create_table(self, table, exists_ok=False):
         self.calls.append(("create_table", table.table_id, exists_ok))
+        self.events.append("bq:create_table")
+        if self.create_exc:
+            raise self.create_exc
         return table
 
     def query(self, sql, job_config=None):
         self.calls.append(("query", sql, job_config))
+        self.events.append(f"bq:{sql}")
         return _Job(exc=self.query_exc)
 
     def load_table_from_file(self, fileobj, dest, job_config=None):
@@ -191,9 +199,12 @@ def test_main_missing_bq_creds_exits_2_even_with_apify_token(monkeypatch, sandbo
 def test_main_live_run_with_zero_rows_exits_3(monkeypatch, capsys, sandbox_out):
     monkeypatch.setenv("APIFY_TOKEN", "dummy")
     monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
+    events = []
+    monkeypatch.setattr(BW, "_client", lambda: FakeBQClient(events=events))
     calls = []
     monkeypatch.setattr(RM, "fetch_live", lambda limit=None: (
-        calls.append(limit) or ({}, {"mode": "live", "apify_cost_usd": 0.12, "manifest": []})))
+        calls.append(limit) or events.append("fetch_live")
+        or ({}, {"mode": "live", "apify_cost_usd": 0.12, "manifest": []})))
 
     def no_write(*a, **k):
         raise AssertionError("0 rows must not reach BigQuery")
@@ -202,7 +213,37 @@ def test_main_live_run_with_zero_rows_exits_3(monkeypatch, capsys, sandbox_out):
         _run_main(monkeypatch, "--source", "naukri")
     assert e.value.code == 3
     assert calls == [None]
+    # BQ auth + table are proven BEFORE the paid scrape.
+    assert events == ["bq:SELECT 1", "bq:create_table", "fetch_live"]
     assert "[FATAL] live run produced 0 rows" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("fake_kw, reason", [
+    ({"query_exc": RuntimeError("invalid_grant: account disabled")}, "RuntimeError: invalid_grant"),
+    ({"create_exc": PermissionError("403 Access Denied: dataset")}, "PermissionError: 403"),
+])
+def test_main_bad_bq_creds_exit_2_before_the_paid_scrape(monkeypatch, capsys, sandbox_out, no_fetch,
+                                                         fake_kw, reason):
+    # Secret present and parseable (so preflight() passes) but the key is
+    # disabled / the SA lost its grant: used to pay for the scrape, then die
+    # uncaught (exit 1) in write_snapshot.
+    monkeypatch.setenv("APIFY_TOKEN", "dummy")
+    monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
+    monkeypatch.setattr(BW, "_client", lambda: FakeBQClient(**fake_kw))
+    with pytest.raises(SystemExit) as e:
+        _run_main(monkeypatch, "--source", "naukri")
+    assert e.value.code == 2
+    out = capsys.readouterr().out
+    assert "FATAL preflight: BigQuery auth/query failed (nothing spent): " + reason in out
+    assert "=== Job Market Demand agent" not in out
+
+
+def test_main_dry_run_with_bq_also_checks_bq_first(monkeypatch, sandbox_out, no_fetch):
+    monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
+    monkeypatch.setattr(BW, "_client", lambda: FakeBQClient(query_exc=RuntimeError("invalid_grant")))
+    with pytest.raises(SystemExit) as e:
+        _run_main(monkeypatch, "--dry-run", "--source", "linkedin")
+    assert e.value.code == 2
 
 
 def test_main_dry_run_no_bq_happy_path_exits_normally(monkeypatch, sandbox_out):
@@ -244,6 +285,33 @@ def test_main_preflight_bq_auth_failure_exits_2(monkeypatch, capsys, sandbox_out
         _run_main(monkeypatch, "--preflight")
     assert e.value.code == 2
     assert "BigQuery auth/query failed: RuntimeError" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------------------
+# deploy docs: the no-spend smoke must really run --preflight
+# ---------------------------------------------------------------------------
+def _smoke_commands(text):
+    """Logical lines (backslash continuations joined) that run a Fly machine."""
+    joined = re.sub(r"\\\r?\n\s*", " ", text)
+    return [ln for ln in joined.splitlines() if "machine run" in ln]
+
+
+def test_docs_never_pass_the_preflight_smoke_via_fly_command_flag():
+    # `fly machine run --command` is read only with --shell (flyctl v0.4.110);
+    # otherwise the image CMD runs = a LIVE paid scrape + BQ DELETE/append. The
+    # smoke must pass the command positionally after `--`.
+    here = RM.HERE
+    deploy = os.path.join(here, "DEPLOY_FLY.md")
+    paths = [deploy, os.path.join(here, "Dockerfile"), os.path.join(here, "..", "PROJECT_TODO.md")]
+    docs = {p: open(p, encoding="utf-8").read() for p in paths if os.path.isfile(p)}
+    assert deploy in docs
+    for path, text in docs.items():
+        assert not re.search(r"--command\s+[\"']?python", text), path
+        for cmd in _smoke_commands(text):
+            if "--preflight" in cmd:
+                assert re.search(r"\s--\s+python\s+run_\w+\.py\s+--preflight\b", cmd), (path, cmd)
+    assert [c for c in _smoke_commands(docs[deploy]) if "run_monthly.py --preflight" in c], \
+        "DEPLOY_FLY.md §4 lost its preflight smoke command"
 
 
 # ---------------------------------------------------------------------------

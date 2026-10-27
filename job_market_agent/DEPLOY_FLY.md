@@ -103,19 +103,29 @@ calls Apify and never writes BigQuery. Run it in a throwaway Machine:
 ```bash
 fly machine run "registry.fly.io/ik-market-research-jobs:$TAG" --rm --restart no \
   --region sin --env JOBMKT_SOURCE=naukri -a ik-market-research-jobs \
-  --command "python run_monthly.py --preflight"
+  -- python run_monthly.py --preflight
+fly logs -a ik-market-research-jobs
 # expect: [preflight] BigQuery OK ... / preflight OK
 
 # The real Machine must show no schedule, restart no, state stopped:
 fly machines list -a ik-market-research-jobs --json
 ```
 
+The command goes **positionally, after `--`**. Never use `--command "…"` here:
+`fly machine run` reads `--command` only together with `--shell` and otherwise
+silently boots the image CMD — the full LIVE paid Naukri scrape plus a BigQuery
+DELETE + append of the month (flyctl v0.4.110, `internal/command/machine/run.go`).
+If the logs show `=== Job Market Demand agent` at any point (the live-run banner;
+`--preflight` never prints it), the override did not apply: kill that Machine at
+once with
+`fly machine destroy --force <id printed by machine run> -a ik-market-research-jobs`.
+
 Exit codes of `run_monthly.py` (what the Machine's exit shows after a run):
 
 | code | meaning |
 |---|---|
 | 0 | OK (or `--preflight` passed) |
-| 2 | preflight failed — a secret / BQ credential is missing or BQ auth failed. Checked **before** the Apify scrape, so nothing was spent |
+| 2 | preflight failed — a secret / BQ credential is missing, or BQ auth (`SELECT 1`) or the target-table check failed. Checked **before** the Apify scrape on every run, so nothing was spent |
 | 3 | live run produced 0 rows (every query failed or was budget-skipped) |
 | 1 | uncaught error (traceback in `fly logs`) |
 
@@ -125,7 +135,9 @@ Lives in `../cloudflare-trigger/`. One cron, `30 3 1,2 * *` (03:30 UTC = 09:00
 IST); the handler dispatches on the UTC day: **day 1 starts this Machine**, day 2
 starts the market-research pipeline, any other day does nothing. It only POSTs
 the Fly Machines API `start`; it never throws (a Cloudflare retry would
-double-start a paid run).
+double-start a paid run). A transient failure (5xx / 429 / network / 15 s
+timeout) is retried in-handler up to 3 attempts within ~1 min; any other 4xx
+(e.g. a 401 expired token) is final.
 
 The Worker authenticates with an **app-scoped Fly deploy token** (least privilege:
 it can manage only this app). Create it and pipe it straight into the Worker

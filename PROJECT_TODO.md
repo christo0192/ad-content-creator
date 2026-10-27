@@ -73,7 +73,7 @@ Guide: `job_market_agent/DEPLOY_FLY.md` (rewritten 2026-10-27). Pure Python, low
 - [x] App created, secrets `APIFY_TOKEN` + `MARKET_RESEARCH_BQ_SA_B64` set (2026-08-25; "Staged" label is expected on this non-Launch machine)
 - [x] ~~`fly machine run . --schedule monthly`~~ — registered 2026-08-25, **never fired**. Do not re-run.
 - [ ] **NEVER plain `fly deploy` here** (creates + starts a new machine = paid scrape). `fly deploy --build-only --push --image-label <tag>` then `fly machine update 7845393fe26338 --image … --machine-config noschedule.json --restart no --skip-start -y` (§3)
-- [ ] No-spend smoke: `fly machine run <image> --rm … --command "python run_monthly.py --preflight"` → `preflight OK` (§4)
+- [ ] No-spend smoke: `fly machine run <image> --rm … -a ik-market-research-jobs -- python run_monthly.py --preflight` → `preflight OK` (§4). The command goes after `--`; **never `--command "…"`** (flyctl ignores it without `--shell` and boots the LIVE paid scrape)
 - [ ] `fly machines list -a ik-market-research-jobs --json` → no `schedule`, restart `no`, stopped
 
 ## #3 — Fly: Market-research pipeline (monthly)  [app `ik-market-research-weekly`, machine `7812565f9d3378`]
@@ -82,7 +82,7 @@ Guide: `market_research/DEPLOY_FLY.md` (rewritten 2026-10-27). Image bundles Nod
 - [x] ~~`fly machine run . --schedule weekly/monthly`~~ — registered 2026-08-25, **never fired**. Do not re-run.
 - [ ] `fly deploy --ha=false` (Launch machine: updated in place, stays stopped; picks up `MR_CADENCE=monthly` + `[[restart]] never`)
 - [ ] Clear the schedule: `fly machine update 7812565f9d3378 --machine-config noschedule.json --restart no --skip-start -y` (§3)
-- [ ] Smoke: `fly machine run <image> --rm --vm-memory 4096 … --command "python run_weekly.py --preflight"` → BQ OK + `claude -p` OK + `preflight OK` (§4)
+- [ ] Smoke: `fly machine run <image> --rm --vm-memory 4096 … --env MR_CADENCE=monthly --env MR_WEEKLY_WINDOW_DAYS=32 -a ik-market-research-weekly -- python run_weekly.py --preflight` → BQ OK + `claude -p` OK (extract + synth) + `preflight OK` (§4). Command after `--`; **never `--command "…"`** (ignored without `--shell` → full live run)
 - [ ] On Fly's dedicated CPU, raise `MR_LLM_CONCURRENCY` to 2 (env) for faster runs.
 
 ## #5 — Cloudflare Worker `ik-intelligence-trigger` (the ONLY scheduler)  [needs Cloudflare auth]

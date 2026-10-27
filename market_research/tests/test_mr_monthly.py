@@ -9,12 +9,15 @@ credential env var and points CLAUDE_BIN at a missing binary.
 import base64
 import importlib
 import json
+import os
+import re
 
 import pytest
 
 import config as C
 import bq as BQ
 import llm as L
+import exec_summary as ES
 import run_weekly as RW
 from google.cloud import bigquery
 
@@ -102,13 +105,108 @@ def test_mr_run_id_override_wins(monkeypatch, reload_config):
     assert C.RUN_ID == "backfill-2026-10"
 
 
+def _fly_env() -> dict:
+    import tomllib
+    with open(os.path.join(RW.HERE, "fly.toml"), "rb") as f:
+        return tomllib.load(f)["env"]
+
+
 def test_fly_toml_sets_monthly_cadence_and_never_restart():
-    import os
     import tomllib
     with open(os.path.join(RW.HERE, "fly.toml"), "rb") as f:
         cfg = tomllib.load(f)
     assert cfg["env"]["MR_CADENCE"] == "monthly"
     assert cfg["restart"] == [{"policy": "never"}]
+
+
+def _smoke_commands(text: str) -> list[str]:
+    """Logical lines (backslash continuations joined) that run a Fly machine."""
+    joined = re.sub(r"\\\r?\n\s*", " ", text)
+    return [ln for ln in joined.splitlines() if "machine run" in ln]
+
+
+def _deploy_docs() -> dict[str, str]:
+    paths = [os.path.join(RW.HERE, "DEPLOY_FLY.md"), os.path.join(RW.HERE, "Dockerfile"),
+             os.path.join(RW.HERE, "..", "PROJECT_TODO.md")]
+    return {p: open(p, encoding="utf-8").read() for p in paths if os.path.isfile(p)}
+
+
+def test_docs_never_pass_the_preflight_smoke_via_fly_command_flag():
+    # `fly machine run --command` is read only with --shell; otherwise flyctl
+    # boots the image CMD = the full LIVE pipeline. The smoke must pass the
+    # command positionally after `--`.
+    docs = _deploy_docs()
+    assert os.path.join(RW.HERE, "DEPLOY_FLY.md") in docs
+    for path, text in docs.items():
+        assert not re.search(r"--command\s+[\"']?python", text), path
+        for cmd in _smoke_commands(text):
+            if "--preflight" in cmd:
+                assert re.search(r"\s--\s+python\s+run_\w+\.py\s+--preflight\b", cmd), (path, cmd)
+    smokes = [c for c in _smoke_commands(docs[os.path.join(RW.HERE, "DEPLOY_FLY.md")])
+              if "run_weekly.py --preflight" in c]
+    assert smokes, "DEPLOY_FLY.md §4 lost its preflight smoke command"
+
+
+def test_preflight_smoke_sees_the_same_config_as_the_real_machine():
+    # `fly machine run` applies only --env, never fly.toml [env]: every [env]
+    # value must equal its config.py default, or be passed with --env in the
+    # DEPLOY_FLY.md smoke.
+    src = open(os.path.join(RW.HERE, "shared", "config.py"), encoding="utf-8").read()
+    defaults = dict(re.findall(r'os\.getenv\("(MR_\w+)",\s*"([^"]*)"\)', src))
+    doc = open(os.path.join(RW.HERE, "DEPLOY_FLY.md"), encoding="utf-8").read()
+    (smoke,) = [c for c in _smoke_commands(doc) if "run_weekly.py --preflight" in c]
+    passed = dict(re.findall(r"--env\s+(\w+)=(\S+)", smoke))
+    for key, value in _fly_env().items():
+        assert key in defaults, f"fly.toml [env] {key} has no os.getenv default in config.py"
+        if defaults[key] != str(value):
+            assert passed.get(key) == str(value), f"smoke must pass --env {key}={value}"
+
+
+# ---------------------------------------------------------------------------
+# Executive Summary: runs on the synthesis tier (model AND effort)
+# ---------------------------------------------------------------------------
+class _Proc:
+    def __init__(self, stdout):
+        self.returncode, self.stdout, self.stderr = 0, stdout, ""
+
+
+def test_exec_summary_calls_synth_model_at_synth_effort(monkeypatch):
+    # The fly.toml [env] tiers; before the fix the exec call ran
+    # `--model claude-sonnet-5 --effort low` (the EXTRACTION effort).
+    env = _fly_env()
+    for key, attr in (("MR_EXTRACT_MODEL", "EXTRACT_MODEL"), ("MR_SYNTH_MODEL", "SYNTH_MODEL"),
+                      ("MR_EXTRACT_EFFORT", "EXTRACT_EFFORT"), ("MR_SYNTH_EFFORT", "SYNTH_EFFORT")):
+        monkeypatch.setattr(C, attr, env[key])
+    assert C.SYNTH_EFFORT != C.EXTRACT_EFFORT        # else this test proves nothing
+    monkeypatch.setattr(ES, "jobs_digest", lambda: "ML Engineer: 10 postings (2 emerging)")
+    reply = json.dumps([{"rank": 1, "direction": "Ship an agents track", "sections": ["Jobs"],
+                         "urgency": "HIGH", "actionable_insight": "Launch it"}])
+    calls = []
+
+    def fake_run(argv, **kw):
+        calls.append(argv)
+        return _Proc(reply)
+    monkeypatch.setattr(L.subprocess, "run", fake_run)
+
+    rows = ES.synthesize([], [], [], "monthly-2026-11")
+    assert len(calls) == 1
+    argv = calls[0]
+    assert argv[argv.index("--model") + 1] == env["MR_SYNTH_MODEL"]       # claude-sonnet-5
+    assert argv[argv.index("--effort") + 1] == env["MR_SYNTH_EFFORT"]     # medium, not low
+    assert [(r.rank, r.run_id) for r in rows] == [(1, "monthly-2026-11")]
+
+
+def test_exec_summary_follows_mr_synth_effort(monkeypatch):
+    monkeypatch.setattr(C, "SYNTH_EFFORT", "high")
+    monkeypatch.setattr(ES, "jobs_digest", lambda: "none")
+    seen = {}
+
+    def fake_extract(prompt, model=None, retries=2, timeout=None, effort=None):
+        seen.update(model=model, effort=effort)
+        return []
+    monkeypatch.setattr(L, "extract_json", fake_extract)
+    assert ES.synthesize([], [], [], "monthly-2026-11") == []
+    assert seen == {"model": C.SYNTH_MODEL, "effort": "high"}
 
 
 # ---------------------------------------------------------------------------
@@ -230,7 +328,7 @@ def test_main_exits_0_on_a_healthy_run(monkeypatch):
     assert RW.main(["--no-bq"]) == 0
 
 
-def test_main_preflight_ok_probes_bq_and_claude_once(monkeypatch, capsys, no_run):
+def test_main_preflight_ok_probes_bq_and_both_llm_tiers_once(monkeypatch, capsys, no_run):
     monkeypatch.setenv("FLY_APP_NAME", "ik-market-research-weekly")
     monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN", "dummy")
     monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
@@ -238,11 +336,30 @@ def test_main_preflight_ok_probes_bq_and_claude_once(monkeypatch, capsys, no_run
     monkeypatch.setattr(BQ, "client", lambda: fake)
     prompts = []
     monkeypatch.setattr(L, "claude", lambda p, model=None, timeout=None, effort=None: (
-        prompts.append((p, timeout)) or "OK"))
+        prompts.append((p, model, effort, timeout)) or "OK"))
     assert RW.main(["--preflight"]) == 0
     assert [c[:2] for c in fake.calls] == [("query", "SELECT 1")]
-    assert prompts == [("Reply with OK", 120)]
+    # Each tier with the exact model AND effort the run uses.
+    assert prompts == [("Reply with OK", C.EXTRACT_MODEL, C.EXTRACT_EFFORT, 120),
+                       ("Reply with OK", C.SYNTH_MODEL, C.SYNTH_EFFORT, 120)]
     assert "preflight OK" in capsys.readouterr().out
+
+
+def test_main_preflight_fails_2_when_only_the_synth_tier_fails(monkeypatch, capsys, no_run):
+    # e.g. a bad MR_SYNTH_MODEL / MR_SYNTH_EFFORT: extraction answers, synthesis
+    # does not -> caught by the smoke, not by the monthly run's exec step.
+    monkeypatch.setattr(BQ, "client", lambda: FakeBQClient())
+    monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
+
+    def fake_claude(p, model=None, timeout=None, effort=None):
+        if model == C.SYNTH_MODEL and effort == C.SYNTH_EFFORT:
+            raise RuntimeError("claude -p (x) exit 1: invalid effort")
+        return "OK"
+    monkeypatch.setattr(L, "claude", fake_claude)
+    assert RW.main(["--preflight"]) == 2
+    out = capsys.readouterr().out
+    assert f"FATAL preflight: claude -p failed (synth {C.SYNTH_MODEL}/{C.SYNTH_EFFORT})" in out
+    assert "preflight OK" not in out
 
 
 def test_main_preflight_fails_2_when_claude_fails(monkeypatch, capsys, no_run):

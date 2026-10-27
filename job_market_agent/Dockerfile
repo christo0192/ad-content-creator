@@ -15,5 +15,7 @@ COPY config.py harness.py normalize.py classify.py scoring.py \
 
 # LIVE run by default. The Worker starts the Machine, this runs to completion,
 # exits (0 OK / 2 preflight failed, nothing spent / 3 zero rows), and the
-# Machine stops. Smoke without spend: --command "python run_monthly.py --preflight".
+# Machine stops. Smoke without spend (DEPLOY_FLY.md §4): pass the command after
+# `--`: `fly machine run <image> … -- python run_monthly.py --preflight`. Never
+# `--command "…"` — flyctl ignores it without --shell and runs this LIVE CMD.
 CMD ["python", "run_monthly.py"]

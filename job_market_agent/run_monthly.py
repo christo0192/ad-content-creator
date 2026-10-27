@@ -15,8 +15,9 @@ Exit codes (added 2026-10-27 — the Fly machine's exit code is the only signal
 the Cloudflare-Worker-started monthly run gives, so a broken run must be
 non-zero instead of a silent 0):
   0  OK (or `--preflight` passed)
-  2  preflight failed: a required secret / BQ credential is missing or BQ auth
-     failed. Checked BEFORE the paid Apify scrape, so nothing is spent.
+  2  preflight failed: a required secret / BQ credential is missing, or BQ auth
+     (SELECT 1) or the target-table check failed. Checked BEFORE the paid Apify
+     scrape on every run (not only --preflight), so nothing is spent.
   3  a live run produced 0 rows (every query failed / was skipped)
 """
 from __future__ import annotations
@@ -202,8 +203,8 @@ def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]],
 # ---------------------------------------------------------------------------
 # Preflight (added 2026-10-27). Before this, a Fly machine whose BQ secret
 # never reached it paid for the full Apify scrape (~$0.70) and only THEN died
-# in bigquery_writer with DefaultCredentialsError. The checks are presence-only
-# and report NAMES, never values.
+# in bigquery_writer with DefaultCredentialsError. preflight() is presence-only
+# and reports NAMES, never values; bq_check() then proves the creds work.
 # ---------------------------------------------------------------------------
 PREFLIGHT_APIFY = "APIFY_TOKEN"
 PREFLIGHT_BQ = "BigQuery SA creds (MARKET_RESEARCH_BQ_SA_B64 | MARKET_RESEARCH_BQ_SA_JSON | JOBMKT_BQ_KEY file)"
@@ -235,6 +236,23 @@ def preflight(dry_run: bool, no_bq: bool) -> list[str]:
     return missing
 
 
+def bq_check(ensure_table: bool = False) -> str | None:
+    """Prove BigQuery auth works with the creds the write will use: one
+    `SELECT 1`, plus (ensure_table=True, every real run) the create-if-missing
+    table check that write_snapshot does first anyway. None = OK, else a short
+    'Type: message' reason. A present-but-disabled/rotated key, or a lost IAM
+    grant, passes preflight() (presence-only) but fails here."""
+    try:
+        import bigquery_writer as BW
+        client = BW._client()
+        client.query("SELECT 1").result()
+        if ensure_table:
+            BW.ensure_table(client)
+    except Exception as e:
+        return f"{type(e).__name__}: {str(e)[:200]}"
+    return None
+
+
 def run_preflight_only(dry_run: bool, no_bq: bool) -> None:
     """`--preflight`: prove the booted machine has its secrets and that BQ auth
     works (one `SELECT 1`), then exit 0 — no Apify call, no BQ write. Used as the
@@ -245,11 +263,9 @@ def run_preflight_only(dry_run: bool, no_bq: bool) -> None:
         print("FATAL preflight: missing " + ", ".join(missing))
         sys.exit(2)
     if not no_bq:
-        try:
-            import bigquery_writer as BW
-            BW._client().query("SELECT 1").result()
-        except Exception as e:
-            print(f"FATAL preflight: BigQuery auth/query failed: {type(e).__name__}: {str(e)[:200]}")
+        err = bq_check()
+        if err:
+            print(f"FATAL preflight: BigQuery auth/query failed: {err}")
             sys.exit(2)
         print(f"[preflight] BigQuery OK (project {C.BQ_PROJECT})")
     print("preflight OK")
@@ -280,6 +296,15 @@ def main():
     if missing:
         print("FATAL preflight: missing " + ", ".join(missing))
         sys.exit(2)
+    # ...and so do BAD creds (2026-10-27): the presence check above passed a
+    # disabled key, the scrape was paid for, then write_snapshot died uncaught
+    # (exit 1) and the scraped rows were lost with the ephemeral FS.
+    if not args.no_bq:
+        err = bq_check(ensure_table=True)
+        if err:
+            print(f"FATAL preflight: BigQuery auth/query failed (nothing spent): {err}")
+            sys.exit(2)
+        print(f"[BQ] auth + table check OK (project {C.BQ_PROJECT})")
 
     SOURCE = args.source
     RUN_ID = f"{SOURCE}-{C.REPORT_DATE:%Y-%m}"
