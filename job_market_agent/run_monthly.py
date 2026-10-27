@@ -4,13 +4,30 @@
   python run_monthly.py --dry-run  # reuse existing raw LinkedIn JSON, no Apify
                                    #   spend, no token needed; still writes BQ
   python run_monthly.py --dry-run --no-bq   # process + validate only, skip BQ
+  python run_monthly.py --preflight         # secrets + BQ auth check only; no
+                                            #   Apify spend, no BQ write
 
 Pipeline (per the v0.1 plan): fetch -> normalize -> AI-classify -> score ->
 Pydantic-validate (the tool-call gate) -> dedup -> write BigQuery + local
 snapshot + cost/validation manifest.
+
+Exit codes (added 2026-10-27 — the Fly machine's exit code is the only signal
+the Cloudflare-Worker-started monthly run gives, so a broken run must be
+non-zero instead of a silent 0):
+  0  OK (or `--preflight` passed)
+  2  preflight failed: a required secret / BQ credential is missing, or BQ auth
+     (SELECT 1) or the target-table check failed. Checked BEFORE the paid Apify
+     scrape on every run (not only --preflight), so nothing is spent.
+  3  a live run produced 0 rows (every query failed / was skipped)
+  4  partial live run: fewer than C.MIN_QUERY_SUCCESS_SHARE (80%) of the planned
+     queries returned data (errors, launch errors, failed/timed-out actor runs
+     with 0 items, budget skips, or queries never run after an [ABORT]). The
+     BigQuery write is SKIPPED, so the month's previous snapshot is kept.
+  5  degraded live run: some queries failed but coverage passed the gate; the
+     snapshot WAS written (with those queries missing)
 """
 from __future__ import annotations
-import os, sys, io, re, json, glob, argparse
+import os, sys, re, json, glob, argparse
 from datetime import datetime, timezone
 
 import config as C
@@ -20,7 +37,14 @@ import scoring as SC
 from schema import JobDemandRow
 from pydantic import ValidationError
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", line_buffering=True)
+# UTF-8 stdout for the Windows console. reconfigure() (2026-10-27) replaces the
+# old `sys.stdout = io.TextIOWrapper(sys.stdout.buffer, ...)`: that wrapper
+# closed the shared buffer when it was garbage-collected, which broke pytest's
+# output capture once the tests import this module. Same effect for the CLI.
+try:
+    sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
+except (AttributeError, ValueError):
+    pass
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "output")
 RAW = os.path.join(HERE, "raw")
@@ -160,39 +184,168 @@ def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]],
             items, cost, meta = H.run_actor(
                 actor, input_fn(q), gov, f"{sname}:{q}", timeout_s=240)
         except H.BudgetExceeded as e:
-            print(f"[ABORT] {e}")
+            print(f"[ABORT] {H.redact(e)}")
             break
         except Exception as e:
-            print(f"[ERR] {q}: {e}")
-            manifest.append({"query": q, "error": str(e)})
+            print(f"[ERR] {q}: {H.redact(e)}")
+            manifest.append({"query": q, "error": H.redact(e)})
             continue
         if meta.get("error"):
             print(f"[LAUNCH-ERR] {q}: {meta['error'][:150]}")
             manifest.append({"query": q, "launch_error": meta["error"][:200]})
             continue
+        status = meta.get("status")
+        if status != "SUCCEEDED" and not items:
+            # A FAILED / ABORTED / TIMED-OUT actor run with an empty dataset used
+            # to be logged as "[OK] raw=0" and counted as a good query.
+            print(f"[RUN-ERR] {q}: actor run ended {status} with 0 items")
+            manifest.append({"query": q, "run_error": f"actor run ended {status} with 0 items"})
+            continue
+        if status != "SUCCEEDED":
+            print(f"[WARN] {q}: actor run ended {status}; keeping its {len(items)} items")
         safe = re.sub(r"[^A-Za-z0-9]+", "_", q)
         json.dump(items, open(os.path.join(RAW, f"live_{sname}_{safe}.json"), "w",
                   encoding="utf-8"), ensure_ascii=False)
         by_query.setdefault(q, []).extend(items)
         print(f"[OK] {q:<28} raw={meta['n_items']:<4} cost=${meta['cost_usd']:<8} "
               f"session=${meta['session_spent']}")
-        manifest.append({"query": q, "raw": meta["n_items"], "cost_usd": meta["cost_usd"]})
+        manifest.append({"query": q, "raw": meta["n_items"], "cost_usd": meta["cost_usd"],
+                         "status": status})
+    # Queries never attempted because an [ABORT] broke the loop count as failed
+    # too (2026-10-27): before, they were simply missing from the manifest.
+    attempted = {m["query"] for m in manifest}
+    manifest += [{"query": q, "skipped": "aborted"} for q in queries if q not in attempted]
+    failed = [m["query"] for m in manifest if "raw" not in m]
     metaout = {"mode": "live", "source": sname, "apify_cost_usd": round(gov.session_spent, 5),
-               "apify_final_usage": round(gov.last, 5), "manifest": manifest}
+               "apify_final_usage": round(gov.last, 5), "manifest": manifest,
+               "queries_planned": len(queries), "queries_failed": failed}
     return by_query, metaout
+
+
+def coverage_verdict(fetch_meta: dict) -> tuple[int, str]:
+    """(exit code, message) for a live run's query coverage (2026-10-27).
+    0 = every planned query returned data; 4 = fewer than
+    C.MIN_QUERY_SUCCESS_SHARE succeeded, so the run must NOT replace the month's
+    snapshot; 5 = some failed but coverage is enough to write. Before this, a run
+    where 13/14 queries failed still DELETE+APPENDed the month and exited 0.
+    Dry-run meta has no `queries_failed` and is always 0."""
+    failed = fetch_meta.get("queries_failed") or []
+    if not failed:
+        return 0, ""
+    planned = fetch_meta.get("queries_planned") or len(failed)
+    ok = planned - len(failed)
+    msg = (f"{len(failed)}/{planned} queries failed / were skipped "
+           f"({', '.join(failed[:5])}{' ...' if len(failed) > 5 else ''})")
+    if ok < C.MIN_QUERY_SUCCESS_SHARE * planned:
+        return 4, msg
+    return 5, msg
+
+
+# ---------------------------------------------------------------------------
+# Preflight (added 2026-10-27). Before this, a Fly machine whose BQ secret
+# never reached it paid for the full Apify scrape (~$0.70) and only THEN died
+# in bigquery_writer with DefaultCredentialsError. preflight() is presence-only
+# and reports NAMES, never values; bq_check() then proves the creds work.
+# ---------------------------------------------------------------------------
+PREFLIGHT_APIFY = "APIFY_TOKEN"
+PREFLIGHT_BQ = "BigQuery SA creds (MARKET_RESEARCH_BQ_SA_B64 | MARKET_RESEARCH_BQ_SA_JSON | JOBMKT_BQ_KEY file)"
+
+
+def _bq_creds_resolvable() -> bool:
+    """True if bigquery_writer can load an SA key, or GOOGLE_APPLICATION_CREDENTIALS
+    names an existing key file (the ADC path that does work for BQ jobs). A
+    malformed secret counts as missing — the exception text is NOT surfaced
+    because it could quote part of the secret."""
+    import bigquery_writer as BW   # ImportError (no google-cloud-bigquery) stays loud
+    try:
+        if BW._load_sa_info() is not None:
+            return True
+    except Exception:
+        return False
+    adc = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    return bool(adc and os.path.isfile(adc))
+
+
+def preflight(dry_run: bool, no_bq: bool) -> list[str]:
+    """Names of the missing runtime requirements ([] = good to go).
+    Live runs need APIFY_TOKEN; any run that writes BQ needs resolvable creds."""
+    missing = []
+    if not dry_run and not os.getenv("APIFY_TOKEN"):
+        missing.append(PREFLIGHT_APIFY)
+    if not no_bq and not _bq_creds_resolvable():
+        missing.append(PREFLIGHT_BQ)
+    return missing
+
+
+def bq_check(ensure_table: bool = False) -> str | None:
+    """Prove BigQuery auth works with the creds the write will use: one
+    `SELECT 1`, plus (ensure_table=True, every real run) the create-if-missing
+    table check that write_snapshot does first anyway. None = OK, else a short
+    'Type: message' reason. A present-but-disabled/rotated key, or a lost IAM
+    grant, passes preflight() (presence-only) but fails here."""
+    try:
+        import bigquery_writer as BW
+        client = BW._client()
+        client.query("SELECT 1").result()
+        if ensure_table:
+            BW.ensure_table(client)
+    except Exception as e:
+        return f"{type(e).__name__}: {str(e)[:200]}"
+    return None
+
+
+def run_preflight_only(dry_run: bool, no_bq: bool) -> None:
+    """`--preflight`: prove the booted machine has its secrets and that BQ auth
+    works (one `SELECT 1`), then exit 0 — no Apify call, no BQ write. Used as the
+    post-deploy smoke on Fly (see DEPLOY_FLY.md). --dry-run / --no-bq narrow the
+    checks exactly as they narrow a real run."""
+    missing = preflight(dry_run=dry_run, no_bq=no_bq)
+    if missing:
+        print("FATAL preflight: missing " + ", ".join(missing))
+        sys.exit(2)
+    if not no_bq:
+        err = bq_check()
+        if err:
+            print(f"FATAL preflight: BigQuery auth/query failed: {err}")
+            sys.exit(2)
+        print(f"[preflight] BigQuery OK (project {C.BQ_PROJECT})")
+    print("preflight OK")
+    sys.exit(0)
 
 
 def main():
     global SOURCE, RUN_ID
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", choices=list(C.SOURCES), default="linkedin",
-                    help="job board to scrape (default linkedin)")
+    ap.add_argument("--source", choices=list(C.SOURCES),
+                    default=os.getenv("JOBMKT_SOURCE", "linkedin"),
+                    help="job board to scrape (default: $JOBMKT_SOURCE or linkedin)")
     ap.add_argument("--limit-queries", type=int, default=None,
                     help="live only: cap number of queries (smoke test)")
     ap.add_argument("--dry-run", action="store_true",
                     help="reuse existing raw LinkedIn JSON; no Apify spend/token")
     ap.add_argument("--no-bq", action="store_true", help="skip the BigQuery write")
+    ap.add_argument("--preflight", action="store_true",
+                    help="check secrets + BigQuery auth (SELECT 1), print 'preflight OK', "
+                         "exit 0; no Apify spend, no BQ write")
     args = ap.parse_args()
+
+    if args.preflight:
+        run_preflight_only(args.dry_run, args.no_bq)
+
+    # Fail BEFORE fetch_live so missing creds never cost an Apify scrape.
+    missing = preflight(args.dry_run, args.no_bq)
+    if missing:
+        print("FATAL preflight: missing " + ", ".join(missing))
+        sys.exit(2)
+    # ...and so do BAD creds (2026-10-27): the presence check above passed a
+    # disabled key, the scrape was paid for, then write_snapshot died uncaught
+    # (exit 1) and the scraped rows were lost with the ephemeral FS.
+    if not args.no_bq:
+        err = bq_check(ensure_table=True)
+        if err:
+            print(f"FATAL preflight: BigQuery auth/query failed (nothing spent): {err}")
+            sys.exit(2)
+        print(f"[BQ] auth + table check OK (project {C.BQ_PROJECT})")
 
     SOURCE = args.source
     RUN_ID = f"{SOURCE}-{C.REPORT_DATE:%Y-%m}"
@@ -214,8 +367,19 @@ def main():
     json.dump(bq_rows, open(os.path.join(OUT, "job_demand_rows.json"), "w",
               encoding="utf-8"), ensure_ascii=False, indent=2)
 
+    if not args.dry_run and not bq_rows:
+        # Every query failed / was budget-skipped. Before 2026-10-27 this skipped
+        # the BQ write and exited 0, so the month silently kept the old snapshot.
+        print(f"[FATAL] live run produced 0 rows (apify ${fetch_meta.get('apify_cost_usd', 0)}; "
+              f"see the [ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(3)
+
+    cov_code, cov_msg = coverage_verdict(fetch_meta)
     bq_result = None
-    if not args.no_bq and bq_rows:
+    if cov_code == 4:
+        print(f"[PARTIAL] {cov_msg}: below the {C.MIN_QUERY_SUCCESS_SHARE:.0%} coverage gate, "
+              f"so the BigQuery snapshot for {RUN_ID} is NOT replaced")
+    elif not args.no_bq and bq_rows:
         import bigquery_writer as BW
         bq_result = BW.write_snapshot(bq_rows, RUN_ID, dry_run=args.dry_run)
         print(f"[BQ] loaded {bq_result['loaded']} rows -> {bq_result['table']} "
@@ -233,11 +397,20 @@ def main():
         "fetch": fetch_meta,
         "stats": stats,
         "bq": bq_result,
+        "coverage": {"exit_code": cov_code, "detail": cov_msg or None},
     }
     json.dump(manifest, open(os.path.join(OUT, "run_manifest.json"), "w",
               encoding="utf-8"), ensure_ascii=False, indent=2)
     print(f"\n### kept {len(rows)} rows | apify ${fetch_meta.get('apify_cost_usd', 0)} "
           f"| manifest -> output/run_manifest.json")
+    if cov_code == 4:
+        print(f"[FATAL] partial run, BigQuery not written: {cov_msg} "
+              f"(see the [ERR]/[LAUNCH-ERR]/[RUN-ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(4)
+    if cov_code == 5:
+        print(f"[DEGRADED] snapshot written, but {cov_msg} "
+              f"(see the [ERR]/[LAUNCH-ERR]/[RUN-ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(5)
 
 
 if __name__ == "__main__":

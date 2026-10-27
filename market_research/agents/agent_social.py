@@ -164,7 +164,8 @@ def reddit() -> list:
             if r: rows.append(r)
         return rows
     except Exception as e:
-        print(f"[reddit] skipped: {e}")
+        msg, tok = str(e), os.environ.get("APIFY_TOKEN")   # never print the token
+        print(f"[reddit] skipped: {msg.replace(tok, '***') if tok else msg}")
         return []
 
 

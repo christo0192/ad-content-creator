@@ -15,6 +15,17 @@ if not TOKEN:
 
 API = "https://api.apify.com/v2"
 S = requests.Session()
+# The token goes in the Authorization header, never the URL (2026-10-27): with
+# `?token=` every requests error ("503 ... for url: ...?token=<TOKEN>",
+# "Max retries exceeded with url: ...?token=<TOKEN>") printed it into Fly logs.
+S.headers["Authorization"] = f"Bearer {TOKEN}"
+
+
+def redact(text) -> str:
+    """str(text) with the Apify token masked: the backstop for anything printed
+    or stored in the run manifest."""
+    s = str(text)
+    return s.replace(TOKEN, "***") if TOKEN else s
 
 
 class BudgetExceeded(Exception):
@@ -32,7 +43,7 @@ class BudgetGovernor:
               f"(account cap $5.00, room ${5.0 - self.baseline:.4f})")
 
     def _usage(self):
-        r = S.get(f"{API}/users/me/limits?token={TOKEN}", timeout=30)
+        r = S.get(f"{API}/users/me/limits", timeout=30)
         r.raise_for_status()
         return float(r.json()["data"]["current"]["monthlyUsageUsd"])
 
@@ -67,7 +78,7 @@ def run_actor(actor, run_input, governor, label, memory_mb=None,
     Governed: refuses to launch if a budget ceiling is reached."""
     governor.check_can_launch(label)
     aid = actor.replace("/", "~")
-    params = {"token": TOKEN, "timeout": timeout_s}
+    params = {"timeout": timeout_s}
     if memory_mb:
         params["memory"] = memory_mb
     before = governor.last
@@ -75,7 +86,7 @@ def run_actor(actor, run_input, governor, label, memory_mb=None,
     t0 = time.time()
     r = S.post(f"{API}/acts/{aid}/runs", params=params, json=run_input, timeout=60)
     if r.status_code not in (200, 201):
-        return [], 0.0, {"error": f"launch HTTP {r.status_code}: {r.text[:300]}"}
+        return [], 0.0, {"error": redact(f"launch HTTP {r.status_code}: {r.text[:300]}")}
     run = r.json()["data"]
     run_id = run["id"]
     ds_id = run.get("defaultDatasetId")
@@ -83,11 +94,11 @@ def run_actor(actor, run_input, governor, label, memory_mb=None,
     status = run["status"]
     while status in ("READY", "RUNNING"):
         if time.time() - t0 > timeout_s + 60:
-            S.post(f"{API}/actor-runs/{run_id}/abort?token={TOKEN}", timeout=30)
+            S.post(f"{API}/actor-runs/{run_id}/abort", timeout=30)
             status = "TIMED-OUT"
             break
         time.sleep(C.POLL_INTERVAL_S)
-        rr = S.get(f"{API}/actor-runs/{run_id}?token={TOKEN}", timeout=30)
+        rr = S.get(f"{API}/actor-runs/{run_id}", timeout=30)
         d = rr.json()["data"]
         status = d["status"]
         ds_id = d.get("defaultDatasetId", ds_id)
@@ -95,7 +106,7 @@ def run_actor(actor, run_input, governor, label, memory_mb=None,
     items = []
     if ds_id:
         ir = S.get(f"{API}/datasets/{ds_id}/items",
-                   params={"token": TOKEN, "clean": "true", "format": "json"},
+                   params={"clean": "true", "format": "json"},
                    timeout=120)
         if ir.status_code == 200:
             try:

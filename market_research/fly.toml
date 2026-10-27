@@ -1,16 +1,46 @@
-# Fly.io app — weekly Market Research pipeline (batch / scheduled Machine).
-# No [http_service]; a scheduled Machine boots weekly, runs run_weekly.py, stops.
+# Fly.io app — Market Research pipeline (batch job, NOT a server).
+# No [http_service] and NO Fly-native schedule: the stopped Machine
+# (7812565f9d3378) is started monthly by the Cloudflare Worker
+# ik-intelligence-trigger (../cloudflare-trigger/, 2nd of the month 03:30 UTC =
+# 09:00 IST, the day after the jobs agent so the Executive Summary reads the
+# fresh jobs snapshot); it runs run_weekly.py, exits, and stops. Fly's own
+# `--schedule` never fired in Aug-Oct 2026 — never set one again (DEPLOY_FLY.md).
+# Deploy with `fly deploy --ha=false` (updates that Machine, leaves it stopped).
 app = "ik-market-research-weekly"     # rename to taste; globally unique
 primary_region = "sin"                # Singapore — close to India; match your other apps
 
 [build]
   dockerfile = "Dockerfile"
 
-# Non-secret config. Secrets (CLAUDE_CODE_OAUTH_TOKEN, APIFY_TOKEN,
-# MARKET_RESEARCH_BQ_SA_B64) via `fly secrets set` — see DEPLOY_FLY.md.
+# The weekly pipeline shells out to the Node-based `claude` CLI (one full Node
+# process per LLM call), which starves on the 256MB default and crawls. Give the
+# batch Machine real headroom — it's stopped between monthly runs, so the size
+# only costs during the ~10-min run.
+[[vm]]
+  size   = "shared-cpu-2x"
+  memory = "4gb"
+
+# Non-secret config. Secrets (CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY,
+# APIFY_TOKEN, MARKET_RESEARCH_BQ_SA_B64) via `fly secrets set` — see DEPLOY_FLY.md.
 [env]
   MR_BQ_PROJECT  = "ik-marketing-data"
   MR_BQ_DATASET  = "Market_Research"   # flip from cai_dev_sandbox once provisioned
   MR_BQ_LOCATION = "US"
+  # Hybrid: Haiku (low effort) for bulk extraction, Sonnet 5 (medium) for synthesis.
   MR_EXTRACT_MODEL = "haiku"
-  MR_SYNTH_MODEL   = "sonnet"
+  MR_SYNTH_MODEL   = "claude-sonnet-5"
+  MR_EXTRACT_EFFORT = "low"
+  MR_SYNTH_EFFORT   = "medium"
+  # Monthly cadence (was weekly): widen the blog/competitor recency window to
+  # ~32 days so a monthly run captures a full month of publications.
+  MR_WEEKLY_WINDOW_DAYS = "32"
+  # Monthly run_id grain (monthly-YYYY-MM, 2026-10-27): a retry later in the
+  # same month replaces that month's rows instead of adding a second snapshot.
+  MR_CADENCE = "monthly"
+
+# Batch job: Fly must never restart it after it exits (a restart would re-run
+# the LLM + Apify job). `fly deploy` resets the Machine's restart policy unless
+# fly.toml carries [[restart]] (flyctl appconfig/machines.go, read 2026-10-27),
+# so this keeps restart=no across deploys.
+[[restart]]
+  policy = "never"

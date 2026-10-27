@@ -12,17 +12,25 @@ from datetime import date, timedelta
 
 # ---------------------------------------------------------------------------
 # CADENCE / DATE WINDOW
-# Month-to-date: window = 1st of the current month -> today (requested 2026-08:
-# "August 1st till date"). REPORT_DATE is dynamic so the agent self-dates each
-# month; postings are date-filtered post-hoc against this window (in_window).
-# Override with JOBMKT_WINDOW_START=YYYY-MM-DD for an explicit window.
+# Default = rolling ~32-day lookback so an automated monthly cron (the
+# Cloudflare Worker ik-intelligence-trigger starts the Fly machine on the 1st,
+# 03:30 UTC) always captures a full month of postings regardless of the run day.
+# REPORT_DATE is the container's UTC date, so the run_id label is the RUN month
+# (naukri-2026-11 holds mostly October postings) — kept for continuity.
+# REPORT_DATE is dynamic so the agent self-dates each month; postings are
+# date-filtered post-hoc against this window (in_window).
+# Overrides: JOBMKT_WINDOW_DAYS=N (lookback length) or JOBMKT_WINDOW_START=
+# YYYY-MM-DD (explicit start, e.g. an ad-hoc month-to-date run).
 # ---------------------------------------------------------------------------
 import os as _os
 REPORT_DATE = date.today()
+WINDOW_DAYS = int(_os.getenv("JOBMKT_WINDOW_DAYS", "32"))
 _ws = _os.getenv("JOBMKT_WINDOW_START")
-WINDOW_START = (date.fromisoformat(_ws) if _ws
-                else date(REPORT_DATE.year, REPORT_DATE.month, 1))
-WINDOW_DAYS = max(1, (REPORT_DATE - WINDOW_START).days)
+if _ws:
+    WINDOW_START = date.fromisoformat(_ws)
+    WINDOW_DAYS = max(1, (REPORT_DATE - WINDOW_START).days)
+else:
+    WINDOW_START = REPORT_DATE - timedelta(days=WINDOW_DAYS)
 
 # ---------------------------------------------------------------------------
 # BUDGET GUARDRAILS  (sized for LinkedIn-only monthly ~ $0.70-1.00/run)
@@ -35,6 +43,11 @@ SESSION_SOFT_CEILING_USD = 1.50   # stop launching NEW queries past this session
 SESSION_HARD_ABORT_USD   = 2.00   # abort the whole run past this session delta
 ACCOUNT_ABS_ABORT_USD    = 4.50   # abort if absolute monthly usage crosses this (buffer under $5)
 WORST_CASE_PER_QUERY_USD = 0.15   # predictive guard: skip a query if it could cross HARD
+# Coverage gate (2026-10-27): if fewer than this share of the planned queries
+# returned data (the rest errored / were budget-skipped / never ran after an
+# [ABORT]), a live run does NOT replace the month's BigQuery snapshot and exits
+# 4; any smaller shortfall still writes but exits 5 (see run_monthly.py).
+MIN_QUERY_SUCCESS_SHARE = 0.8
 
 DEFAULT_TIMEOUT_S = 300
 POLL_INTERVAL_S   = 5

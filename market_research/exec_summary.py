@@ -1,7 +1,8 @@
 """Executive Summary synthesis (the orchestrator's strong-LLM step).
 
 Reads the 4 validated tabs (Social/Blog/Competitor in-memory + the latest
-monthly Job-Market snapshot from BigQuery) and asks Sonnet 4.6 via `claude -p`
+monthly Job-Market snapshot from BigQuery) and asks the synthesis tier
+(C.SYNTH_MODEL at C.SYNTH_EFFORT, i.e. Sonnet 5 / medium on Fly) via `claude -p`
 to produce a ranked strategic-priorities matrix. Each priority validates against
 schemas.ExecPriorityRow.
 """
@@ -85,7 +86,10 @@ def synthesize(social_rows, blog_rows, comp_rows, run_id: str, k: int = 6) -> li
         blog=_digest_blog(blog_rows) or "(none)",
         comp=_digest_comp(comp_rows) or "(none)")
     try:
-        data = L.extract_json(prompt, model=C.SYNTH_MODEL, timeout=360)
+        # effort is explicit: extract_json defaults to the EXTRACTION effort
+        # (low), so without it MR_SYNTH_EFFORT was dead config (fixed 2026-10-27).
+        data = L.extract_json(prompt, model=C.SYNTH_MODEL, timeout=360,
+                              effort=C.SYNTH_EFFORT)
     except Exception as e:
         print(f"[exec] synthesis failed: {e}")
         return []

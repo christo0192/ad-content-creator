@@ -1,0 +1,46 @@
+# Cloudflare Worker -- monthly trigger for the two Intelligence Fly batch apps.
+# Added 2026-10-27: the Fly-native `--schedule monthly` on both machines never
+# fired (Market_Research went stale after 2026-08-25), so this Worker is now the
+# ONLY scheduler. Never also set a Fly schedule on those machines.
+#
+# ONE cron, to stay under the Cloudflare per-account cron-trigger quota (this
+# account already runs ik-anomaly-trigger, ik-ad-generator-trigger and others):
+# 03:30 UTC = 09:00 IST on the 1st and the 2nd. src/index.ts dispatches on the
+# UTC day of event.scheduledTime:
+#   day 1 -> start ik-market-research-jobs   machine 7845393fe26338 (FLY_TOKEN_JOBS)
+#   day 2 -> start ik-market-research-weekly machine 7812565f9d3378 (FLY_TOKEN_WEEKLY)
+#   any other day -> log, start nothing
+# Jobs go first because the pipeline's Executive Summary reads the latest
+# job_market_demand snapshot. 03:30 UTC keeps the UTC and IST calendar dates
+# equal (anything 00:00-18:29 UTC does) and finishes before ik-ad-generator
+# (05:30 UTC) reads Market_Research.
+#
+# Deploy:  npm ci && npx wrangler deploy   (needs `npx wrangler login` once, or
+#          CLOUDFLARE_API_TOKEN with Workers Scripts:Edit on this account)
+# Secrets: app-scoped Fly deploy tokens, piped straight in so they are never
+#          echoed (record the creation date: -x 26280h = 3-year expiry):
+#   fly tokens create deploy -a ik-market-research-jobs   -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_JOBS
+#   fly tokens create deploy -a ik-market-research-weekly -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_WEEKLY
+
+name = "ik-intelligence-trigger"
+main = "src/index.ts"
+compatibility_date = "2025-12-01"
+workers_dev = false
+account_id = "bbb3aa03755ccab33b6367bb6367294c"   # same Cloudflare account as ik-anomaly-trigger; non-secret
+
+# MUST equal CRON in src/index.ts (test/index.test.ts fails on drift).
+[triggers]
+crons = ["30 3 1,2 * *"]
+
+# Non-secret targets. If a machine is ever recreated, update its ID here and
+# redeploy (the jobs app must never get a plain `fly deploy` -- see
+# job_market_agent/DEPLOY_FLY.md).
+[vars]
+JOBS_APP = "ik-market-research-jobs"
+JOBS_MACHINE_ID = "7845393fe26338"
+WEEKLY_APP = "ik-market-research-weekly"
+WEEKLY_MACHINE_ID = "7812565f9d3378"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
