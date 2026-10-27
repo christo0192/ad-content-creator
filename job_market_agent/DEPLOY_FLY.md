@@ -127,6 +127,8 @@ Exit codes of `run_monthly.py` (what the Machine's exit shows after a run):
 | 0 | OK (or `--preflight` passed) |
 | 2 | preflight failed — a secret / BQ credential is missing, or BQ auth (`SELECT 1`) or the target-table check failed. Checked **before** the Apify scrape on every run, so nothing was spent |
 | 3 | live run produced 0 rows (every query failed or was budget-skipped) |
+| 4 | **partial** live run: fewer than 80% (`MIN_QUERY_SUCCESS_SHARE`) of the planned queries returned data — `[ERR]`, `[LAUNCH-ERR]`, `[RUN-ERR]` (actor run FAILED / ABORTED / TIMED-OUT with 0 items), `[GUARD-SKIP]`, or queries never run after an `[ABORT]`. BigQuery was **not** written, so the month keeps its previous snapshot; fix the cause and re-run (§6) |
+| 5 | **degraded** live run: some queries failed but coverage passed the 80% gate; the snapshot **was** written without them (`output/run_manifest.json` → `fetch.queries_failed`) |
 | 1 | uncaught error (traceback in `fly logs`) |
 
 ## 5. The scheduler: Cloudflare Worker `ik-intelligence-trigger`

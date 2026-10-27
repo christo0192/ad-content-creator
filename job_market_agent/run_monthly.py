@@ -19,6 +19,12 @@ non-zero instead of a silent 0):
      (SELECT 1) or the target-table check failed. Checked BEFORE the paid Apify
      scrape on every run (not only --preflight), so nothing is spent.
   3  a live run produced 0 rows (every query failed / was skipped)
+  4  partial live run: fewer than C.MIN_QUERY_SUCCESS_SHARE (80%) of the planned
+     queries returned data (errors, launch errors, failed/timed-out actor runs
+     with 0 items, budget skips, or queries never run after an [ABORT]). The
+     BigQuery write is SKIPPED, so the month's previous snapshot is kept.
+  5  degraded live run: some queries failed but coverage passed the gate; the
+     snapshot WAS written (with those queries missing)
 """
 from __future__ import annotations
 import os, sys, re, json, glob, argparse
@@ -178,26 +184,61 @@ def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]],
             items, cost, meta = H.run_actor(
                 actor, input_fn(q), gov, f"{sname}:{q}", timeout_s=240)
         except H.BudgetExceeded as e:
-            print(f"[ABORT] {e}")
+            print(f"[ABORT] {H.redact(e)}")
             break
         except Exception as e:
-            print(f"[ERR] {q}: {e}")
-            manifest.append({"query": q, "error": str(e)})
+            print(f"[ERR] {q}: {H.redact(e)}")
+            manifest.append({"query": q, "error": H.redact(e)})
             continue
         if meta.get("error"):
             print(f"[LAUNCH-ERR] {q}: {meta['error'][:150]}")
             manifest.append({"query": q, "launch_error": meta["error"][:200]})
             continue
+        status = meta.get("status")
+        if status != "SUCCEEDED" and not items:
+            # A FAILED / ABORTED / TIMED-OUT actor run with an empty dataset used
+            # to be logged as "[OK] raw=0" and counted as a good query.
+            print(f"[RUN-ERR] {q}: actor run ended {status} with 0 items")
+            manifest.append({"query": q, "run_error": f"actor run ended {status} with 0 items"})
+            continue
+        if status != "SUCCEEDED":
+            print(f"[WARN] {q}: actor run ended {status}; keeping its {len(items)} items")
         safe = re.sub(r"[^A-Za-z0-9]+", "_", q)
         json.dump(items, open(os.path.join(RAW, f"live_{sname}_{safe}.json"), "w",
                   encoding="utf-8"), ensure_ascii=False)
         by_query.setdefault(q, []).extend(items)
         print(f"[OK] {q:<28} raw={meta['n_items']:<4} cost=${meta['cost_usd']:<8} "
               f"session=${meta['session_spent']}")
-        manifest.append({"query": q, "raw": meta["n_items"], "cost_usd": meta["cost_usd"]})
+        manifest.append({"query": q, "raw": meta["n_items"], "cost_usd": meta["cost_usd"],
+                         "status": status})
+    # Queries never attempted because an [ABORT] broke the loop count as failed
+    # too (2026-10-27): before, they were simply missing from the manifest.
+    attempted = {m["query"] for m in manifest}
+    manifest += [{"query": q, "skipped": "aborted"} for q in queries if q not in attempted]
+    failed = [m["query"] for m in manifest if "raw" not in m]
     metaout = {"mode": "live", "source": sname, "apify_cost_usd": round(gov.session_spent, 5),
-               "apify_final_usage": round(gov.last, 5), "manifest": manifest}
+               "apify_final_usage": round(gov.last, 5), "manifest": manifest,
+               "queries_planned": len(queries), "queries_failed": failed}
     return by_query, metaout
+
+
+def coverage_verdict(fetch_meta: dict) -> tuple[int, str]:
+    """(exit code, message) for a live run's query coverage (2026-10-27).
+    0 = every planned query returned data; 4 = fewer than
+    C.MIN_QUERY_SUCCESS_SHARE succeeded, so the run must NOT replace the month's
+    snapshot; 5 = some failed but coverage is enough to write. Before this, a run
+    where 13/14 queries failed still DELETE+APPENDed the month and exited 0.
+    Dry-run meta has no `queries_failed` and is always 0."""
+    failed = fetch_meta.get("queries_failed") or []
+    if not failed:
+        return 0, ""
+    planned = fetch_meta.get("queries_planned") or len(failed)
+    ok = planned - len(failed)
+    msg = (f"{len(failed)}/{planned} queries failed / were skipped "
+           f"({', '.join(failed[:5])}{' ...' if len(failed) > 5 else ''})")
+    if ok < C.MIN_QUERY_SUCCESS_SHARE * planned:
+        return 4, msg
+    return 5, msg
 
 
 # ---------------------------------------------------------------------------
@@ -333,8 +374,12 @@ def main():
               f"see the [ERR]/[GUARD-SKIP]/[ABORT] lines above)")
         sys.exit(3)
 
+    cov_code, cov_msg = coverage_verdict(fetch_meta)
     bq_result = None
-    if not args.no_bq and bq_rows:
+    if cov_code == 4:
+        print(f"[PARTIAL] {cov_msg}: below the {C.MIN_QUERY_SUCCESS_SHARE:.0%} coverage gate, "
+              f"so the BigQuery snapshot for {RUN_ID} is NOT replaced")
+    elif not args.no_bq and bq_rows:
         import bigquery_writer as BW
         bq_result = BW.write_snapshot(bq_rows, RUN_ID, dry_run=args.dry_run)
         print(f"[BQ] loaded {bq_result['loaded']} rows -> {bq_result['table']} "
@@ -352,11 +397,20 @@ def main():
         "fetch": fetch_meta,
         "stats": stats,
         "bq": bq_result,
+        "coverage": {"exit_code": cov_code, "detail": cov_msg or None},
     }
     json.dump(manifest, open(os.path.join(OUT, "run_manifest.json"), "w",
               encoding="utf-8"), ensure_ascii=False, indent=2)
     print(f"\n### kept {len(rows)} rows | apify ${fetch_meta.get('apify_cost_usd', 0)} "
           f"| manifest -> output/run_manifest.json")
+    if cov_code == 4:
+        print(f"[FATAL] partial run, BigQuery not written: {cov_msg} "
+              f"(see the [ERR]/[LAUNCH-ERR]/[RUN-ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(4)
+    if cov_code == 5:
+        print(f"[DEGRADED] snapshot written, but {cov_msg} "
+              f"(see the [ERR]/[LAUNCH-ERR]/[RUN-ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(5)
 
 
 if __name__ == "__main__":

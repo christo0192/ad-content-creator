@@ -43,6 +43,11 @@ SESSION_SOFT_CEILING_USD = 1.50   # stop launching NEW queries past this session
 SESSION_HARD_ABORT_USD   = 2.00   # abort the whole run past this session delta
 ACCOUNT_ABS_ABORT_USD    = 4.50   # abort if absolute monthly usage crosses this (buffer under $5)
 WORST_CASE_PER_QUERY_USD = 0.15   # predictive guard: skip a query if it could cross HARD
+# Coverage gate (2026-10-27): if fewer than this share of the planned queries
+# returned data (the rest errored / were budget-skipped / never ran after an
+# [ABORT]), a live run does NOT replace the month's BigQuery snapshot and exits
+# 4; any smaller shortfall still writes but exits 5 (see run_monthly.py).
+MIN_QUERY_SUCCESS_SHARE = 0.8
 
 DEFAULT_TIMEOUT_S = 300
 POLL_INTERVAL_S   = 5

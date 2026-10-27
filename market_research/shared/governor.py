@@ -18,6 +18,12 @@ class BudgetExceeded(Exception):
     pass
 
 
+def redact(text) -> str:
+    """str(text) with APIFY_TOKEN masked (backstop for printed errors)."""
+    s, t = str(text), os.environ.get("APIFY_TOKEN")
+    return s.replace(t, "***") if t else s
+
+
 def _token() -> str:
     t = os.environ.get("APIFY_TOKEN")
     if not t:
@@ -28,11 +34,14 @@ def _token() -> str:
 class BudgetGovernor:
     def __init__(self):
         self.token = _token()
+        # Header, never `?token=` in the URL (2026-10-27): requests errors quote
+        # the URL, which put the token into Fly logs via "[reddit] skipped: ...".
+        self.auth = {"Authorization": f"Bearer {self.token}"}
         self.baseline = self._usage()
         self.last = self.baseline
 
     def _usage(self):
-        r = _S.get(f"{API}/users/me/limits?token={self.token}", timeout=30)
+        r = _S.get(f"{API}/users/me/limits", headers=self.auth, timeout=30)
         r.raise_for_status()
         return float(r.json()["data"]["current"]["monthlyUsageUsd"])
 
@@ -63,22 +72,23 @@ def run_actor(actor, run_input, gov: BudgetGovernor, label,
     before = gov.last
     t0 = time.time()
     r = _S.post(f"{API}/acts/{aid}/runs",
-                params={"token": gov.token, "timeout": timeout_s}, json=run_input, timeout=60)
+                params={"timeout": timeout_s}, headers=gov.auth, json=run_input, timeout=60)
     if r.status_code not in (200, 201):
-        return [], 0.0, {"error": f"launch HTTP {r.status_code}: {r.text[:200]}"}
+        return [], 0.0, {"error": redact(f"launch HTTP {r.status_code}: {r.text[:200]}")}
     run = r.json()["data"]
     run_id, ds_id, status = run["id"], run.get("defaultDatasetId"), run["status"]
     while status in ("READY", "RUNNING"):
         if time.time() - t0 > timeout_s + 60:
-            _S.post(f"{API}/actor-runs/{run_id}/abort?token={gov.token}", timeout=30)
+            _S.post(f"{API}/actor-runs/{run_id}/abort", headers=gov.auth, timeout=30)
             status = "TIMED-OUT"; break
         time.sleep(C.APIFY_POLL_INTERVAL_S)
-        d = _S.get(f"{API}/actor-runs/{run_id}?token={gov.token}", timeout=30).json()["data"]
+        d = _S.get(f"{API}/actor-runs/{run_id}", headers=gov.auth, timeout=30).json()["data"]
         status, ds_id = d["status"], d.get("defaultDatasetId", ds_id)
     items = []
     if ds_id:
         ir = _S.get(f"{API}/datasets/{ds_id}/items",
-                    params={"token": gov.token, "clean": "true", "format": "json"}, timeout=120)
+                    params={"clean": "true", "format": "json"}, headers=gov.auth,
+                    timeout=120)
         if ir.status_code == 200:
             try: items = ir.json()
             except Exception: items = []

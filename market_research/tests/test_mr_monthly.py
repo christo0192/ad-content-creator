@@ -13,12 +13,15 @@ import os
 import re
 
 import pytest
+import requests
 
 import config as C
 import bq as BQ
 import llm as L
 import exec_summary as ES
 import run_weekly as RW
+import governor as G
+import agent_social as AS
 from google.cloud import bigquery
 
 FAKE_SA_B64 = base64.b64encode(json.dumps({"type": "service_account"}).encode()).decode()
@@ -439,3 +442,79 @@ def test_write_snapshot_with_no_rows_still_clears_the_run_id(monkeypatch):
     monkeypatch.setattr(BQ, "client", lambda: fake)
     BQ.write_snapshot("social", [], "monthly-2026-11")
     assert [c[0] for c in fake.calls] == ["create_table", "query", "get_table"]
+
+
+# ---------------------------------------------------------------------------
+# governor (Reddit via Apify): the token travels in a header, never a URL
+# (2026-10-27) — requests' error text quotes the URL, and "[reddit] skipped: {e}"
+# printed it into Fly logs.
+# ---------------------------------------------------------------------------
+APIFY_FAKE = "apify_api_FAKE0123456789fake"
+
+
+class _FakeAdapter(requests.adapters.BaseAdapter):
+    def __init__(self, route):
+        super().__init__()
+        self.route, self.sent = route, []
+
+    def send(self, request, **kw):
+        self.sent.append(request)
+        status, body = self.route(request)
+        resp = requests.Response()
+        resp.status_code, resp.url, resp.request = status, request.url, request
+        resp._content = json.dumps(body).encode()
+        resp.headers["Content-Type"] = "application/json"
+        return resp
+
+    def close(self):
+        pass
+
+
+@pytest.fixture
+def apify_session(monkeypatch):
+    """Point governor at a fresh Session whose only transport is the fake."""
+    monkeypatch.setenv("APIFY_TOKEN", APIFY_FAKE)
+    monkeypatch.setattr(G.time, "sleep", lambda s: None)
+
+    def install(route):
+        fake = _FakeAdapter(route)
+        s = requests.Session()
+        s.mount("https://", fake)
+        monkeypatch.setattr(G, "_S", s)
+        return fake
+    return install
+
+
+def test_governor_http_error_never_carries_the_token(apify_session, capsys):
+    fake = apify_session(lambda req: (503, {"error": "unavailable"}))
+    with pytest.raises(requests.HTTPError) as e:
+        G.BudgetGovernor()
+    assert APIFY_FAKE not in str(e.value)
+    (req,) = fake.sent
+    assert APIFY_FAKE not in req.url
+    assert req.headers["Authorization"] == f"Bearer {APIFY_FAKE}"
+    # ...and the social agent's catch-all prints it without the token too.
+    assert AS.reddit() == []
+    out = capsys.readouterr().out
+    assert "[reddit] skipped: 503" in out and APIFY_FAKE not in out
+
+
+def test_governor_run_actor_sends_the_token_only_as_a_header(apify_session):
+    def route(req):
+        if req.url.split("?")[0].endswith("/users/me/limits"):
+            return 200, {"data": {"current": {"monthlyUsageUsd": 1.0}}}
+        if "/acts/" in req.url:
+            return 201, {"data": {"id": "run1", "status": "SUCCEEDED", "defaultDatasetId": "ds1"}}
+        return 200, [{"title": "t", "upVotes": 5}]
+    fake = apify_session(route)
+    items, _, meta = G.run_actor("a/b", {"q": 1}, G.BudgetGovernor(), "reddit")
+    assert items == [{"title": "t", "upVotes": 5}] and meta["status"] == "SUCCEEDED"
+    assert len(fake.sent) >= 4
+    for req in fake.sent:
+        assert APIFY_FAKE not in req.url, req.url
+        assert req.headers["Authorization"] == f"Bearer {APIFY_FAKE}"
+
+
+def test_governor_redact_masks_the_token(monkeypatch):
+    monkeypatch.setenv("APIFY_TOKEN", APIFY_FAKE)
+    assert G.redact(f"x {APIFY_FAKE} y") == "x *** y"

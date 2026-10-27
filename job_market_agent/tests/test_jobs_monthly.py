@@ -15,6 +15,7 @@ import sys
 from datetime import timedelta
 
 import pytest
+import requests
 
 import config as C
 import bigquery_writer as BW
@@ -356,3 +357,236 @@ def test_process_tracked_linkedin_fixtures_are_valid(monkeypatch):
     assert stats["kept"] == len(rows)
     assert all(r.run_id == "linkedin-test" for r in rows)
     assert all(r.to_bq()["run_id"] == "linkedin-test" for r in rows[:5])
+
+
+# ---------------------------------------------------------------------------
+# partial / degraded live runs (2026-10-27): a run where most queries failed
+# used to DELETE+APPEND the month with a fraction of the data and exit 0.
+# ---------------------------------------------------------------------------
+def _fixture_items():
+    files = sorted(f for g in RM.DRYRUN_RAW_GLOBS for f in glob.glob(g))
+    assert files, "tracked ai-hiring-trends-test/raw LinkedIn fixtures are missing"
+    return json.load(open(files[0], encoding="utf-8"))
+
+
+class _FakeGov:
+    def __init__(self, soft=None):
+        self.session_spent, self.last = 0.0, 1.0
+        self._soft = list(soft or [])
+
+    def soft_ok(self):
+        return self._soft.pop(0) if self._soft else True
+
+
+def _fake_harness(results, soft=None):
+    """A stand-in `harness` module: run_actor plays `results` in order, one per
+    launched query (an Exception instance is raised)."""
+    import types
+    H = types.ModuleType("harness")
+
+    class BudgetExceeded(Exception):
+        pass
+    H.BudgetExceeded = BudgetExceeded
+    H.BudgetGovernor = lambda: _FakeGov(soft)
+    H.redact = str
+    plays = list(results)
+
+    def run_actor(actor, run_input, gov, label, timeout_s=None):
+        r = plays.pop(0)
+        if isinstance(r, Exception):
+            raise r
+        return r
+    H.run_actor = run_actor
+    return H
+
+
+def _abort_at(H, query, run_actor):
+    """Wrap run_actor so the governor raises BudgetExceeded at `query`."""
+    def wrapped(actor, run_input, gov, label, timeout_s=None):
+        if label.endswith(":" + query):
+            raise H.BudgetExceeded("absolute usage $4.51 >= abort $4.5")
+        return run_actor(actor, run_input, gov, label, timeout_s=timeout_s)
+    return wrapped
+
+
+def _ok(items, status="SUCCEEDED"):
+    return items, 0.01, {"run_id": "r", "status": status, "n_items": len(items),
+                         "cost_usd": 0.01, "session_spent": 0.01}
+
+
+def test_fetch_live_counts_every_kind_of_failed_query(monkeypatch, sandbox_out):
+    os.makedirs(RM.RAW, exist_ok=True)
+    monkeypatch.setattr(RM, "SOURCE", "linkedin")
+    items = _fixture_items()[:3]
+    H = _fake_harness([
+        _ok(items),                                             # q0 OK
+        RuntimeError("503 Server Error"),                       # q2 [ERR]   (q1 GUARD-SKIP)
+        ([], 0.0, {"error": "launch HTTP 402: payment required"}),   # q3 [LAUNCH-ERR]
+        _ok([], status="FAILED"),                               # q4 [RUN-ERR] (was "[OK] raw=0")
+        _ok(items, status="TIMED-OUT"),                         # q5 partial data: kept, counts OK
+    ], soft=[True, False])
+    H.run_actor = _abort_at(H, C.LINKEDIN_QUERIES[6], H.run_actor)   # q6 [ABORT]; q7 never runs
+    monkeypatch.setitem(sys.modules, "harness", H)
+
+    by_query, meta = RM.fetch_live(limit_queries=8)
+    qs = C.LINKEDIN_QUERIES[:8]
+    assert set(by_query) == {qs[0], qs[5]}
+    assert meta["queries_planned"] == 8
+    assert meta["queries_failed"] == [qs[1], qs[2], qs[3], qs[4], qs[6], qs[7]]
+    kinds = {m["query"]: (set(m) - {"query"}) for m in meta["manifest"]}
+    assert kinds[qs[1]] == {"skipped"} and kinds[qs[2]] == {"error"}
+    assert kinds[qs[3]] == {"launch_error"} and kinds[qs[4]] == {"run_error"}
+    assert {m["query"]: m.get("skipped") for m in meta["manifest"]}[qs[7]] == "aborted"
+    assert RM.coverage_verdict(meta)[0] == 4
+
+
+@pytest.mark.parametrize("planned, n_failed, code", [
+    (14, 0, 0), (14, 2, 5), (14, 3, 4), (14, 13, 4), (1, 1, 4)])
+def test_coverage_verdict_gate(planned, n_failed, code):
+    meta = {"queries_planned": planned, "queries_failed": [f"q{i}" for i in range(n_failed)]}
+    assert RM.coverage_verdict(meta)[0] == code
+
+
+def test_coverage_verdict_dry_run_meta_is_ok():
+    assert RM.coverage_verdict({"mode": "dry-run", "apify_cost_usd": 0.0}) == (0, "")
+
+
+def _setup_live(monkeypatch, n_ok, n_failed):
+    """Live main() with BQ + Apify faked: n_ok queries returned the fixture
+    items, n_failed hit a launch error. Returns the write_snapshot call log."""
+    monkeypatch.setenv("APIFY_TOKEN", "dummy")
+    monkeypatch.setenv("MARKET_RESEARCH_BQ_SA_B64", FAKE_SA_B64)
+    monkeypatch.setattr(BW, "_client", lambda: FakeBQClient())
+    items = _fixture_items()
+    qs = C.LINKEDIN_QUERIES[:n_ok + n_failed]
+    by_query = {q: items for q in qs[:n_ok]}
+    manifest = ([{"query": q, "raw": len(items), "cost_usd": 0.05} for q in qs[:n_ok]]
+                + [{"query": q, "launch_error": "launch HTTP 402"} for q in qs[n_ok:]])
+    meta = {"mode": "live", "apify_cost_usd": 0.05, "manifest": manifest,
+            "queries_planned": len(qs), "queries_failed": list(qs[n_ok:])}
+    monkeypatch.setattr(RM, "fetch_live", lambda limit=None: (by_query, meta))
+    writes = []
+    monkeypatch.setattr(BW, "write_snapshot", lambda rows, rid, dry_run=False: (
+        writes.append((len(rows), rid)) or {"loaded": len(rows), "table": C.BQ_FQTN,
+                                            "table_total_rows": len(rows), "run_id": rid}))
+    monkeypatch.setattr(BW, "query_summary", lambda rid: [])
+    return writes
+
+
+def test_main_partial_run_exits_4_and_keeps_the_previous_snapshot(monkeypatch, capsys, sandbox_out):
+    writes = _setup_live(monkeypatch, n_ok=1, n_failed=13)
+    with pytest.raises(SystemExit) as e:
+        _run_main(monkeypatch, "--source", "linkedin")
+    assert e.value.code == 4
+    assert writes == []           # no DELETE run_id + APPEND of 1/14 of the month
+    out = capsys.readouterr().out
+    assert "[FATAL] partial run, BigQuery not written: 13/14 queries failed" in out
+    manifest = json.load(open(sandbox_out / "output" / "run_manifest.json", encoding="utf-8"))
+    assert manifest["coverage"]["exit_code"] == 4 and manifest["bq"] is None
+
+
+def test_main_degraded_run_writes_but_exits_5(monkeypatch, capsys, sandbox_out):
+    writes = _setup_live(monkeypatch, n_ok=13, n_failed=1)
+    with pytest.raises(SystemExit) as e:
+        _run_main(monkeypatch, "--source", "linkedin")
+    assert e.value.code == 5
+    assert len(writes) == 1 and writes[0][1] == f"linkedin-{C.REPORT_DATE:%Y-%m}"
+    assert "[DEGRADED] snapshot written, but 1/14 queries failed" in capsys.readouterr().out
+
+
+def test_main_full_live_run_writes_and_exits_0(monkeypatch, sandbox_out):
+    writes = _setup_live(monkeypatch, n_ok=14, n_failed=0)
+    assert _run_main(monkeypatch, "--source", "linkedin") is None
+    assert len(writes) == 1
+
+
+# ---------------------------------------------------------------------------
+# harness: the Apify token travels in a header, never in a URL (2026-10-27).
+# With `?token=`, requests' own error text ("503 ... for url: ...?token=X")
+# printed the token into Fly logs and the run manifest.
+# ---------------------------------------------------------------------------
+TOKEN = "apify_api_FAKE0123456789fake"
+
+
+class _FakeAdapter(requests.adapters.BaseAdapter):
+    """Records every prepared request; answers from `route(request)`."""
+
+    def __init__(self, route):
+        super().__init__()
+        self.route, self.sent = route, []
+
+    def send(self, request, **kw):
+        self.sent.append(request)
+        status, body = self.route(request)
+        resp = requests.Response()
+        resp.status_code, resp.url, resp.request = status, request.url, request
+        resp._content = json.dumps(body).encode()
+        resp.headers["Content-Type"] = "application/json"
+        return resp
+
+    def close(self):
+        pass
+
+
+@pytest.fixture
+def real_harness(monkeypatch):
+    """Import the real harness under a fake token; dropped again afterwards."""
+    monkeypatch.setenv("APIFY_TOKEN", TOKEN)
+    monkeypatch.delitem(sys.modules, "harness", raising=False)
+    H = importlib.import_module("harness")
+    monkeypatch.setitem(sys.modules, "harness", H)
+    monkeypatch.setattr(H.time, "sleep", lambda s: None)
+    return H
+
+
+def _limits(usage=1.0):
+    return 200, {"data": {"current": {"monthlyUsageUsd": usage}}}
+
+
+def test_harness_http_error_never_carries_the_token(real_harness):
+    H = real_harness
+    fake = _FakeAdapter(lambda req: (503, {"error": "unavailable"}))
+    H.S.mount("https://", fake)
+    with pytest.raises(requests.HTTPError) as e:
+        H.BudgetGovernor()
+    assert TOKEN not in str(e.value)
+    (req,) = fake.sent
+    assert TOKEN not in req.url
+    assert req.headers["Authorization"] == f"Bearer {TOKEN}"
+
+
+def test_harness_run_actor_sends_the_token_only_as_a_header(real_harness):
+    H = real_harness
+
+    def route(req):
+        if req.url.split("?")[0].endswith("/users/me/limits"):
+            return _limits()
+        if "/acts/" in req.url:
+            return 201, {"data": {"id": "run1", "status": "SUCCEEDED", "defaultDatasetId": "ds1"}}
+        return 200, [{"title": "ML Engineer"}]
+    fake = _FakeAdapter(route)
+    H.S.mount("https://", fake)
+    items, _, meta = H.run_actor("a/b", {"q": 1}, H.BudgetGovernor(), "label")
+    assert items == [{"title": "ML Engineer"}] and meta["status"] == "SUCCEEDED"
+    assert len(fake.sent) >= 4    # limits x3 (init/pre/post), launch, dataset
+    for req in fake.sent:
+        assert TOKEN not in req.url, req.url
+        assert req.headers["Authorization"] == f"Bearer {TOKEN}"
+
+
+def test_harness_redact_masks_the_token(real_harness):
+    assert real_harness.redact(f"boom url=...?token={TOKEN}") == "boom url=...?token=***"
+
+
+def test_fetch_live_err_line_and_manifest_are_redacted(monkeypatch, capsys, sandbox_out, real_harness):
+    os.makedirs(RM.RAW, exist_ok=True)
+    monkeypatch.setattr(RM, "SOURCE", "linkedin")
+    H = real_harness
+    monkeypatch.setattr(H, "BudgetGovernor", lambda: _FakeGov())
+
+    def run_actor(*a, **k):
+        raise RuntimeError(f"Max retries exceeded with url: /v2/x?token={TOKEN}")
+    monkeypatch.setattr(H, "run_actor", run_actor)
+    _, meta = RM.fetch_live(limit_queries=1)
+    assert TOKEN not in capsys.readouterr().out
+    assert TOKEN not in json.dumps(meta)
