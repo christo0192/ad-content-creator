@@ -22,7 +22,9 @@
     ik-ad-generator-trigger, ik-anomaly-trigger, ik-donna-scheduler x2,
     sip-pipeline-trigger). Decision: stay free, piggyback on the MIS cron. Code + vitest
     suite kept (CI) for a Workers Paid re-enable — see `cloudflare-trigger/README.md`.
-    Never give it a cron while ik-mis dispatches (double runs).
+    Never give it a cron while ik-mis dispatches (double runs): its wrangler.toml
+    is `crons = []` (a redeploy removes, never adds, a cron) and the vitest drift
+    guard fails if a cron appears there.
   - `--preflight` on both entrypoints (secrets + BQ `SELECT 1`; pipeline also one
     tiny `claude -p`), and real exit codes: jobs 2 = preflight failed (before any
     Apify spend), 3 = live run with 0 rows; pipeline 2 = preflight, 1 = degraded tab.

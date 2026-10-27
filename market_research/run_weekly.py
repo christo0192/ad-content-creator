@@ -16,8 +16,9 @@ monthly BQ snapshot) and writes that too.
 
 LLM calls use `claude -p` (Max plan). Jobs (Tab 3) runs on its own monthly
 cadence in ../job_market_agent. On Fly this runs MONTHLY (MR_CADENCE=monthly,
-run_id monthly-YYYY-MM), started by the Cloudflare Worker ik-intelligence-trigger
-on the 2nd — the file name is historical.
+run_id monthly-YYYY-MM), started by the MIS Worker ik-ad-generator-trigger
+(christo0192/ik-mis cloudflare-trigger/) on the 2nd, 05:30 UTC — the file name
+is historical.
 
 Exit codes (added 2026-10-27; before, a run with no LLM token wrote nothing
 and still exited 0, so the Worker-started machine looked healthy):

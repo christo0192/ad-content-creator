@@ -171,8 +171,12 @@ the schedule `"30 5 * * *"`.
 
 `-x 26280h` = 3 years. **Record the creation date** when you mint it (expiry =
 creation + 3 years); an expired token makes the 2nd-of-month start fail with a
-401 that only shows up in the Worker logs. Deploy tokens print as `FlyV1 fm2_…`
-and must be sent as-is (not as `Bearer`). Check a fired run on the 2nd with
+401 that only shows up in the Worker logs. Deploy tokens print as `FlyV1 fm2_…`;
+the Worker sends this one as-is (`Authorization: FlyV1 fm2_…`, as flyctl does).
+Fly also accepts `Bearer FlyV1 fm2_…`, which is what the generator start has
+always sent with its own deploy token `FLY_TOKEN`: leave that header alone. A
+401 here points at the token (expired, revoked, other app), not the header.
+Check a fired run on the 2nd with
 `npx wrangler tail ik-ad-generator-trigger` (the pipeline start returns 200,
 next to the usual generator start).
 

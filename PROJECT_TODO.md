@@ -97,7 +97,7 @@ Code: `christo0192/ik-mis` → `cloudflare-trigger/` (cron `30 5 * * *` = 05:30 
 daily generator start unchanged; UTC day 1 → also jobs, day 2 → also pipeline). This repo's
 own `cloudflare-trigger/` Worker is NOT scheduled — Cloudflare refused its cron (Workers Free
 limit of 5 per account); kept + CI-tested for Workers Paid (`cloudflare-trigger/README.md`).
-- [x] This repo's Worker deployed once; cron refused (code 10072) → stays cronless. Never give it a cron while ik-mis dispatches (double runs).
+- [x] This repo's Worker deployed once; cron refused (code 10072) → stays cronless. Never give it a cron while ik-mis dispatches (double runs); `wrangler.toml` pins `crons = []` (a redeploy removes, never adds, a cron) and the vitest drift guard enforces it.
 - [ ] ik-mis: day-1/day-2 dispatch merged in `cloudflare-trigger/` (generator start independent, never blocked/delayed, never throws)
 - [ ] In the ik-mis `cloudflare-trigger/` folder: `npm ci && npx wrangler login` (browser OAuth; or `CLOUDFLARE_API_TOKEN`)
 - [ ] `fly tokens create deploy -a ik-market-research-jobs -n ik-ad-generator-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_JOBS`

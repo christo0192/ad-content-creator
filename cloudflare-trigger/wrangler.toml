@@ -4,10 +4,13 @@
 # dispatch is in christo0192/ik-mis cloudflare-trigger/ (Worker
 # ik-ad-generator-trigger, daily 05:30 UTC = 11:00 IST): UTC day 1 starts the
 # jobs machine (secret FLY_TOKEN_JOBS), day 2 the pipeline machine (secret
-# FLY_TOKEN_WEEKLY). This file, src/ and test/ are kept as-is (CI tests them)
-# so the Worker can be re-enabled on Workers Paid: `npx wrangler deploy` plus
-# the two `wrangler secret put` pipes below -- and, in the same change, remove
-# the day-1/day-2 dispatch from ik-mis, or every monthly run starts twice.
+# FLY_TOKEN_WEEKLY). `crons = []` below keeps it cronless on every redeploy
+# (wrangler removes any cron the Worker has), so a freed quota slot can never
+# bring back double monthly runs. src/ and test/ are kept (CI tests them) so
+# the Worker can be re-enabled on Workers Paid: set crons back to the CRON in
+# src/index.ts, flip the drift test, `npx wrangler deploy` plus the two
+# `wrangler secret put` pipes below -- and, in the same change, remove the
+# day-1/day-2 dispatch from ik-mis, or every monthly run starts twice.
 # See README.md. The rest of this header describes the design if re-enabled.
 # ============================================================================
 #
@@ -41,9 +44,12 @@ compatibility_date = "2025-12-01"
 workers_dev = false
 account_id = "bbb3aa03755ccab33b6367bb6367294c"   # same Cloudflare account as ik-anomaly-trigger; non-secret
 
-# MUST equal CRON in src/index.ts (test/index.test.ts fails on drift).
+# CRONLESS while ik-mis dispatches the same machines (test/index.test.ts fails
+# if a cron appears here). Re-enable only together with removing the ik-mis
+# day-1/day-2 dispatch, as crons = ["30 3 1,2 * *"] (MUST equal CRON in
+# src/index.ts) and the drift test switched back to asserting it.
 [triggers]
-crons = ["30 3 1,2 * *"]
+crons = []
 
 # Non-secret targets. If a machine is ever recreated, update its ID here and
 # redeploy (the jobs app must never get a plain `fly deploy` -- see

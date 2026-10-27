@@ -315,11 +315,20 @@ describe("fetch()", () => {
 describe("wrangler.toml drift guard", () => {
   const toml = readFileSync(fileURLToPath(new URL("../wrangler.toml", import.meta.url)), "utf8");
 
-  it("has exactly one cron and it equals CRON", () => {
-    const m = toml.match(/^crons\s*=\s*\[([^\]]*)\]/m);
-    expect(m).not.toBeNull();
-    const crons = [...m![1].matchAll(/"([^"]*)"/g)].map((x) => x[1]);
-    expect(crons).toEqual([CRON]);
+  // Cronless while ik-mis (ik-ad-generator-trigger) dispatches the same two
+  // machines: a cron here would start every monthly run twice as soon as a
+  // Cloudflare cron slot frees up. `crons = []` (not an omitted key) makes
+  // `wrangler deploy` remove any cron. Re-enabling on Workers Paid = set
+  // crons = [CRON] and assert that here, in the same change that drops the
+  // ik-mis day-1/day-2 dispatch.
+  it("has no cron (crons = [] under [triggers]) while ik-mis dispatches", () => {
+    expect(toml).toMatch(/^\[triggers\][ \t]*\r?\ncrons[ \t]*=[ \t]*\[[ \t]*\][ \t]*\r?$/m);
+    expect(toml.match(/^crons\s*=/gm)).toHaveLength(1);
+    expect(toml.match(/^\[triggers\]/gm)).toHaveLength(1);
+  });
+
+  it("keeps the re-enable cron documented and equal to CRON", () => {
+    expect(toml).toContain(`crons = ["${CRON}"]`);
   });
 
   it("targets the real machines", () => {

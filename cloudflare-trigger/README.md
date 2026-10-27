@@ -47,19 +47,23 @@ only scheduler.
 ## What is deployed here
 
 `ik-intelligence-trigger` was deployed once and exists on the account without a
-cron trigger, so it never fires. Do **not** give it a cron while the ik-mis
-Worker dispatches the same machines, or each month's jobs and pipeline would
-start twice (two paid runs). If it should not linger, `npx wrangler delete`
-from this folder removes it; nothing depends on it.
+cron trigger, so it never fires. `wrangler.toml` says so too: `crons = []`, so
+any later `npx wrangler deploy` from this folder (a code fix, a secret rotation)
+removes a cron rather than adding one, even once a cron slot frees up. Do
+**not** give it a cron while the ik-mis Worker dispatches the same machines, or
+each month's jobs and pipeline would start twice (two paid runs). If it should
+not linger, `npx wrangler delete` from this folder removes it; nothing depends
+on it.
 
 ## Code + tests (kept as they are)
 
-- `src/index.ts`: cron `CRON = "30 3 1,2 * *"`, UTC day 1 starts jobs, day 2
-  starts the pipeline, any other day logs and starts nothing; transient
-  failures (5xx / 429 / network / 15 s timeout) retried up to 3 attempts; never
-  throws.
-- `test/index.test.ts`: vitest suite, including a guard that `CRON` equals
-  `wrangler.toml [triggers].crons[0]`.
+- `src/index.ts`: `CRON = "30 3 1,2 * *"` (the cron for a re-enable), UTC day
+  1 starts jobs, day 2 starts the pipeline, any other day logs and starts
+  nothing; transient failures (5xx / 429 / network / 15 s timeout) retried up
+  to 3 attempts; never throws.
+- `test/index.test.ts`: vitest suite, including a guard that `wrangler.toml`
+  has `crons = []` under `[triggers]` (and documents `crons = ["<CRON>"]` for
+  the re-enable).
 - CI runs `npm ci && npm test && npm run typecheck` here.
 
 ```bash
@@ -73,9 +77,14 @@ Only if the account moves to **Workers Paid** (cron limit is no longer 5) **and*
 the day-1 / day-2 dispatch is removed from `ik-mis/cloudflare-trigger` in the
 same change (never both live):
 
+1. In `wrangler.toml` set `crons = ["30 3 1,2 * *"]` (= `CRON`), and switch
+   the drift test in `test/index.test.ts` from asserting `crons = []` to
+   asserting `crons = [CRON]`.
+2. Then:
+
 ```bash
 cd cloudflare-trigger
-npm ci
+npm ci && npm test
 npx wrangler login          # once; or CLOUDFLARE_API_TOKEN with Workers Scripts:Edit
 fly tokens create deploy -a ik-market-research-jobs   -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_JOBS
 fly tokens create deploy -a ik-market-research-weekly -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_WEEKLY

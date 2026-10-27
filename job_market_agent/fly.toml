@@ -1,9 +1,10 @@
 # Fly.io app for the monthly job-market agent (batch job, NOT a server).
 # There is no [http_service] and NO Fly-native schedule. The one stopped Machine
-# (7845393fe26338) is started monthly by the Cloudflare Worker
-# ik-intelligence-trigger (../cloudflare-trigger/, 1st of the month 03:30 UTC =
-# 09:00 IST); it runs run_monthly.py, exits, and stops. Fly's own `--schedule
-# monthly` never fired in Aug-Oct 2026, so it must never be set again (see
+# (7845393fe26338) is started monthly by the MIS Worker ik-ad-generator-trigger
+# (christo0192/ik-mis cloudflare-trigger/, 1st of the month 05:30 UTC = 11:00
+# IST; ../cloudflare-trigger/README.md says why the local Worker is idle); it
+# runs run_monthly.py, exits, and stops. Fly's own `--schedule monthly` never
+# fired in Aug-Oct 2026, so it must never be set again (see
 # DEPLOY_FLY.md). JOBMKT_SOURCE=naukri makes the run use the cheap Naukri actor
 # (thirdwatch); WINDOW defaults to a rolling 32-day lookback.
 #

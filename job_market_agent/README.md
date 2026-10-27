@@ -73,10 +73,11 @@ python run_monthly.py
 ## Schedule (monthly)
 
 **Production target = Fly.io** (one stopped batch Machine). Since 2026-10-27 the
-**only** scheduler is the Cloudflare Worker `ik-intelligence-trigger`
-(`../cloudflare-trigger/`), which starts the Machine on the 1st at 03:30 UTC
-(09:00 IST). The old Fly `--schedule monthly` never fired — never set it again,
-and never run a plain `fly deploy` on this app (it creates + starts a new
+**only** scheduler is the MIS Worker `ik-ad-generator-trigger`
+(`christo0192/ik-mis` → `cloudflare-trigger/`), which starts the Machine on the
+1st at 05:30 UTC (11:00 IST); this repo's `../cloudflare-trigger/` Worker is
+idle (see its README.md for why). The old Fly `--schedule monthly` never fired
+— never set it again, and never run a plain `fly deploy` on this app (it creates + starts a new
 Machine = a live paid scrape). See **`DEPLOY_FLY.md`** for the build-only +
 `fly machine update` flow, secrets, and the no-spend smoke:
 
