@@ -100,6 +100,7 @@ weekly window, so every source is still represented each run.
 - **Competitor pricing** is often form-gated → `price_inr` null + `confidence:low`
   is the honest result, not a bug.
 - Deploy: see **`DEPLOY_FLY.md`** — one stopped Fly Machine started **monthly**
-  (2nd, 03:30 UTC) by the Cloudflare Worker `ik-intelligence-trigger`
-  (`../cloudflare-trigger/`); no Fly-native schedule. On Fly `MR_CADENCE=monthly`
-  gives run_id `monthly-YYYY-MM`. Smoke: `python run_weekly.py --preflight`.
+  (2nd, 05:30 UTC = 11:00 IST) by the MIS Worker `ik-ad-generator-trigger`
+  (`christo0192/ik-mis` → `cloudflare-trigger/`; this repo's
+  `../cloudflare-trigger/` is idle, see its README.md); no Fly-native
+  schedule. On Fly `MR_CADENCE=monthly` gives run_id `monthly-YYYY-MM`. Smoke: `python run_weekly.py --preflight`.
