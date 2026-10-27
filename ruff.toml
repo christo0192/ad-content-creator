@@ -1,0 +1,8 @@
+# Lint gate for CI (added 2026-10-27). Deliberately NARROW: syntax errors and
+# undefined names only (E9/F63/F7/F82). The default rule set reports ~38
+# pre-existing style findings (E401/E701/E702/E402/F401...) in the pipelines;
+# widen this only together with a cleanup PR.
+extend-exclude = ["market_research_dashboard", "Reference", "**/.venv"]
+
+[lint]
+select = ["E9", "F63", "F7", "F82"]

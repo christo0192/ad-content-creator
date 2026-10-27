@@ -21,3 +21,11 @@ job_market_agent/staging/
 .playwright-mcp/
 .gsd/runtime/
 node_modules/
+.pytest_cache/
+.ruff_cache/
+
+# Cloudflare Worker (cloudflare-trigger/): wrangler state, local dev secrets,
+# and the `wrangler deploy --dry-run --outdir dist` bundle
+.wrangler/
+.dev.vars
+cloudflare-trigger/dist/

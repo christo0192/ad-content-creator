@@ -1,0 +1,78 @@
+# PR + push gate for ad-content-creator (Intelligence dept). Needs NO secrets:
+# the Python tests fake BigQuery / Apify / `claude -p`, the smoke run uses the
+# tracked ai-hiring-trends-test LinkedIn fixtures with --dry-run --no-bq, and the
+# Worker tests stub fetch. Live paths (Apify scrapes, BigQuery, claude -p,
+# run_weekly.py itself, wrangler deploy, flyctl) are deliberately NOT exercised
+# here — see */DEPLOY_FLY.md for the manual post-merge smoke (--preflight).
+# Added 2026-10-27 with the monthly Cloudflare-Worker trigger.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: "1"
+      # Point every live-credential lookup at paths that don't exist so nothing
+      # can reach a real service even if a guard regresses.
+      JOBMKT_BQ_KEY: /nonexistent/sa.json
+      MR_BQ_KEY: /nonexistent/sa.json
+      CLAUDE_BIN: /nonexistent/claude
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"   # matches python:3.12-slim in both Dockerfiles
+          cache: pip
+          cache-dependency-path: |
+            job_market_agent/requirements.txt
+            market_research/requirements.txt
+      - run: pip install -r job_market_agent/requirements.txt -r market_research/requirements.txt pytest==8.3.3 ruff==0.6.9
+      - name: ruff (narrow select from ruff.toml)
+        run: ruff check job_market_agent market_research
+      - name: compileall
+        run: python -m compileall -q job_market_agent market_research
+      # Two processes: both packages have a top-level module named `config`.
+      - name: job_market_agent tests
+        run: python -m pytest -q -p no:cacheprovider job_market_agent/tests
+      - name: market_research tests
+        run: python -m pytest -q -p no:cacheprovider market_research/tests
+      - name: smoke — offline monthly jobs run on tracked fixtures
+        working-directory: job_market_agent
+        run: JOBMKT_SOURCE=linkedin python run_monthly.py --dry-run --no-bq --source linkedin
+
+  worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: cloudflare-trigger
+    env:
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # 24 = the Node the lockfile + tests were verified on locally (and the
+          # MIS repo's CI); Node 20 went EOL 2026-04.
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: cloudflare-trigger/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: wrangler bundle + config check (no credentials)
+        run: npx wrangler deploy --dry-run --outdir dist

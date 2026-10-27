@@ -1,0 +1,19 @@
+{
+  "name": "ik-intelligence-trigger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker cron that starts the Intelligence Fly batch machines monthly (jobs on the 1st, market-research pipeline on the 2nd, 09:00 IST)",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev --test-scheduled",
+    "tail": "wrangler tail",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20260702.1",
+    "typescript": "5.6.3",
+    "vitest": "2.1.9",
+    "wrangler": "3.114.17"
+  }
+}

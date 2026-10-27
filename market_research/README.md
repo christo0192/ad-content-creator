@@ -66,6 +66,9 @@ once provisioned (see `../job_market_agent/IAM_REQUEST.md`).
 | `MR_BQ_DATASET` | `cai_dev_sandbox` | flip to `Market_Research` |
 | `MR_EXTRACT_MODEL` / `MR_SYNTH_MODEL` | `haiku` / `sonnet` | model selection for `claude -p` |
 | `MR_WEEKLY_WINDOW_DAYS` | `7` | recency window |
+| `MR_CADENCE` | `weekly` | `monthly` → run_id `monthly-YYYY-MM` (one snapshot per month; set on Fly) |
+| `MR_RUN_ID` | — | force an explicit run_id (backfills) |
+| `MR_REQUIRE_LLM_TOKEN` | — | `1` → preflight demands `CLAUDE_CODE_OAUTH_TOKEN`/`ANTHROPIC_API_KEY` off Fly too |
 | `MR_BLOG_MAX` | `18` | max articles extracted/run (LLM cost/latency cap) |
 | `MR_LLM_CONCURRENCY` | `4` | parallel `claude -p` calls (respect Max-plan limits) |
 | `APIFY_TOKEN` | — | optional; enables Reddit in Social |
@@ -96,4 +99,7 @@ weekly window, so every source is still represented each run.
   skews positive); swap to a `claude -p` sentiment pass if you want nuance.
 - **Competitor pricing** is often form-gated → `price_inr` null + `confidence:low`
   is the honest result, not a bug.
-- Deploy: see **`DEPLOY_FLY.md`** (Fly scheduled Machine, weekly).
+- Deploy: see **`DEPLOY_FLY.md`** — one stopped Fly Machine started **monthly**
+  (2nd, 03:30 UTC) by the Cloudflare Worker `ik-intelligence-trigger`
+  (`../cloudflare-trigger/`); no Fly-native schedule. On Fly `MR_CADENCE=monthly`
+  gives run_id `monthly-YYYY-MM`. Smoke: `python run_weekly.py --preflight`.

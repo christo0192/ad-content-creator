@@ -12,8 +12,11 @@ from datetime import date, timedelta
 
 # ---------------------------------------------------------------------------
 # CADENCE / DATE WINDOW
-# Default = rolling ~32-day lookback so an automated monthly cron (Fly fires on
-# the 1st) always captures a full month of postings regardless of the run day.
+# Default = rolling ~32-day lookback so an automated monthly cron (the
+# Cloudflare Worker ik-intelligence-trigger starts the Fly machine on the 1st,
+# 03:30 UTC) always captures a full month of postings regardless of the run day.
+# REPORT_DATE is the container's UTC date, so the run_id label is the RUN month
+# (naukri-2026-11 holds mostly October postings) — kept for continuity.
 # REPORT_DATE is dynamic so the agent self-dates each month; postings are
 # date-filtered post-hoc against this window (in_window).
 # Overrides: JOBMKT_WINDOW_DAYS=N (lookback length) or JOBMKT_WINDOW_START=

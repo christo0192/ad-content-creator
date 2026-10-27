@@ -1,8 +1,17 @@
-# Fly.io app for the monthly job-market agent (batch / scheduled).
-# This is NOT a server — there is no [http_service]. The work is done by a
-# scheduled Machine (see DEPLOY_FLY.md): it boots monthly, runs run_monthly.py,
-# and stops. JOBMKT_SOURCE=naukri makes the scheduled run use the cheap Naukri
-# actor (thirdwatch); WINDOW defaults to a rolling 32-day lookback.
+# Fly.io app for the monthly job-market agent (batch job, NOT a server).
+# There is no [http_service] and NO Fly-native schedule. The one stopped Machine
+# (7845393fe26338) is started monthly by the Cloudflare Worker
+# ik-intelligence-trigger (../cloudflare-trigger/, 1st of the month 03:30 UTC =
+# 09:00 IST); it runs run_monthly.py, exits, and stops. Fly's own `--schedule
+# monthly` never fired in Aug-Oct 2026, so it must never be set again (see
+# DEPLOY_FLY.md). JOBMKT_SOURCE=naukri makes the run use the cheap Naukri actor
+# (thirdwatch); WINDOW defaults to a rolling 32-day lookback.
+#
+# !! NEVER run a plain `fly deploy` on this app. The machine above is not a Fly
+# !! Launch machine, so `fly deploy` would CREATE a new one and START it — an
+# !! immediate live paid Apify scrape — and the Worker would still point at the
+# !! old machine ID. Use `fly deploy --build-only --push --image-label <x>` then
+# !! `fly machine update 7845393fe26338 --image ... --skip-start` (DEPLOY_FLY.md §3).
 app = "ik-market-research-jobs"      # rename to taste; must be globally unique
 primary_region = "sin"               # Singapore — close to India; match your other apps
 
@@ -17,5 +26,14 @@ primary_region = "sin"               # Singapore — close to India; match your 
   JOBMKT_BQ_DATASET  = "Market_Research"
   JOBMKT_BQ_LOCATION = "US"
 
+# Batch job: Fly must never restart it after it exits (an exit-0 restart would
+# re-run the paid scrape). Kept explicit because fly deploy resets a machine's
+# restart policy to Fly's default unless fly.toml carries [[restart]]
+# (flyctl appconfig/machines.go, read 2026-10-27). Maps to restart=no; also
+# pass `--restart no` to `fly machine update` (not a Launch machine).
+[[restart]]
+  policy = "never"
+
 # No [[services]] / [http_service]: nothing listens on a port.
-# No [[vm]] auto-start machines — the scheduled Machine is created explicitly.
+# No [[vm]] auto-start machines — the single Worker-started Machine is managed
+# explicitly with `fly machine update` (never created by `fly deploy`).

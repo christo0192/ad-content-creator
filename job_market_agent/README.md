@@ -72,19 +72,24 @@ python run_monthly.py
 
 ## Schedule (monthly)
 
-**Production target = Fly.io** (batch / scheduled Machine). See **`DEPLOY_FLY.md`**
-for the full deploy: `Dockerfile` + `fly.toml`, secrets via `fly secrets set`
-(`APIFY_TOKEN`, `MARKET_RESEARCH_BQ_SA_B64`), and:
+**Production target = Fly.io** (one stopped batch Machine). Since 2026-10-27 the
+**only** scheduler is the Cloudflare Worker `ik-intelligence-trigger`
+(`../cloudflare-trigger/`), which starts the Machine on the 1st at 03:30 UTC
+(09:00 IST). The old Fly `--schedule monthly` never fired — never set it again,
+and never run a plain `fly deploy` on this app (it creates + starts a new
+Machine = a live paid scrape). See **`DEPLOY_FLY.md`** for the build-only +
+`fly machine update` flow, secrets, and the no-spend smoke:
 
 ```bash
-fly machine run . --schedule monthly --restart no -a ik-market-research-jobs
+python run_monthly.py --preflight   # secrets + BQ SELECT 1; exit 0 = OK, 2 = missing
 ```
 
 On Fly the filesystem is ephemeral — **BigQuery is the durable store**; the
 `output/`+`raw/` JSON snapshots are just local convenience.
 
-**Local Windows scheduling (optional)** — only if you also want to run from your
-laptop. Not shipped in the Fly image (`.dockerignore`):
+**Local Windows scheduling (optional, legacy)** — only if you run from your
+laptop *instead of* Fly; running both scrapes (and pays for) the month twice.
+Not shipped in the Fly image (`.dockerignore`):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File schedule_monthly.ps1   # 2nd of month, 09:00

@@ -4,13 +4,23 @@
   python run_monthly.py --dry-run  # reuse existing raw LinkedIn JSON, no Apify
                                    #   spend, no token needed; still writes BQ
   python run_monthly.py --dry-run --no-bq   # process + validate only, skip BQ
+  python run_monthly.py --preflight         # secrets + BQ auth check only; no
+                                            #   Apify spend, no BQ write
 
 Pipeline (per the v0.1 plan): fetch -> normalize -> AI-classify -> score ->
 Pydantic-validate (the tool-call gate) -> dedup -> write BigQuery + local
 snapshot + cost/validation manifest.
+
+Exit codes (added 2026-10-27 — the Fly machine's exit code is the only signal
+the Cloudflare-Worker-started monthly run gives, so a broken run must be
+non-zero instead of a silent 0):
+  0  OK (or `--preflight` passed)
+  2  preflight failed: a required secret / BQ credential is missing or BQ auth
+     failed. Checked BEFORE the paid Apify scrape, so nothing is spent.
+  3  a live run produced 0 rows (every query failed / was skipped)
 """
 from __future__ import annotations
-import os, sys, io, re, json, glob, argparse
+import os, sys, re, json, glob, argparse
 from datetime import datetime, timezone
 
 import config as C
@@ -20,7 +30,14 @@ import scoring as SC
 from schema import JobDemandRow
 from pydantic import ValidationError
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", line_buffering=True)
+# UTF-8 stdout for the Windows console. reconfigure() (2026-10-27) replaces the
+# old `sys.stdout = io.TextIOWrapper(sys.stdout.buffer, ...)`: that wrapper
+# closed the shared buffer when it was garbage-collected, which broke pytest's
+# output capture once the tests import this module. Same effect for the CLI.
+try:
+    sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
+except (AttributeError, ValueError):
+    pass
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "output")
 RAW = os.path.join(HERE, "raw")
@@ -182,6 +199,63 @@ def fetch_live(limit_queries: int | None = None) -> tuple[dict[str, list[dict]],
     return by_query, metaout
 
 
+# ---------------------------------------------------------------------------
+# Preflight (added 2026-10-27). Before this, a Fly machine whose BQ secret
+# never reached it paid for the full Apify scrape (~$0.70) and only THEN died
+# in bigquery_writer with DefaultCredentialsError. The checks are presence-only
+# and report NAMES, never values.
+# ---------------------------------------------------------------------------
+PREFLIGHT_APIFY = "APIFY_TOKEN"
+PREFLIGHT_BQ = "BigQuery SA creds (MARKET_RESEARCH_BQ_SA_B64 | MARKET_RESEARCH_BQ_SA_JSON | JOBMKT_BQ_KEY file)"
+
+
+def _bq_creds_resolvable() -> bool:
+    """True if bigquery_writer can load an SA key, or GOOGLE_APPLICATION_CREDENTIALS
+    names an existing key file (the ADC path that does work for BQ jobs). A
+    malformed secret counts as missing — the exception text is NOT surfaced
+    because it could quote part of the secret."""
+    import bigquery_writer as BW   # ImportError (no google-cloud-bigquery) stays loud
+    try:
+        if BW._load_sa_info() is not None:
+            return True
+    except Exception:
+        return False
+    adc = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    return bool(adc and os.path.isfile(adc))
+
+
+def preflight(dry_run: bool, no_bq: bool) -> list[str]:
+    """Names of the missing runtime requirements ([] = good to go).
+    Live runs need APIFY_TOKEN; any run that writes BQ needs resolvable creds."""
+    missing = []
+    if not dry_run and not os.getenv("APIFY_TOKEN"):
+        missing.append(PREFLIGHT_APIFY)
+    if not no_bq and not _bq_creds_resolvable():
+        missing.append(PREFLIGHT_BQ)
+    return missing
+
+
+def run_preflight_only(dry_run: bool, no_bq: bool) -> None:
+    """`--preflight`: prove the booted machine has its secrets and that BQ auth
+    works (one `SELECT 1`), then exit 0 — no Apify call, no BQ write. Used as the
+    post-deploy smoke on Fly (see DEPLOY_FLY.md). --dry-run / --no-bq narrow the
+    checks exactly as they narrow a real run."""
+    missing = preflight(dry_run=dry_run, no_bq=no_bq)
+    if missing:
+        print("FATAL preflight: missing " + ", ".join(missing))
+        sys.exit(2)
+    if not no_bq:
+        try:
+            import bigquery_writer as BW
+            BW._client().query("SELECT 1").result()
+        except Exception as e:
+            print(f"FATAL preflight: BigQuery auth/query failed: {type(e).__name__}: {str(e)[:200]}")
+            sys.exit(2)
+        print(f"[preflight] BigQuery OK (project {C.BQ_PROJECT})")
+    print("preflight OK")
+    sys.exit(0)
+
+
 def main():
     global SOURCE, RUN_ID
     ap = argparse.ArgumentParser()
@@ -193,7 +267,19 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                     help="reuse existing raw LinkedIn JSON; no Apify spend/token")
     ap.add_argument("--no-bq", action="store_true", help="skip the BigQuery write")
+    ap.add_argument("--preflight", action="store_true",
+                    help="check secrets + BigQuery auth (SELECT 1), print 'preflight OK', "
+                         "exit 0; no Apify spend, no BQ write")
     args = ap.parse_args()
+
+    if args.preflight:
+        run_preflight_only(args.dry_run, args.no_bq)
+
+    # Fail BEFORE fetch_live so missing creds never cost an Apify scrape.
+    missing = preflight(args.dry_run, args.no_bq)
+    if missing:
+        print("FATAL preflight: missing " + ", ".join(missing))
+        sys.exit(2)
 
     SOURCE = args.source
     RUN_ID = f"{SOURCE}-{C.REPORT_DATE:%Y-%m}"
@@ -214,6 +300,13 @@ def main():
     bq_rows = [r.to_bq() for r in rows]
     json.dump(bq_rows, open(os.path.join(OUT, "job_demand_rows.json"), "w",
               encoding="utf-8"), ensure_ascii=False, indent=2)
+
+    if not args.dry_run and not bq_rows:
+        # Every query failed / was budget-skipped. Before 2026-10-27 this skipped
+        # the BQ write and exited 0, so the month silently kept the old snapshot.
+        print(f"[FATAL] live run produced 0 rows (apify ${fetch_meta.get('apify_cost_usd', 0)}; "
+              f"see the [ERR]/[GUARD-SKIP]/[ABORT] lines above)")
+        sys.exit(3)
 
     bq_result = None
     if not args.no_bq and bq_rows:

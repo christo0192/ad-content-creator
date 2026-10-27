@@ -13,7 +13,17 @@ REPORT_DATE = date.today()
 # Tab1/2/4 = weekly window; Tab3 jobs = monthly (its own package).
 WEEKLY_WINDOW_DAYS = int(os.getenv("MR_WEEKLY_WINDOW_DAYS", "7"))
 WEEKLY_WINDOW_START = REPORT_DATE - timedelta(days=WEEKLY_WINDOW_DAYS)
-RUN_ID = f"weekly-{REPORT_DATE:%Y-%m-%d}"
+# run_id grain = idempotency key (bq.write_snapshot DELETEs the run_id, then
+# appends). Fly sets MR_CADENCE=monthly (2026-10-27): every run in a calendar
+# month shares `monthly-YYYY-MM`, so a retry on the 3rd REPLACES the 2nd's rows
+# instead of adding a second full snapshot to the month (the old per-day
+# `weekly-YYYY-MM-DD` id did that). Local default stays weekly-per-day.
+# MR_RUN_ID forces an explicit id (e.g. backfills). REPORT_DATE is the container
+# clock (UTC on Fly), so the label is the RUN month.
+CADENCE = os.getenv("MR_CADENCE", "weekly")
+RUN_ID = os.getenv("MR_RUN_ID") or (
+    f"monthly-{REPORT_DATE:%Y-%m}" if CADENCE == "monthly"
+    else f"weekly-{REPORT_DATE:%Y-%m-%d}")
 
 # ---- BigQuery -------------------------------------------------------------
 BQ_PROJECT  = os.getenv("MR_BQ_PROJECT", "ik-marketing-data")
