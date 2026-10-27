@@ -5,10 +5,13 @@ writes BigQuery, and exits. On Fly that is **one stopped Machine** —
 `7845393fe26338` in app `ik-market-research-jobs` — with no `[http_service]`.
 
 > **Scheduler (rewritten 2026-10-27).** The Cloudflare Worker
-> **`ik-intelligence-trigger`** (`../cloudflare-trigger/`) is the **ONLY**
-> scheduler. It starts this Machine on the **1st of each month at 03:30 UTC
-> (09:00 IST)**; the market-research pipeline follows on the 2nd so its
-> Executive Summary reads the fresh jobs snapshot. The Fly-native
+> **`ik-ad-generator-trigger`** in **`christo0192/ik-mis` → `cloudflare-trigger/`**
+> is the **ONLY** scheduler. It starts this Machine on the **1st of each month
+> at 05:30 UTC (11:00 IST)**; the market-research pipeline follows on the 2nd so
+> its Executive Summary reads the fresh jobs snapshot. (This repo's own
+> `../cloudflare-trigger/` Worker is deployed without a cron and schedules
+> nothing: Workers Free allows 5 crons per account and all are in use — see
+> `../cloudflare-trigger/README.md`.) The Fly-native
 > `--schedule monthly` that was registered on 2026-08-25 **never fired** (Aug,
 > Sep and Oct 2026 were all missed) — **never set a Fly schedule on this
 > Machine again**, or it can double-run alongside the Worker.
@@ -31,9 +34,10 @@ writes BigQuery, and exits. On Fly that is **one stopped Machine** —
 - `flyctl` installed and logged in (`fly auth login`)
 - The `market-research-bq@` service-account JSON key (see `IAM_REQUEST.md`)
 - The Apify acct #2 (`hip_bouncer`) token
-- For the Worker (§5): Node + `npm ci` in `../cloudflare-trigger`, and Cloudflare
-  auth (`npx wrangler login` once in a browser, or `CLOUDFLARE_API_TOKEN` with
-  Workers Scripts:Edit on account `bbb3aa03755ccab33b6367bb6367294c`)
+- For the Worker token (§5): a checkout of `christo0192/ik-mis`, Node + `npm ci`
+  in its `cloudflare-trigger/` folder, and Cloudflare auth (`npx wrangler login`
+  once in a browser, or `CLOUDFLARE_API_TOKEN` with Workers Scripts:Edit on
+  account `bbb3aa03755ccab33b6367bb6367294c`)
 
 ## 1. App + Machine (one-time — already done 2026-08-25)
 
@@ -49,8 +53,9 @@ fly machine create registry.fly.io/ik-market-research-jobs:intel-init \
   --restart no --region sin --env JOBMKT_SOURCE=naukri -a ik-market-research-jobs
 ```
 
-Then put the new Machine ID in `../cloudflare-trigger/wrangler.toml`
-(`JOBS_MACHINE_ID`) and redeploy the Worker.
+Then put the new Machine ID in the jobs-machine setting of the ik-mis Worker
+(`christo0192/ik-mis` → `cloudflare-trigger/`, Worker `ik-ad-generator-trigger`)
+and redeploy that Worker.
 
 ## 2. Secrets (never in fly.toml or git)
 
@@ -131,35 +136,53 @@ Exit codes of `run_monthly.py` (what the Machine's exit shows after a run):
 | 5 | **degraded** live run: some queries failed but coverage passed the 80% gate; the snapshot **was** written without them (`output/run_manifest.json` → `fetch.queries_failed`) |
 | 1 | uncaught error (traceback in `fly logs`) |
 
-## 5. The scheduler: Cloudflare Worker `ik-intelligence-trigger`
+## 5. The scheduler: Cloudflare Worker `ik-ad-generator-trigger` (ik-mis)
 
-Lives in `../cloudflare-trigger/`. One cron, `30 3 1,2 * *` (03:30 UTC = 09:00
-IST); the handler dispatches on the UTC day: **day 1 starts this Machine**, day 2
-starts the market-research pipeline, any other day does nothing. It only POSTs
-the Fly Machines API `start`; it never throws (a Cloudflare retry would
-double-start a paid run). A transient failure (5xx / 429 / network / 15 s
-timeout) is retried in-handler up to 3 attempts within ~1 min; any other 4xx
-(e.g. a 401 expired token) is final.
+Lives in **`christo0192/ik-mis` → `cloudflare-trigger/`**, not in this repo. Its
+one cron, `30 5 * * *` (05:30 UTC = 11:00 IST, daily), starts the
+`ik-ad-generator` Machine every day and also dispatches on the UTC day of the
+month: **day 1 starts this Machine**, day 2 starts the market-research
+pipeline, any other day starts neither. The generator start does not depend on
+these two starts and is never blocked or delayed by them. The handler only POSTs
+the Fly Machines API `start` and never throws (a Cloudflare retry would
+double-start a paid run).
+
+This repo's own `../cloudflare-trigger/` Worker (same day-1/day-2 dispatch on
+its own cron) is deployed **without a cron**: Cloudflare refused it because
+Workers Free allows 5 cron triggers per account and all 5 are in use. Its code
+and tests stay for a possible move to Workers Paid; `../cloudflare-trigger/README.md`
+explains the status. Never give it a cron while the ik-mis Worker dispatches
+this Machine, or every month is scraped (and paid for) twice.
+
+Timing: 05:30 UTC keeps the UTC and IST dates equal, so "day 1" is the 1st in
+both. The pipeline starts 24 h after this Machine, so its Executive Summary
+still reads this month's jobs snapshot. On the 1st, the Generation run that the
+same cron starts reads `Market_Research` while this Machine is still scraping,
+so that day's generation can still see the previous month's jobs snapshot.
 
 The Worker authenticates with an **app-scoped Fly deploy token** (least privilege:
-it can manage only this app). Create it and pipe it straight into the Worker
-secret so it is never echoed or saved:
+it can manage only this app). Create it and pipe it straight into the ik-mis
+Worker secret so it is never echoed or saved:
 
 ```bash
-cd ../cloudflare-trigger
+cd <ik-mis checkout>/cloudflare-trigger    # Worker ik-ad-generator-trigger
 npm ci
-fly tokens create deploy -a ik-market-research-jobs -n ik-intelligence-trigger -x 26280h \
+fly tokens create deploy -a ik-market-research-jobs -n ik-ad-generator-trigger -x 26280h \
   | npx wrangler secret put FLY_TOKEN_JOBS
-npx wrangler deploy        # output must list the schedule "30 3 1,2 * *"
 ```
+
+`wrangler secret put` updates the deployed Worker directly. Deploy the Worker
+itself from ik-mis (per its own docs); `npx wrangler deploy` output must list
+the schedule `"30 5 * * *"`.
 
 `-x 26280h` = 3 years. **Record the creation date** when you mint it (expiry =
 creation + 3 years); an expired token makes the 1st-of-month start fail with a
-401 that only shows up in the Worker logs. Deploy tokens print as `FlyV1 fm2_…`;
-the Worker sends `FlyV1` tokens as-is and anything else as `Bearer`.
+401 that only shows up in the Worker logs. Deploy tokens print as `FlyV1 fm2_…`
+and must be sent as-is (not as `Bearer`).
 
-Check a fired run: `npx wrangler tail ik-intelligence-trigger` (or Workers
-observability logs) shows `jobs start OK (200)`.
+Check a fired run on the 1st: `npx wrangler tail ik-ad-generator-trigger` (or
+Workers observability logs for `ik-ad-generator-trigger`) shows the jobs start
+returning 200, next to the usual generator start.
 
 ## 6. Ad-hoc refresh (don't wait for the 1st)
 

@@ -7,10 +7,15 @@ now MIS Mission Control (`ik-mis/dashboard`).
 
 > **To resume:** read this file + `.gsd/STATE.md`. **2026-10-27 update:** both Fly
 > apps were created on 2026-08-25, but their Fly-native `--schedule` never fired
-> (data stale since 2026-08-25). The scheduler is now the Cloudflare Worker
-> `ik-intelligence-trigger` (`cloudflare-trigger/`, branch
-> `feat/intelligence-monthly-trigger`). #2/#3 below are rewritten for that flow;
-> the old `fly machine run . --schedule …` steps are obsolete and must NOT be re-run.
+> (data stale since 2026-08-25). The scheduler is now the MIS Cloudflare Worker
+> `ik-ad-generator-trigger` (`christo0192/ik-mis` → `cloudflare-trigger/`, cron
+> `30 5 * * *` = 11:00 IST): on UTC day 1 it also starts the jobs machine, on
+> day 2 the pipeline machine. This repo's own `cloudflare-trigger/` Worker
+> (merged in #2) was deployed once **without a cron**:
+> Cloudflare refused it (code 10072, Workers Free = max 5 crons per account, all
+> in use) — it schedules nothing; see `cloudflare-trigger/README.md`. #2/#3 below
+> are rewritten for that flow; the old `fly machine run . --schedule …` steps are
+> obsolete and must NOT be re-run.
 
 ---
 
@@ -27,11 +32,13 @@ now MIS Mission Control (`ik-mis/dashboard`).
 | **Vercel deploy** | ⬜ TODO (#1) |
 | **Fly deploy — Job Market (monthly)** | 🟡 app + machine exist (2026-08-25); Worker-trigger redeploy pending (#2) |
 | **Fly deploy — Pipeline (monthly)** | 🟡 app + machine exist (2026-08-25); Worker-trigger redeploy pending (#3) |
-| **Cloudflare Worker `ik-intelligence-trigger`** | ⬜ TODO (#5) — needs Cloudflare auth (`wrangler login`) |
+| **Scheduler: ik-mis Worker `ik-ad-generator-trigger` (day 1 jobs / day 2 pipeline)** | ⬜ TODO (#5) — dispatch code + 2 Fly token secrets in ik-mis; needs Cloudflare auth (`wrangler login`) |
+| This repo's own Worker (`cloudflare-trigger/`) | ⏸ deployed once, cronless (free-plan cron limit); code + tests kept for Workers Paid |
 | **Read-only dashboard SA** | ⬜ TODO (#4) — data-team request sent |
 
 Nothing auto-refreshes the data yet — the 2026-08 Fly schedules never fired;
-auto-refresh starts once #5 is deployed (first runs 2026-11-01 / 2026-11-02).
+auto-refresh starts once #5 is deployed in ik-mis (first runs 2026-11-01 /
+2026-11-02, 11:00 IST).
 
 ---
 
@@ -85,15 +92,21 @@ Guide: `market_research/DEPLOY_FLY.md` (rewritten 2026-10-27). Image bundles Nod
 - [ ] Smoke: `fly machine run <image> --rm --vm-memory 4096 … --env MR_CADENCE=monthly --env MR_WEEKLY_WINDOW_DAYS=32 -a ik-market-research-weekly -- python run_weekly.py --preflight` → BQ OK + `claude -p` OK (extract + synth) + `preflight OK` (§4). Command after `--`; **never `--command "…"`** (ignored without `--shell` → full live run)
 - [ ] On Fly's dedicated CPU, raise `MR_LLM_CONCURRENCY` to 2 (env) for faster runs.
 
-## #5 — Cloudflare Worker `ik-intelligence-trigger` (the ONLY scheduler)  [needs Cloudflare auth]
-Code: `cloudflare-trigger/` (cron `30 3 1,2 * *`; UTC day 1 → jobs, day 2 → pipeline).
-- [ ] `cd cloudflare-trigger && npm ci && npx wrangler login` (browser OAuth; or `CLOUDFLARE_API_TOKEN`)
-- [ ] `fly tokens create deploy -a ik-market-research-jobs -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_JOBS`
-- [ ] `fly tokens create deploy -a ik-market-research-weekly -n ik-intelligence-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_WEEKLY`
+## #5 — Scheduler: MIS Worker `ik-ad-generator-trigger` (the ONLY scheduler)  [needs Cloudflare auth]
+Code: `christo0192/ik-mis` → `cloudflare-trigger/` (cron `30 5 * * *` = 05:30 UTC / 11:00 IST;
+daily generator start unchanged; UTC day 1 → also jobs, day 2 → also pipeline). This repo's
+own `cloudflare-trigger/` Worker is NOT scheduled — Cloudflare refused its cron (Workers Free
+limit of 5 per account); kept + CI-tested for Workers Paid (`cloudflare-trigger/README.md`).
+- [x] This repo's Worker deployed once; cron refused (code 10072) → stays cronless. Never give it a cron while ik-mis dispatches (double runs).
+- [ ] ik-mis: day-1/day-2 dispatch merged in `cloudflare-trigger/` (generator start independent, never blocked/delayed, never throws)
+- [ ] In the ik-mis `cloudflare-trigger/` folder: `npm ci && npx wrangler login` (browser OAuth; or `CLOUDFLARE_API_TOKEN`)
+- [ ] `fly tokens create deploy -a ik-market-research-jobs -n ik-ad-generator-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_JOBS`
+- [ ] `fly tokens create deploy -a ik-market-research-weekly -n ik-ad-generator-trigger -x 26280h | npx wrangler secret put FLY_TOKEN_WEEKLY`
 - [ ] Record the token creation date here (3-year expiry): ____
-- [ ] `npx wrangler deploy` → output lists schedule `30 3 1,2 * *`
+- [ ] `npx wrangler deploy` from ik-mis → output still lists schedule `30 5 * * *`
 - [ ] Optional now: ad-hoc refresh — `fly machine start` jobs, wait for exit 0, then the pipeline (~$0.70 Apify + Max-plan usage)
-- [ ] 2026-11-01 / 11-02: `npx wrangler tail ik-intelligence-trigger` shows `start OK (200)`; BQ has `naukri-2026-11` + `monthly-2026-11`
+- [ ] 2026-11-01 / 11-02 (11:00 IST): `npx wrangler tail ik-ad-generator-trigger` shows the jobs (1st) / pipeline (2nd) start returning 200 alongside the generator start; BQ has `naukri-2026-11` + `monthly-2026-11`
+- [ ] Optional: `npx wrangler delete` in this repo's `cloudflare-trigger/` to drop the idle cronless Worker (or keep it for Workers Paid)
 
 ## #4 — Read-only dashboard SA  [data-team request — sent 2026-06-26]
 Request lives in `job_market_agent/IAM_REQUEST.md` (addendum).

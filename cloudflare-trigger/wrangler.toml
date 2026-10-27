@@ -1,7 +1,20 @@
+# ==== STATUS 2026-10-27: NOT SCHEDULED -- deployed once, cronless. ===========
+# Cloudflare refused the cron below (code 10072: "This account has reached the
+# Workers Free limit of 5 cron triggers per account"). The live monthly
+# dispatch is in christo0192/ik-mis cloudflare-trigger/ (Worker
+# ik-ad-generator-trigger, daily 05:30 UTC = 11:00 IST): UTC day 1 starts the
+# jobs machine (secret FLY_TOKEN_JOBS), day 2 the pipeline machine (secret
+# FLY_TOKEN_WEEKLY). This file, src/ and test/ are kept as-is (CI tests them)
+# so the Worker can be re-enabled on Workers Paid: `npx wrangler deploy` plus
+# the two `wrangler secret put` pipes below -- and, in the same change, remove
+# the day-1/day-2 dispatch from ik-mis, or every monthly run starts twice.
+# See README.md. The rest of this header describes the design if re-enabled.
+# ============================================================================
+#
 # Cloudflare Worker -- monthly trigger for the two Intelligence Fly batch apps.
 # Added 2026-10-27: the Fly-native `--schedule monthly` on both machines never
-# fired (Market_Research went stale after 2026-08-25), so this Worker is now the
-# ONLY scheduler. Never also set a Fly schedule on those machines.
+# fired (Market_Research went stale after 2026-08-25), so a Cloudflare Worker is
+# the ONLY scheduler. Never also set a Fly schedule on those machines.
 #
 # ONE cron, to stay under the Cloudflare per-account cron-trigger quota (this
 # account already runs ik-anomaly-trigger, ik-ad-generator-trigger and others):
